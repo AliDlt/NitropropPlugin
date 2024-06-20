@@ -1,0 +1,13 @@
+.nitro-list-table th,.nitro-list-table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+body,.rtl h1, .rtl h2, .rtl h3, .rtl h4, .rtl h5, .rtl h6 {
+    font-family: 'kalameh' !important;
+}
+#auth_delete {
+    padding: 0px 0px !important;
+    color: red !important;
+    border-color: red !important;
+}
