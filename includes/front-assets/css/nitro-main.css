@@ -2018,6 +2018,11 @@ select#status_id {
     padding: 0;
 }
 
+.certificate-btn,.certificate-btn:hover,.certificate-btn:focus{
+    background-color: #5386E4 !important;
+    color: white;
+}
+
 @media screen and (max-width: 1325px) {
     .ncp-transaction-block {
         width: 100%;

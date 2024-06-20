@@ -85,9 +85,7 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
                             <div class="field-transaction"><?php echo !empty($history['response']) ? htmlspecialchars($history['response'], ENT_QUOTES, 'UTF-8') : '-'; ?></div>
                         </div>
                         <?php if ($history['certificate'] != null) { ?>
-                            <div class="transaction-condition transaction-success transaction-50">
-                                <a href="<?php echo $history['certificate']; ?>" target="_blank">گواهی</a>
-                            </div>
+                                <a class="certificate-btn transaction-condition transaction-success transaction-50" href="<?php echo $history['certificate']; ?>" target="_blank">دریافت سرتیفیکیت</a>
                         <?php } ?>
 
                         <?php
