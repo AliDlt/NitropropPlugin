@@ -624,16 +624,29 @@ img.btn-account-bell {
     margin-bottom: 0;
 }
 
-.ncp-withdrawal input {
+.ncp-withdrawal input,.ncp-withdrawal select {
     height: 55px;
-    margin-top: 25px;
+    /*margin-top: 25px;*/
     direction: ltr;
     border: 1px solid #89ABEA !important;
     border-radius: 20px !important;
     color: #5D5D5D;
     outline: none;
 }
-
+.withdrawal-input-sec {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+.withdrawal-input-sec-inner {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 .ncp-withdrawal input:focus {
     border: 3px solid #89ABEA !important;
 
@@ -659,7 +672,7 @@ img.btn-account-bell {
 .ncp-withdrawal-btn {
     display: flex;
     justify-content: center;
-    margin-top: 41px;
+    margin-top: 15px;
 }
 
 .ncp-withdrawal-btn a:hover {
@@ -2185,7 +2198,12 @@ select#status_id {
 }
 
 @media screen and (max-width: 768px) {
-
+    .withdrawal-input-sec-inner {
+        width: 100%;
+    }
+    .withdrawal-input-sec{
+        gap:20px;
+    }
     .ncp-request-list{
         flex-direction: column;
     }

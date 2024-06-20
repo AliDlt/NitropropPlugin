@@ -15,18 +15,7 @@ jQuery(function ($) {
             }
         });
     }
-    //datepicker
-    $(document).on('click', '#birth_date', function (e) {
-        e.preventDefault();
-        jalaliDatepicker.startWatch({
-            hideAfterChange: true,
-            autoHide:true,
-            showTodayBtn:false,
-            showEmptyBtn:false,
-            showCloseBtn:true,
-            useDropDownYears:true
-        });
-    });
+
     $(document).ready(function () {
         const urlParams = new URLSearchParams(window.location.search);
         const land = urlParams.get('land');
@@ -45,6 +34,8 @@ jQuery(function ($) {
             $('.background-spinner').fadeIn();
             var selectedOption = $('#status_id ').find('option:selected');
             var dataArrayId = selectedOption.data('array-id');
+            var dataArrayVal = selectedOption.val();
+
             $.ajax({
                 url: ajax_filter_params.ajax_url,
                 type: 'POST',
@@ -69,6 +60,9 @@ jQuery(function ($) {
                         showToast(error.statusText, 'error');
                     }
                     $('.background-spinner').fadeOut();
+                },
+                complete: function (){
+                    $('#withdrawal-type ').val(dataArrayVal).select();
                 }
             })
         });
@@ -125,7 +119,7 @@ jQuery(function ($) {
                 },
                 success: function (response) {
                     $('#ncp-my-account-wrapper').html(response);
-                    $('.background-spinner').fadeOut();
+                    // $('.background-spinner').fadeOut();
                     $('.ncp-menu-content .menu-pointer').fadeOut();
                     $('#ncp-request .menu-pointer').fadeIn();
                     history.pushState(null, '', '?land=request');
@@ -139,6 +133,13 @@ jQuery(function ($) {
                         showToast(error.statusText, 'error');
                     }
                     $('.background-spinner').fadeOut();
+                },
+                complete: function (){
+                    stateLoader(dataArrayId,function (){
+                        $('#request-account ').val(dataArrayVal).select();
+                        $('.background-spinner').fadeOut();
+                    })
+
                 }
             })
         });
@@ -302,6 +303,18 @@ jQuery(function ($) {
             $('#ncp-dashboard').trigger('click');
         }
     });
+
+    $(document).on('click', '#birth_date', function (e) {
+        e.preventDefault();
+        jalaliDatepicker.startWatch({
+            hideAfterChange: true,
+            autoHide:true,
+            showTodayBtn:false,
+            showEmptyBtn:false,
+            showCloseBtn:true,
+            useDropDownYears:true
+        });
+    });
     $(document).on('click', '#buy-challenge', function (e) {
         e.preventDefault();
         let discount = true;
@@ -344,10 +357,6 @@ jQuery(function ($) {
         }
 
     })
-    // $(document).on('click', '.payment-btn', function (e) {
-    //     $('.payment-method-sec a').removeClass('btn-active')
-    //     $(this).addClass('btn-active');
-    // })
     $(document).on('click', '.ncp-discount .ncp_btn_normal', function (e) {
         e.preventDefault();
         let groupID = $('.btn-table.btn-active').data('id');
@@ -370,7 +379,6 @@ jQuery(function ($) {
                     groupID: groupID,
                 },
                 success: function (response) {
-                    console.log(response)
                     if (response.discount_amount !== 0) {
                         $('#rial-price').text(response.ir_price_formatted);
                         $('#dollar-price').text(response.usd_price);
@@ -397,6 +405,9 @@ jQuery(function ($) {
         e.preventDefault();
         let code = $('#withdrawal-input').val()
         var dataId = $('#withdrawal-btn').data('id');
+        var selectedOption = $('#withdrawal-type').find('option:selected');
+        var dataArrayVal = selectedOption.val();
+        var dataArrayId = selectedOption.data('array-id');
         if (code) {
             $('.background-spinner').fadeIn();
             $.ajax({
@@ -407,6 +418,8 @@ jQuery(function ($) {
                     nonce: nonce,
                     code: code,
                     dataId: dataId,
+                    dataArrayVal:dataArrayVal,
+                    dataArrayId:dataArrayId
                 },
                 success: function (response) {
                     showToast('درخواست شما ارسال شد', 'success')
@@ -436,7 +449,6 @@ jQuery(function ($) {
     })
     $(document).on('click', '#auth_form_send', function (e) {
         e.preventDefault();
-        console.log('hi')
         let birth_date = $('#birth_date').val();
         let code_melli = $('#code_melli').val();
         let cart_melli_upload = $('#cart_melli_upload')[0].files[0];
@@ -540,20 +552,6 @@ jQuery(function ($) {
             showValidationErrors(errors);
         }
     })
-    $(document).on('change', '#cart_melli_upload', function (e) {
-        e.preventDefault();
-        if ($(this).val()) {
-            $('#cart_melli_1').hide();
-            $('#cart_melli_2').show();
-        }
-    })
-    $(document).on('change', '#selfie_upload', function (e) {
-        e.preventDefault();
-        if ($(this).val()) {
-            $('#selfie_1').hide();
-            $('#selfie_2').show();
-        }
-    })
     $(document).on('click', '#main-pass-clipboard', function (e) {
         e.preventDefault();
         var text = $(this).closest('.right-info').text().trim();
@@ -615,7 +613,6 @@ jQuery(function ($) {
             }
         });
     })
-
     $(document).on('click', '.payment-btn', function (e) {
         e.preventDefault();
 
@@ -640,6 +637,20 @@ jQuery(function ($) {
         $('#payment-digital').val('شما درگاه ریالی را انتخاب کرده اید')
     });
 
+    $(document).on('change', '#cart_melli_upload', function (e) {
+        e.preventDefault();
+        if ($(this).val()) {
+            $('#cart_melli_1').hide();
+            $('#cart_melli_2').show();
+        }
+    })
+    $(document).on('change', '#selfie_upload', function (e) {
+        e.preventDefault();
+        if ($(this).val()) {
+            $('#selfie_1').hide();
+            $('#selfie_2').show();
+        }
+    })
     $(document).on('change', '#status_id', function () {
         $('.background-spinner').fadeIn();
         var selectedOption = $(this).find('option:selected');
@@ -683,6 +694,9 @@ jQuery(function ($) {
         var selectedOption = $(this).find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
         var dataArrayVal = selectedOption.val();
+        stateLoader(dataArrayId , function (){
+            $('#status_id ').val(dataArrayVal).select();
+        });
         $.ajax({
             url: ajax_filter_params.ajax_url,
             type: 'POST',
@@ -703,6 +717,17 @@ jQuery(function ($) {
             }
         })
     })
+    $(document).on('change', '#withdrawal-type', function () {
+        $('.background-spinner').fadeIn();
+        var selectedOption = $(this).find('option:selected');
+        var dataArrayId = selectedOption.data('array-id');
+        var dataArrayVal = selectedOption.val();
+        $('#status_id ').val(dataArrayVal).select();
+        stateLoader(dataArrayId , function (){
+            $('#ncp-withdrawal').trigger('click')
+        });
+    })
+
 
     function dashboardAjaxLoader(dataArrayId) {
         $.ajax({
