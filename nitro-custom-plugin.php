@@ -10,7 +10,7 @@
 
 defined('ABSPATH') or die('Access Denied!');
 
-const NCP_VER = '7.7.3';
+const NCP_VER = '7.7.4';
 
 define('NCP_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('NCP_PLUGIN_URL', plugin_dir_url(__FILE__));
