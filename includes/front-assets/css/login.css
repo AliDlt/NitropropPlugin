@@ -107,6 +107,7 @@
 .input-container {
     position: relative;
     width: 100%;
+    min-height: 150px;
     /*margin: 50px auto;*/
 }
 .register-container {
@@ -218,8 +219,8 @@
 
 .input-container svg {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 35%;
+    /* transform: translateY(-50%); */
     left: 20px;
 }
 
@@ -334,6 +335,9 @@
 }
 
 @media screen and (max-width: 1080px) {
+    .input-container svg {
+        transform: none;
+    }
     .login-body{
         justify-content: flex-end;
     }
@@ -404,6 +408,7 @@
     .input-container {
         width: 100%;
         margin-bottom: 20px;
+        min-height: fit-content;
     }
 
     /* .input-container svg {
@@ -461,6 +466,7 @@
         width: 100%;
         margin: 0;
         margin-top: 10px;
+        min-height: fit-content;
     }
 
     /* .input-container svg {

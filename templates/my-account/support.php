@@ -13,11 +13,11 @@ function support_template()
             <p>لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ، و با استفاده از طراحان گرافیک است، چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است، لورم ایپسوم متن ساختگی با تولید سادگی لورم</p>
         </div>
         <div class="connection-sec">
-            <a class="connection-inner-sec">
+            <a href="https://www.goftino.com/c/XcFiN3" class="connection-inner-sec">
                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/chat.png' ?>" alt="">
                 چت آنلاین سایت
             </a>
-            <a class="connection-inner-sec">
+            <a href="https://t.me/nitroprop_support" class="connection-inner-sec">
                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/telegram.png' ?>" alt="">
                 پشتیبانی تلگرام
             </a>

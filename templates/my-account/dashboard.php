@@ -176,7 +176,7 @@ function dashboard_template($account_info_response, $data)
         <div class="dashboard-second ncp-block">
             <div class="ncp-update-btn-contianer">
                 <h2>وضعیت حساب</h2>
-                <a class="ncp-update-btn">آپدیت</a>
+                <a class="ncp-update-btn">آپدیت اطلاعات پنل</a>
             </div>
             <div class="account-status-sec">
                 <div class="account-status">
