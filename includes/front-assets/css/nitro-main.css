@@ -1048,6 +1048,18 @@ select {
     padding: 32px 64px;
 }
 
+.your-order-challenge {
+    margin-top: 40px;
+    border: 3px dashed #5386E4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 17px;
+    border-radius: 31px;
+    width: fit-content;
+    padding: 32px 64px;
+}
+
 .order-block-grid {
     display: flex;
     flex-direction: row;
@@ -1060,6 +1072,19 @@ select {
 
 .inner-small-block {
     width: fit-content;
+    background: #E8F0FF;
+    display: flex;
+    justify-content: center;
+    height: 55px;
+    align-items: center;
+    border-radius: 31px;
+    font-weight: 700;
+    color: #2DA2E1;
+    padding: 20px;
+}
+
+.inner-small-block-challenge {
+    width: 100%;
     background: #E8F0FF;
     display: flex;
     justify-content: center;
@@ -1184,7 +1209,7 @@ label.rules-container {
     display: flex;
     align-items: center;
     flex-direction: row-reverse;
-    height: 35px;
+    height: 50px;
     gap: 7px;
     font-size: 14px;
     color: #5d5d5d;
@@ -1605,13 +1630,13 @@ img.btn-account-person {
 
 .connection-sec {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     background: #EEF3FF;
     padding: 45px;
     border-radius: 80px;
     align-items: center;
     gap: 40px;
-    max-width: 800px;
+    width: 100%;
 }
 
 .account-condition {
@@ -1623,13 +1648,14 @@ img.btn-account-person {
     padding-bottom: 60px;
 }
 
-.connection-inner-sec {
+.connection-inner-sec,.connection-inner-sec:hover,.connection-inner-sec:focus {
     font-size: 25px;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 5px;
     color: #5386E4;
+    cursor: pointer;
 }
 
 
@@ -1868,6 +1894,51 @@ p.null-request-list {
     margin-bottom: 15px;
 }
 
+.header-request-list {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip-container .tooltip-text {
+    visibility: hidden;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 125%; /* Position the tooltip above the image */
+    left: 50%;
+    margin-left: -100px;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.tooltip-container .tooltip-text::after {
+    content: "";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+.tooltip-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
 .ncp-profile-sec {
     display: flex;
     flex-wrap: wrap;
@@ -2001,6 +2072,7 @@ p.null-request-list {
     color: #5D5D5D;
     font-weight: 500;
     padding-right: 15px;
+    line-height:20px;
 }
 
 .change-pass {
@@ -2405,6 +2477,16 @@ select#status_id {
 }
 
 @media screen and (max-width: 480px) {
+    .ncp_btn_big {
+        width: 250px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .your-order-challenge{
+        padding: 32px;
+    }
+
     .accordion-ncp h3 {
         font-size: 14px !important;
     }

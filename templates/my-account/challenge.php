@@ -34,30 +34,30 @@ function challenge_page($account_info_response, $nitro_access_token)
                 <a class="ncp_btn_big payment-btn" id="payment-digital" data-method="digital">درگاه ارزدیجیتال</a>
                 <a class="ncp_btn_big payment-btn btn-active" id="payment-rial" data-method="rial">درگاه ریالی</a>
             </div>
-            <div class="your-order">
+            <div class="your-order-challenge">
                 <h2 class="ncp-title header-sec">سفارش شما</h2>
                 <div class="order-block-grid">
                     <div class="small-block">
                         پلتفرم معاملاتی
-                        <div class="inner-small-block">
+                        <div class="inner-small-block-challenge">
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/order-grid-01.svg' ?>"
                                  alt="">
                         </div>
                     </div>
                     <div class="small-block">
                         سرور اختصاصی
-                        <div class="inner-small-block">
+                        <div class="inner-small-block-challenge">
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/order-grid-02.svg' ?>"
                                  alt="">
                         </div>
                     </div>
                     <div class="small-block">
                         پلتفرم معاملاتی
-                        <div class="inner-small-block" id="dollar-price">$59</div>
+                        <div class="inner-small-block-challenge" id="dollar-price">$59</div>
                     </div>
                     <div class="small-block">
                         قیمت کل به ریال
-                        <div class="inner-small-block"
+                        <div class="inner-small-block-challenge"
                              id="rial-price"><?php echo number_format($challenge_prices_response['data'][0]['price']) ?></div>
                     </div>
                 </div>
