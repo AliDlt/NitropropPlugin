@@ -107,7 +107,9 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
                             <a href="<?php echo $history['certificate']; ?>" target="_blank">گواهی</a>
                         </div>
                     <?php } ?>
-
+                        <?php if ($history['certificate'] != null) { ?>
+                                <a class="certificate-btn transaction-condition transaction-success transaction-50" href="<?php echo $history['certificate']; ?>" target="_blank">دریافت سرتیفیکیت</a>
+                        <?php } ?>
                     <?php
                     if ($history['status'] == 'pending') {
                         $statusClass = 'transaction-warning';
