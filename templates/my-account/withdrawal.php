@@ -98,15 +98,11 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
                         <div class="text-transaction">آدرس کیف پول</div>
                         <div class="field-transaction"><?php echo !empty($history['address']) ? $history['address'] : '-'; ?></div>
                     </div>
-                    <div class="transaction-wallet transaction-100 transaction-border">
+
+                    <?php if (!empty($data['response'])) { ?>
                         <div class="text-transaction">توضیحات</div>
                         <div class="field-transaction"><?php echo !empty($history['response']) ? htmlspecialchars($history['response'], ENT_QUOTES, 'UTF-8') : '-'; ?></div>
-                    </div>
-                    <?php if ($history['certificate'] != null) { ?>
-                        <div class="transaction-condition transaction-success transaction-50">
-                            <a href="<?php echo $history['certificate']; ?>" target="_blank">گواهی</a>
-                        </div>
-                    <?php } ?>
+                        <?php } ?>
                         <?php if ($history['certificate'] != null) { ?>
                                 <a class="certificate-btn transaction-condition transaction-success transaction-50" href="<?php echo $history['certificate']; ?>" target="_blank">دریافت سرتیفیکیت</a>
                         <?php } ?>

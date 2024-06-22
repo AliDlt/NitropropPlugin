@@ -834,12 +834,10 @@ function showToast(message, type) {
         stopOnFocus: true,
         style: {
             background: type === 'success'
-                ? "#fff"
+                ? "green"
                 : "red",
             direction: "rtl",
-            color: type === 'success'
-                ? "green"
-                : "#fff",
+            color:"#fff",
             borderRadius: "14px",
             minWidth: "150px",
             boxShadow: "0 3px 6px rgba(0,0,0,0.1)",
