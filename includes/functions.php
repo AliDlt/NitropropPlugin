@@ -1010,11 +1010,13 @@ function api_discount_checker($nitro_access_token, $code, $groupID)
 
 }
 
-function api_withdrawal_request($code, $nitro_access_token, $dataId)
+function api_withdrawal_request($code, $nitro_access_token, $dataId,$dataArrayVal,$rounded_value)
 {
     $curl = curl_init();
     $body = [
         'address' => $code,
+        'login'=>$dataArrayVal,
+        'profit'=>$rounded_value
     ];
     curl_setopt_array($curl, [
         CURLOPT_URL => 'https://client.nitroprop.com/api/users/accounts/' . $dataId . '/withdraws/create/',
@@ -1222,9 +1224,22 @@ function ncp_withdrawal_request()
     check_ajax_referer('my_ajax_nonce', 'nonce');
     $code = isset($_POST['code']) ? sanitize_text_field($_POST['code']) : '';
     $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
+    $dataArrayVal = isset($_POST['dataArrayVal']) ? sanitize_text_field($_POST['dataArrayVal']) : '';
+    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
     $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
+
     if ($code && $dataId) {
-        $response = api_withdrawal_request($code, $nitro_access_token, $dataId);
+        $response = api_account_file($nitro_access_token);
+        $dataArray = $response['data'][$dataArrayId];
+        $current_balance = $dataArray ? $dataArray['current_balance'] : 0;
+        $percentage_value = $current_balance * 0.8;
+        $rounded_value = round($percentage_value);
+        $response = api_withdrawal_request($code, $nitro_access_token, $dataId,$dataArrayVal,$rounded_value);
+        if ($response){
+            wp_send_json($response);
+        }else{
+            wp_send_json_error();
+        }
     }
 }
 
