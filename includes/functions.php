@@ -580,9 +580,7 @@ function ncp_requests_loader()
     if ($nitro_access_token && $account_info_response['status'] == 200) {
         $account_file_response = api_account_file($nitro_access_token);
         $acc_id = $account_file_response['data'][$dataArrayId]['id'];
-
         wp_send_json(requests_template($acc_id, $dataArrayVal));
-
     } else {
         log_out_ncp();
         die();
@@ -1351,7 +1349,12 @@ function ncp_request_list()
                     'Asia/Tehran',
                     IntlDateFormatter::TRADITIONAL,
                 );
-                $listHTML .= '<div class="field-request-list">' . $formatter->format($timestamp) . '</div></div></div></div>';
+                $listHTML .= '<div class="field-request-list">' . $formatter->format($timestamp) . '</div></div>';
+                if (!empty($data['response'])) {
+                    $listHTML .= '<div class="request-list-desc request-list-border"><div class="text-request-list">توضیحات</div>';
+                    $listHTML .= '<div class="field-request-list">'. $data['response'] .'</div></div>';
+                }
+                $listHTML .= '</div></div>';
             }
         } else {
             $listHTML .= '<p class="null-request-list">درخواستی وجود ندارد</p>';
