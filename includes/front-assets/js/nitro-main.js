@@ -742,7 +742,7 @@ jQuery(function ($) {
             success: function (response) {
                 $('#ncp-my-account-wrapper').html(response.template);
                 $('#account-condition').html(response.step)
-                $('.btn-account-code').find('option:first').prop('selected', true);
+                // $('.btn-account-code').find('option:first').prop('selected', true);
                 $('.background-spinner').fadeOut();
                 $('.ncp-menu-content .menu-pointer').fadeOut();
                 $('#ncp-dashboard .menu-pointer').fadeIn();
