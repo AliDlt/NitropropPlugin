@@ -81,6 +81,7 @@ table th {
 }
 
 .ncp-table {
+    font-family: 'Kalameh';
     flex-direction: column;
     margin-top: 40px;
     position: relative;
@@ -103,7 +104,7 @@ th {
 }
 
 .ncp-table tr td {
-    font-size: 12px;
+    font-size: 14px;
 }
 
 table tr td img {
@@ -116,7 +117,8 @@ table tbody tr:nth-child(odd) {
     border-radius: 50px;
 }
 .ncp-table-btn {
-    height: 30px;
+    direction: ltr;
+    height: 35px;
     background: #5386E4;
     border-radius: 35px;
     display: flex;
@@ -127,7 +129,7 @@ table tbody tr:nth-child(odd) {
     font-weight: 600;
     border: none !important;
     cursor: pointer;
-    width: 55px;
+    width: 100px;
 }
 .table-btn-sec {
     display: flex;

@@ -133,9 +133,12 @@
     position: relative;
 }
 .rule-container label {
-    font-size: 13px;
+    font-size: 16px;
     width: 100%;
-    text-wrap: none;
+    white-space: nowrap;
+}
+.rule-container .forgot-text{
+    font-size: 16px;
 }
 .rule-container {
     display: flex;
@@ -145,12 +148,15 @@
     position: relative;
     justify-content: center;
 }
+
 .rules-error {
     bottom: -40px !important;
 }
+
 .rule-container input {
     margin-top: 4px;
 }
+
 .error-sec {
     width: 100% !important;
     padding-right: 10px !important;
@@ -204,7 +210,10 @@
     position: relative;
 }
 .input-container input:focus {
-    outline: 3px solid #89abea;
+    /* outline: 3px solid #89abea; */
+    outline: none;
+    border: 2px solid #0FBADF;
+    box-shadow: 0 0 22px 0px rgba(15, 186, 223, 0.25) !important;
 }
 
 .input-container svg {
@@ -265,7 +274,7 @@
     align-items: center;
 }
 
-.forgot-text {
+.forgot-text,.forgot-text:hover,.forgot-text:focus,.forgot-text:active {
     margin-top: 20px;
     color: #5386e4;
     font-size: 14px;
