@@ -107,10 +107,10 @@ function requests_template($acc_id,$dataArrayVal)
                                         echo '<div class="field-request-list">' . $formatter->format($timestamp) . '</div>';
                                         ?>
                                     </div>
-                                    <?php if (!empty($data['description'])) { ?>
+                                    <?php if (!empty($data['response'])) { ?>
                                 <div class="request-list-desc request-list-border">
                                     <div class="text-request-list">توضیحات</div>
-                                    <div class="field-request-list"><?php echo $data['description'] ?></div>
+                                    <div class="field-request-list"><?php echo $data['response'] ?></div>
                                 </div>
                             <?php } ?>
                                 </div>
