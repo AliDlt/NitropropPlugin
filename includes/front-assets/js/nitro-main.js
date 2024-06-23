@@ -1,6 +1,8 @@
 jQuery(function ($) {
     var site_url = ajax_filter_params.siteUrl;
     var nonce = ajax_filter_params.nonce;
+    const urlParams = new URLSearchParams(window.location.search);
+    const land = urlParams.get('land');
     let nitro_access_token = $.cookie('nitro_access_token');
     var acc = document.getElementsByClassName("accordion");
     var i;
@@ -17,18 +19,7 @@ jQuery(function ($) {
     }
 
     $(document).ready(function () {
-        const urlParams = new URLSearchParams(window.location.search);
-        const land = urlParams.get('land');
-        function sendRequest() {
-            if (getCookie('ncp_is_page') === 'dashboard') {
-                var selectedOption = $('#status_id').find('option:selected');
-                var dataArrayId = selectedOption.data('array-id');
-                dashboardAjaxLoader(dataArrayId);
-            }
-        }
-        if (land === 'dashboard') {
-            setInterval(sendRequest, 5000);
-        }
+
         $('.background-spinner').fadeIn();
         $('#ncp-withdrawal').on('click', function () {
             $('.background-spinner').fadeIn();
@@ -817,6 +808,16 @@ jQuery(function ($) {
             $('.background-spinner').fadeOut();
         }
     };
+    function sendRequest() {
+        if (getCookie('ncp_is_page') === 'dashboard') {
+            var selectedOption = $('#status_id').find('option:selected');
+            var dataArrayId = selectedOption.data('array-id');
+            dashboardAjaxLoader(dataArrayId);
+        }
+    }
+    if (land === 'dashboard') {
+        setInterval(sendRequest, 20000);
+    }
 });
 
 function addThousandsSeparator(number) {
