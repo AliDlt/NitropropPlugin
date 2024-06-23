@@ -486,6 +486,7 @@ select:focus {
 #rev_slider_2_1_wrapper .ares .tp-bullet {
     width: 13px !important;
     height: 13px !important;
+    background: #89ABEA;
 }
 .tparrows{
     background: #5386E4 !important;
@@ -497,6 +498,7 @@ select:focus {
 }
 rs-bullet.tp-bullet.selected {
     transform: scale(1.5) !important;
+    background: #5386E4;
 }
 .rs-bullets {
     transition: transform 0.5s ease 60ms !important;
