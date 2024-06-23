@@ -95,10 +95,13 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
                         <div class="text-transaction">آدرس کیف پول</div>
                         <div class="field-transaction"><?php echo !empty($history['address']) ? $history['address'] : '-'; ?></div>
                     </div>
-                    <?php if (!empty($data['response'])) { ?>
+
+<!--                    --><?php //if (!empty($history['response'])) { ?>
+                    <div class="transaction-wallet transaction-100 transaction-border">
                         <div class="text-transaction">توضیحات</div>
                         <div class="field-transaction"><?php echo !empty($history['response']) ? htmlspecialchars($history['response'], ENT_QUOTES, 'UTF-8') : '-'; ?></div>
-                    <?php } ?>
+                    </div>
+<!--                    --><?php //} ?>
                     <?php if ($history['certificate'] != null) { ?>
                         <a class="certificate-btn transaction-condition transaction-success transaction-50"
                            href="<?php echo $history['certificate']; ?>" target="_blank">دریافت سرتیفیکیت</a>
@@ -138,6 +141,9 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
         echo '</div>';
         ?>
     </div>
+
+
+
     <?php
     return ob_get_clean();
 }
