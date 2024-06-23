@@ -1602,7 +1602,7 @@ function table_section_shortcode()
                 </tr>
                 <tr>
                     <td style="display: flex;">هزینه یکبارپرداخت</td>
-                    <?php echo is_front_page()||is_page('plans') ? '<td style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">$59 خرید</a></td>' : '<td style="display: flex;"><a>$59</a></td>' ?>
+                    <?php echo is_front_page()||is_page('plans') ? '<td style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">59$ خرید</a></td>' : '<td style="display: flex;"><a>$59</a></td>' ?>
                     <td style="display: flex;">رایگان</td>
                     <td style="display: flex;">عودت هزینه</td>
                 </tr>

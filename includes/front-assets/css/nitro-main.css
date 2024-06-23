@@ -818,7 +818,7 @@ img.btn-account-bell {
 }
 
 .page-content {
-    margin: 50px 0;
+    margin:  0;
 }
 
 .ncp-auth-file-field {
@@ -1249,7 +1249,9 @@ img.ncp-logo {
     margin-top: 29px;
 }
 
-
+.accordion-ncp-btn .svg-icon{
+    rotate: 180deg;
+}
 .ncp-menu-content img {
     width: 20px;
     height: 20px;
@@ -1855,8 +1857,9 @@ p.null-request-list {
     overflow-y: hidden;
     padding: 10px;
     gap: 20px;
-    justify-content: flex-start;
+    /*justify-content: flex-start;*/
 }
+
 
 .request-list-wallet {
     width: 100%;
@@ -2313,6 +2316,10 @@ select#status_id {
 @media screen and (max-width: 768px) {
     .withdrawal-input-sec-inner {
         width: 100%;
+    }
+    #slider-2-slide-2-layer-8 {
+        line-height: 35px !important;
+        font-size: 28px;
     }
     .withdrawal-input-sec{
         gap:20px;

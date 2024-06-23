@@ -107,7 +107,7 @@
 .input-container {
     position: relative;
     width: 100%;
-    min-height: 150px;
+    /*min-height: 150px;*/
     /*margin: 50px auto;*/
 }
 .register-container {
@@ -148,6 +148,7 @@
     margin-bottom: 10px;
     position: relative;
     justify-content: center;
+    margin-top: 10px;
 }
 
 .rules-error {
@@ -161,8 +162,8 @@
 .error-sec {
     width: 100% !important;
     padding-right: 10px !important;
-    position: relative !important;
-    /* top: 80px !important; */
+    position: absolute !important;
+    top: 85px !important;
 }
 .hs-spinner-gif {
     height: 20px;
@@ -353,7 +354,7 @@
         top: -5px;
     }
     .error-sec {
-        /* top: 67px; */
+         top: 75px !important;
     }
     .input-container input {
         margin: 18px 0;
@@ -464,8 +465,7 @@
 
     .input-container {
         width: 100%;
-        margin: 0;
-        margin-top: 10px;
+        margin: 15px 0 0;
         min-height: fit-content;
     }
 
