@@ -245,22 +245,7 @@ jQuery(function ($) {
         });
         $('#npc-exit-profile').on('click', function () {
             $('.background-spinner').fadeIn();
-            $.ajax({
-                url: ajax_filter_params.ajax_url,
-                type: 'POST',
-                data: {
-                    action: 'ncp_exit',
-                    nonce: nonce,
-                },
-                success: function (response) {
-                    window.location.href = site_url + '/login-register';
-                },
-                error: function (error) {
-                    console.error("Error occurred:", error);
-                    showToast(error.statusText, 'error');
-                    $('.background-spinner').fadeOut();
-                }
-            })
+            $('#ncp-exit').trigger('click');
         });
         $('#ncp-hamburger').on('click', function () {
             $('.ncp-my-account-sidebar').toggleClass('active');
