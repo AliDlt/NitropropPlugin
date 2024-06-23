@@ -5,6 +5,7 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
     $response = api_account_file($nitro_access_token);
     $dataArray = $response['data'][$dataArrayId];
     $datas = $response['data'];
+
     $nitro_access_token = $_COOKIE['nitro_access_token'];
     $historys = api_withdrawal_history($nitro_access_token, $dataArray['id'])['data'];
     ob_start();
@@ -12,17 +13,13 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
     <div class="ncp-my-account-withdrawal">
         <div class="ncp-withdrawal ncp-block">
             <h2>برداشت سود</h2>
-            <div class="ncp-warning"><img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/warning.svg' ?>" alt="توجه">
+            <div class="ncp-warning"><img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/warning.svg' ?>"
+                                          alt="توجه">
                 داشته باشید درخواست برداشت سود در روز های شنبه و یکشنبه امکان پذیر است.
             </div>
             <div class="hcp-profit-withdrawal">
                 سود قابل برداشت (80%):
-                <p>$<?php
-                    $current_balance = $dataArray ? $dataArray['current_balance'] : 0;
-                    $percentage_value = $current_balance * 0.8;
-                    $rounded_value = round($percentage_value);
-                    echo $rounded_value;
-                    ?></p>
+                <p>$<?php echo $dataArray['profit'] ?: '0' ?></p>
             </div>
             <div class="withdrawal-input-sec">
                 <div class="withdrawal-input-sec-inner">
@@ -31,18 +28,18 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
                 <div class="withdrawal-input-sec-inner">
                     <label for="withdrawal-type">شماره حساب</label>
                     <select name="withdrawal-type" id="withdrawal-type">
-                </div>
-                    <?php
-                    $first_array = 0;
-                    foreach ($datas as $file_data) {
-                        ?>
-                        <option value="<?php echo $file_data['login'] ?>"
-                                data-array-id="<?php echo $first_array ?>"><?php echo $file_data['login'] ?></option>
                         <?php
-                        $first_array++;
-                    }
-                    ?>
-                </select>
+                        $first_array = 0;
+                        foreach ($datas as $file_data) {
+                            ?>
+                            <option value="<?php echo $file_data['login'] ?>"
+                                    data-array-id="<?php echo $first_array ?>"><?php echo $file_data['login'] ?></option>
+                            <?php
+                            $first_array++;
+                        }
+                        ?>
+                    </select>
+                </div>
             </div>
             <div class="ncp-withdrawal-btn">
                 <a class="ncp_btn_normal" id="withdrawal-btn" data-id="<?php echo $dataArray['id'] ?>">
@@ -56,7 +53,7 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
         <h2>تاریخچه تراکنش ها</h2>
         <?php
         echo '<div class="ncp-transaction-grid">';
-        if (!empty($historys)){
+        if (!empty($historys)) {
             foreach ($historys as $history) {
                 // Given timestamp
                 $timestamp = $history['created_ts'];
@@ -98,15 +95,14 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
                         <div class="text-transaction">آدرس کیف پول</div>
                         <div class="field-transaction"><?php echo !empty($history['address']) ? $history['address'] : '-'; ?></div>
                     </div>
-
                     <?php if (!empty($data['response'])) { ?>
                         <div class="text-transaction">توضیحات</div>
                         <div class="field-transaction"><?php echo !empty($history['response']) ? htmlspecialchars($history['response'], ENT_QUOTES, 'UTF-8') : '-'; ?></div>
-                        <?php } ?>
-                        <?php if ($history['certificate'] != null) { ?>
-                                <a class="certificate-btn transaction-condition transaction-success transaction-50" href="<?php echo $history['certificate']; ?>" target="_blank">دریافت سرتیفیکیت</a>
-                        <?php } ?>
-                    <?php
+                    <?php } ?>
+                    <?php if ($history['certificate'] != null) { ?>
+                        <a class="certificate-btn transaction-condition transaction-success transaction-50"
+                           href="<?php echo $history['certificate']; ?>" target="_blank">دریافت سرتیفیکیت</a>
+                    <?php }
                     if ($history['status'] == 'pending') {
                         $statusClass = 'transaction-warning';
                         $statusText = 'درحال بررسی';
@@ -145,4 +141,5 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
     <?php
     return ob_get_clean();
 }
+
 ?>

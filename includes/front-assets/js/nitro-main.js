@@ -636,6 +636,13 @@ jQuery(function ($) {
         e.preventDefault();
         $('#payment-digital').val('شما درگاه ریالی را انتخاب کرده اید')
     });
+    $(document).on('click', '#refresh-dashboard', function (e) {
+        e.preventDefault();
+        $('.background-spinner').fadeIn();
+        var selectedOption = $('#status_id').find('option:selected');
+        var dataArrayId = selectedOption.data('array-id');
+        dashboardAjaxLoader(dataArrayId)
+    });
 
     $(document).on('change', '#cart_melli_upload', function (e) {
         e.preventDefault();

@@ -19,11 +19,11 @@ function register_template()
         <div class="input-container">
             <label for="phone">شماره تماس</label>
             <div class="input-con">
-                <input type="text" name="phone" id="phone">
+                <input type="text" name="phone" id="phone" placeholder="09123456789">
             </div>
             <div class="error-sec" id="phone-number-error-sec">
                 <p class="input-error" id="phone-error" style="display: none">لطفا شماره تماس خود را وارد کنید!</p>
-                <p class="input-error" id="phone-valid" style="display: none">لطفا شماره تماس خود را درست وارد کنید! فرمت صحیح 09123456789 است</p>
+                <p class="input-error" id="phone-valid" style="display: none">لطفا شماره تماس خود را درست وارد کنید!</p>
             </div>
         </div>
     </div>
