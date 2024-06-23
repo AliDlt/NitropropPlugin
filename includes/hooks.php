@@ -79,7 +79,7 @@ add_filter('upload_dir', 'custom_upload_dir');
 
 //shortcodes
 add_shortcode('nitro_blog', 'display_main_page_blog_slider');
-add_shortcode('nitro_test', 'nitro_test');
+add_shortcode('nitro_slider', 'nitro_slider');
 add_shortcode('my_account_template', 'my_account_template_function');
 add_shortcode('login_template', 'login_template_function');
 add_shortcode('ncp_payment_callback', 'ncp_payment_callback');

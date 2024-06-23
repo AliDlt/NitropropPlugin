@@ -1619,7 +1619,7 @@ function table_section_shortcode()
 }
 
 
-function nitro_test()
+function nitro_slider()
 {
     include_once NCP_PLUGIN_TEMPLATES . 'Slider/main-slider.php';
 }
