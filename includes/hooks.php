@@ -51,7 +51,8 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('jalalidatepicker', NCP_PLUGIN_INCLUDES_URL . 'front-assets/js/jalalidatepicker.min.js', [], NCP_VER, true);
     }
 
-
+    wp_enqueue_script('hs-slider', NCP_PLUGIN_INCLUDES_URL . 'front-assets/js/hs-slider.js', ['jquery'], null, true);
+    wp_enqueue_style('hs-slider', NCP_PLUGIN_INCLUDES_URL . 'front-assets/css/hs-slider.css');
 });
 
 add_action('wp_enqueue_scripts', function () {
@@ -78,6 +79,7 @@ add_filter('upload_dir', 'custom_upload_dir');
 
 //shortcodes
 add_shortcode('nitro_blog', 'display_main_page_blog_slider');
+add_shortcode('nitro_test', 'nitro_test');
 add_shortcode('my_account_template', 'my_account_template_function');
 add_shortcode('login_template', 'login_template_function');
 add_shortcode('ncp_payment_callback', 'ncp_payment_callback');
