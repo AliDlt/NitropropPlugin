@@ -198,8 +198,8 @@ h3.accordion-title {
     display: flex;
     gap: 90px;
     padding: 35px !important;
-    /* height: 640px !important; */
-    height: fit-content;
+    height: 355px !important;
+    /*height: fit-content;*/
     align-items: center !important;
 }
 

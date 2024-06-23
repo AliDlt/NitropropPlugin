@@ -51,7 +51,7 @@ add_action('wp_enqueue_scripts', function () {
         wp_enqueue_script('jalalidatepicker', NCP_PLUGIN_INCLUDES_URL . 'front-assets/js/jalalidatepicker.min.js', [], NCP_VER, true);
     }
 
-    wp_enqueue_script('hs-slider', NCP_PLUGIN_INCLUDES_URL . 'front-assets/js/hs-slider.js', ['jquery'], null, true);
+    wp_enqueue_script('hs-slider', NCP_PLUGIN_INCLUDES_URL . 'front-assets/js/hs-slider.js', [], null, true);
     wp_enqueue_style('hs-slider', NCP_PLUGIN_INCLUDES_URL . 'front-assets/css/hs-slider.css');
 });
 
