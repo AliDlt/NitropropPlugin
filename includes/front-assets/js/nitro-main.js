@@ -27,7 +27,7 @@ jQuery(function ($) {
             }
         }
         if (land === 'dashboard') {
-            setInterval(sendRequest, 20000);
+            setInterval(sendRequest, 5000);
         }
         $('.background-spinner').fadeIn();
         $('#ncp-withdrawal').on('click', function () {
