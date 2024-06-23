@@ -50,7 +50,7 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
         </div>
     </div>
     <div class="ncp-transaction ncp-block">
-        <h2>تاریخچه تراکنش ها</h2>
+        <h2>تاریخچه برداشت ها</h2>
         <?php
         echo '<div class="ncp-transaction-grid">';
         if (!empty($historys)) {
@@ -74,62 +74,57 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
                 // Format the date to Persian
                 $persianDate = $formatter->format($date);
                 ?>
-                <div class="ncp-transaction-block">
-                    <div class="transaction-account-number transaction-50 transaction-border">
-                        <div class="text-transaction">شماره حساب</div>
-                        <div class="field-transaction"><?php echo !empty($history['login']) ? $history['login'] : '-'; ?></div>
+                <div class="ncp-inner-transaction-list-block">
+                    <div class="transaction-condition">
+                        <?php
+                        if ($history['status'] == 'pending') {
+                            $statusClass = 'transaction-warning';
+                            $statusText = 'درحال بررسی';
+                        } elseif ($history['status'] == 'approved') {
+                            $statusClass = 'transaction-success';
+                            $statusText = 'انجام شده';
+                        } elseif ($history['status'] == 'rejected') {
+                            $statusClass = 'transaction-error';
+                            $statusText = 'رد شده';
+                        } else {
+                            $statusClass = '';
+                            $statusText = '';
+                        }
+                        ?>
+                        <?php if ($history['certificate'] != null) { ?>
+                            <a class="certificate-btn transaction-condition transaction-success transaction-list-condition"
+                               href="<?php echo $history['certificate']; ?>" target="_blank">دریافت سرتیفیکیت</a>
+                        <?php } ?>
+                        <div class="transaction-list-condition <?php echo $statusClass; ?>"><?php echo $statusText; ?></div>
                     </div>
-                    <div class="transaction-time transaction-50 transaction-border">
-                        <div class="text-transaction">ساعت</div>
-                        <div class="field-transaction"><?php echo "$hour:$minutes"; ?></div>
-                    </div>
-                    <div class="transaction-price transaction-50 transaction-border">
-                        <div class="text-transaction">مبلغ</div>
-                        <div class="field-transaction"><?php echo !empty($history['profit']) ? $history['profit'] : '-'; ?></div>
-                    </div>
-                    <div class="transaction-date transaction-50 transaction-border">
-                        <div class="text-transaction">تاریخ</div>
-                        <div class="field-transaction"><?php echo $persianDate; ?></div>
-                    </div>
-                    <div class="transaction-wallet transaction-100 transaction-border">
+                    <div class="ncp-inner-transaction-list">
+                        <div class="transaction-list-account-number transaction-list-border">
+                            <div class="text-transaction-list">شماره حساب</div>
+                            <div class="field-transaction-list"><?php echo !empty($history['login']) ? $history['login'] : '-'; ?></div>
+                        </div>
+                        <div class="transaction-list-price transaction-list-border">
+                            <div class="text-transaction-list">مبلغ</div>
+                            <div class="field-transaction-list"><?php echo !empty($history['profit']) ? $history['profit'] : '-'; ?></div>
+                        </div>
+                        <div class="transaction-list-time transaction-list-border">
+                            <div class="text-transaction-list">ساعت</div>
+                            <div class="field-transaction-list"><?php echo "$hour:$minutes"; ?></div>
+                        </div>
+                        <div class="transaction-list-date transaction-list-border">
+                            <div class="text-transaction-list">تاریخ</div>
+                            <div class="field-transaction-list"><?php echo $persianDate; ?></div>
+                        </div>
+                        <div class="transaction-wallet transaction-100 transaction-border">
                         <div class="text-transaction">آدرس کیف پول</div>
                         <div class="field-transaction"><?php echo !empty($history['address']) ? $history['address'] : '-'; ?></div>
                     </div>
-
-<!--                    --><?php //if (!empty($history['response'])) { ?>
-                    <div class="transaction-wallet transaction-100 transaction-border">
-                        <div class="text-transaction">توضیحات</div>
-                        <div class="field-transaction"><?php echo !empty($history['response']) ? htmlspecialchars($history['response'], ENT_QUOTES, 'UTF-8') : '-'; ?></div>
+                    <?php if ($history['response'] != null) { ?>
+                        <div class="transaction-list-desc transaction-list-border">
+                            <div class="text-transaction-list">توضیحات</div>
+                            <div class="field-transaction-list"><?php echo !empty($history['response']) ? htmlspecialchars($history['response'], ENT_QUOTES, 'UTF-8') : '-'; ?></div>
+                        </div>
+                         <?php }?>
                     </div>
-<!--                    --><?php //} ?>
-                    <?php if ($history['certificate'] != null) { ?>
-                        <a class="certificate-btn transaction-condition transaction-success transaction-50"
-                           href="<?php echo $history['certificate']; ?>" target="_blank">دریافت سرتیفیکیت</a>
-                    <?php }
-                    if ($history['status'] == 'pending') {
-                        $statusClass = 'transaction-warning';
-                        $statusText = 'درحال بررسی';
-                    } elseif ($history['status'] == 'approved') {
-                        $statusClass = 'transaction-success';
-                        $statusText = 'انجام شده';
-                    } elseif ($history['status'] == 'rejected') {
-                        $statusClass = 'transaction-error';
-                        $statusText = 'رد شده';
-                    } else {
-                        $statusClass = '';
-                        $statusText = '';
-                    }
-
-                    if ($history['certificate'] == null) {
-                        ?>
-                        <div class="transaction-condition <?php echo $statusClass; ?> transaction-100"><?php echo $statusText; ?></div>
-                        <?php
-                    } else {
-                        ?>
-                        <div class="transaction-condition <?php echo $statusClass; ?> transaction-50"><?php echo $statusText; ?></div>
-                        <?php
-                    }
-                    ?>
                 </div>
                 <?php
             }
@@ -141,11 +136,7 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
         echo '</div>';
         ?>
     </div>
-
-
-
     <?php
     return ob_get_clean();
 }
-
 ?>

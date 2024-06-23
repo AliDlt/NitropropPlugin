@@ -47,12 +47,12 @@ function requests_template($acc_id, $dataArrayVal)
         </div>
     </div>
     <div class="ncp-request-list-block ncp-block">
-        <div class="header-request-list">
-            <h2>لیست درخواست ها</h2>
-            <div class="tooltip-container">
-            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/info.svg' ?>" alt="">
-            <span class="tooltip-text">برای مشاهده لیست درخواست ها، لطفا حساب موردنظر را انتخاب نمایید.</span>
-        </div>
+       <div class="header-request-list">
+    <h2>لیست درخواست ها</h2>
+    <div class="tooltip-container">
+        <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/info.svg' ?>" alt="">
+        <span class="tooltip-text">برای مشاهده لیست درخواست ها، لطفا حساب موردنظر را انتخاب نمایید.</span>
+    </div>
         </div>
         <div class="ncp-request-list">
             <?php
