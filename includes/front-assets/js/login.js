@@ -178,7 +178,7 @@ jQuery(function ($) {
                                 console.log(response)
                                 if (response.success) {
                                     showToast("خوش آمدید", "success");
-                                    window.location.href = sit_url + '/panel';
+                                    window.location.href = sit_url + '/panel/?land=dashboard';
                                 } else if (response.data.status === 401) {
                                     showToast(response.data.detail, 'error');
                                     $('#spinner-gif').fadeOut();
