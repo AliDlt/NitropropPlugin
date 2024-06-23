@@ -691,12 +691,12 @@ img.btn-account-bell {
 }
 
 .ncp-transaction-block {
-    width: 48%;
+    width: 100%;
     background: #E8F0FF;
 }
 
 .ncp-transaction-block {
-    width: 48%;
+    width: 100%;
     background: #E8F0FF;
     border-radius: 31px;
     padding: 22px 16px;
@@ -715,7 +715,7 @@ img.btn-account-bell {
 }
 
 .transaction-100 {
-    width: 98%;
+    width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -740,7 +740,6 @@ img.btn-account-bell {
 
 .transaction-condition {
     border-radius: 22px;
-    justify-content: center !important;
     color: #fff;
     font-size: 15px;
     font-weight: 700;
@@ -1875,7 +1874,7 @@ p.null-request-list {
     font-size: 15px;
     font-weight: 400;
     color: #6E6E6E;
-    text-align: left;
+    text-align: right;
 }
 
 .request-list-desc .field-request-list{
@@ -1910,7 +1909,7 @@ p.null-request-list {
 }
 
 .tooltip-container .tooltip-text {
-    visibility: hidden;
+    display: none; /* Use display none */
     width: 200px;
     background-color: #555;
     color: #fff;
@@ -1938,9 +1937,12 @@ p.null-request-list {
 }
 
 .tooltip-container:hover .tooltip-text {
-    visibility: visible;
+    display: block; /* Change to display block */
     opacity: 1;
+    visibility: visible; /* Ensure visibility is set */
+    transition: opacity 0.3s, visibility 0s; /* Add transition for visibility */
 }
+
 
 .ncp-profile-sec {
     display: flex;
@@ -2147,520 +2149,7 @@ select#status_id {
     color: white;
 }
 
-@media screen and (max-width: 1325px) {
-    .ncp-transaction-block {
-        width: 100%;
-    }
 
-    .inner-acc-info-sec {
-        row-gap: 20px;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .inner-acc-info {
-        width: 100%;
-    }
-
-    .account-plan-btn1{
-        width: 100%;
-    }
-
-    .account-status {
-        min-width: 250px;
-        max-width: 280px;
-    }
-
-    .account-status-sec {
-        flex-wrap: wrap;
-        margin-bottom: 20px;
-    }
-}
-
-@media screen and (max-width: 1024px) {
-   
-    .ncp_btn_normal p {
-        display: none;
-    }
-    .login_btn {
-        display: none;
-    }
-    img.btn-account-person {
-        width: 30px !important;
-        height: 30px !important;
-        margin-right: 0 !important;
-        border-radius: 50% !important;
-        padding: 0;
-    }
-
-    .accordion-ncp {
-        width: 100% !important;
-    }
-    .tp-rightarrow{
-        left: 49% !important;
-    }
-    .tp-leftarrow{
-        left: 51% !important;
-    }
-    .tparrows {
-        width: 30px !important;
-        height: 30px !important;
-    }
-    .login_btn_wrapper {
-        background: #2C487F !important;
-        padding: 10px !important;
-        border-radius: 50% !important;
-        transition: max-height 0.6s ease-in-out;
-    }
-    .tparrows:before {
-        font-size: 14px !important;
-    }
-    .tp-bullets {
-        margin-top: 3px;
-    }
-    .connection-sec {
-        flex-direction: column;
-    }
-    .tp-bullet.selected {
-        width: 14px !important;
-        height: 14px !important;
-    }
-    .ncp_btn_normal.login_btn{
-        width: auto;
-        height: auto;
-        background: rgb(44, 72, 127);
-    }
-
-    .login_btn img {
-        border-radius: 50% !important;
-        margin: 8px;
-        border: none !important;
-        padding: 0;
-    }
-
-    .login_register_btn img {
-        display: block;
-    }
-
-
-}
-
-@media screen and (max-width: 1070px) {
-    .ncp-my-account-container{
-        width: 100%;
-        margin: 0;
-    }
-    .request-list-account-number,
-    .request-list-date,
-    .request-list-price,
-    .request-list-time,
-    .account-choose {
-        width: 100%;
-    }
-
-    .ncp_bt_challenge {
-        gap: 15px;
-    }
-
-    .small-block {
-        width: 85%;
-    }
-
-    .ncp-discount-sec {
-        width: 90%;
-    }
-
-    .ncp-rules {
-        width: 100%;
-    }
-
-    .ncp-hamburger {
-        display: flex !important;
-        cursor: pointer;
-    }
-
-    .ncp-right-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .ncp-my-account-sidebar {
-        position: fixed;
-        right: -300px;
-        width: 260px;
-        height: 100vh;
-        transition: right 0.3s ease;
-        z-index: 10;
-    }
-
-    .ncp-my-account-sidebar.active {
-        right: 0;
-    }
-
-    .ncp-transaction-grid {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .ncp-transaction-block {
-        width: 100%;
-    }
-
-    .account-info-block,
-    .account-plan-block {
-        width: 50%;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .withdrawal-input-sec-inner {
-        width: 100%;
-    }
-    #slider-2-slide-2-layer-8 {
-        line-height: 35px !important;
-        font-size: 28px;
-    }
-    .withdrawal-input-sec{
-        gap:20px;
-    }
-    .ncp-request-list{
-        flex-direction: column;
-    }
-    .ncp-select-input {
-        width: 100%;
-    }
-    .ncp-left-header{
-        display: none;
-    }
-    .login_register_btn {
-        width: unset !important;
-    }
-    .login_register_btn p {
-        display: none;
-    }
-    .ncp-upload-container {
-        padding: 20px 40px;
-        align-items: center;
-        flex-direction: column;
-    }
-    .tparrows {
-        width: 25px !important;
-        height: 25px !important;
-        top: 105% !important;
-    }
-    .tp-bullet.selected {
-        width: 12px !important;
-        height: 12px !important;
-        margin-top: 1px;
-    }
-    .tp-bullet {
-        width: 14px !important;
-        height: 14px !important;
-    }
-    .tp-bullets {
-        margin-top: 19px;
-    }
-    .request-list-wallet {
-        flex-direction: column;
-        padding: 10px 20px;
-        height: 70px;
-        align-items: flex-start;
-    }
-    img.btn-account-person {
-        width: 20px !important;
-        height: 20px !important;
-    }
-    .ncp-upload-instructions ul {
-        padding: 10px;
-        font-size: 12px;
-    }
-
-    .ncp-upload-instructions {
-        padding-left: 0;
-    }
-
-    .ncp-upload-box {
-        margin-right: 0;
-    }
-
-    .account-status {
-        margin-top: 35px;
-        min-width: 200px;
-        max-width: 280px;
-    }
-
-    .ncp-profile-sec {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    .ncp-profile-name-field,
-    .ncp-profile-mobile-field,
-    .ncp-profile-name-latin-field,
-    .ncp-profile-fname-latin-field,
-    .ncp-old-pass-field,
-    .ncp-new-pass-field {
-        width: 100%;
-    }
-
-    .inner-third-account-status {
-        width: 100%;
-        min-width: 322px;
-    }
-
-    .dashboard-first-block {
-        margin: 17px;
-    }
-
-    .account-info-block,
-    .account-plan-block {
-        width: 100%;
-    }
-
-    .dashboard-first-block {
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: center;
-    }
-
-
-    .ncp-block {
-        margin: 17px;
-        border-radius: 15px;
-        padding: 10px 16px;
-    }
-
-    .ncp-my-account-header {
-        padding: 20px 16px;
-    }
-
-    .ncp_bt_challenge {
-        gap: 26px;
-        flex-wrap: wrap;
-    }
-
-    h2.ncp-title {
-        font-size: 18px !important;
-        gap: 5px;
-    }
-
-    .ncp-title::before,
-    .ncp-title::after {
-        width: 20px;
-        height: 7px;
-    }
-
-    .ncp-withdrawal-btn {
-        margin-bottom: 13px;
-    }
-
-    .third-account-status {
-        margin-bottom: 20px;
-    }
-
-    .title {
-        font-size: 19px !important;
-    }
-
-    .ncp-support-content p {
-        color: #5D5D5D;
-        font-size: 13px;
-    }
-
-    .title::before,
-    .title::after {
-        width: 35px;
-        height: 13px;
-    }
-
-    .connection-inner-sec {
-        font-size: 20px;
-    }
-
-    .connection-inner-sec img {
-        width: 30px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .ncp_btn_big {
-        width: 250px;
-        height: 50px;
-        font-size: 20px;
-    }
-
-    .your-order-challenge{
-        padding: 32px;
-    }
-
-    .accordion-ncp h3 {
-        font-size: 14px !important;
-    }
-    .accordion-ncp button {
-        padding: 10px 15px 10px 15px !important;
-    }
-    .svg-icon {
-        height: 23px !important;
-        width: 23px !important;
-    }
-    .panel p {
-        font-size: 12px !important;
-    }
-    .ncp-select-input {
-        width: 100%;
-    }
-    .tparrows {
-        width: 22px !important;
-        height: 22px !important;
-        top: 102% !important;
-    }
-    #rev_slider_2_1_wrapper .ares .tp-bullet{
-        width: 10px !important;
-        height: 10px !important;
-    }
-    .tp-bullet.selected {
-        transform: scale(1.7) !important;
-        margin: 0;
-    }
-    .tp-bullets {
-        margin-top: 0;
-    }
-    .tp-bullet {
-        top: 130% !important;
-    }
-    .tp-leftarrow {
-        left: 55% !important;
-    }
-    .tp-rightarrow {
-        left: 45% !important;
-    }
-    .account-status-sec {
-        margin-bottom: 10px ;
-        gap: 20px;
-    }
-
-    .request-list-condition {
-        width: 135px;
-    }
-
-    .inner-status {
-        font-size: 12px;
-        padding-right: 10px;
-        color: #5386E4;
-    }
-
-    .inner-status img {
-        height: 25px;
-        width: 25px;
-    }
-
-    .account-status {
-        margin-top: 0;
-        min-width: 145px;
-        max-width: 280px;
-        height: 105px;
-        font-size: 23px;
-    }
-
-    .inner-third-account-status span {
-        font-size: 10px !important;
-    }
-
-    .content-status {
-        font-size: 14px;
-    }
-
-    .header-status {
-        font-size: 12px;
-    }
-
-    .inner-acc-plan {
-        min-width: 150px;
-    }
-
-    .account-plan-sec {
-        row-gap: 15px;
-        column-gap: 15px;
-        margin-top: 15px;
-    }
-
-    .transaction-50 {
-        width: 100%;
-    }
-
-    .transaction-100 {
-        width: 100%;
-    }
-
-    .transaction-wallet {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-direction: row;
-    }
-
-    .field-transaction {
-        font-size: 13px;
-        font-weight: 500;
-    }
-
-    .your-order {
-        padding: 24px 30px;
-    }
-
-    .ncp-discount-sec,
-    .ncp-rules {
-        padding: 0;
-    }
-}
-
-@media screen and (max-width: 395px) {
-    .title {
-        font-size: 16px !important;
-    }
-
-    .title::before,
-    .title::after {
-        width: 25px;
-        height: 10px;
-    }
-
-    .account-status {
-        min-width: 135px;
-        height: 95px;
-    }
-
-    .connection-inner-sec {
-        font-size: 17px;
-    }
-
-    .ncp-support-content p {
-        margin: 20px 0;
-        font-size: 12px;
-    }
-
-    .request-list-wallet .field-request-list {
-        font-size: 12px;
-        margin: 0;
-    }
-
-    .inner-acc-plan {
-        min-width: 125px;
-    }
-
-    .content-status {
-        font-size: 11px;
-    }
-
-    .inner-third-account-status {
-        min-width: 290px;
-    }
-
-    .header-status {
-        font-size: 10px;
-    }
-}
 
 select.btn-account-code {
     -webkit-appearance: none;
@@ -2833,4 +2322,651 @@ p.selected-payment {
 }
 .rotated {
     transform: rotate(180deg);
+}
+
+
+.transaction-condition {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.transaction-list-condition {
+    width: 177px;
+    height: 38px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+    justify-content: center;
+    font-weight: 500;
+    border-radius: 35px;
+    row-gap: 8px;
+}
+
+.ncp-inner-transaction-list-block {
+    display: flex;
+    background: #E8F0FF;
+    padding: 20px;
+    border-radius: 31px;
+    row-gap: 20px;
+    flex-direction: column;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.transaction-list-border {
+    display: flex;
+    border: 1px solid #89ABEA;
+    padding: 0 20px;
+    border-radius: 21px;
+    justify-content: space-between;
+    height: 55px;
+    align-items: center;
+    /* gap: 8px; */
+}
+
+.ncp-inner-transaction-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+
+.transaction-list-account-number,
+.transaction-list-date,
+.transaction-list-price,
+.transaction-list-time {
+    width: 49%;
+}
+
+.transaction-list-desc {
+    width: 100%;
+    height: fit-content;
+    overflow-y: hidden;
+    padding: 10px;
+    gap: 20px;
+    justify-content: flex-start !important;
+}
+
+.transaction-list-wallet {
+    width: 100%;
+}
+
+.text-transaction-list {
+    font-size: 14px;
+    font-weight: 400;
+    color: #A0A0A0;
+}
+
+.field-transaction-list {
+    font-size: 15px;
+    font-weight: 400;
+    color: #6E6E6E;
+    text-align: right;
+}
+
+.transaction-list-desc .field-transaction-list{
+    text-align: right;
+}
+
+
+@media screen and (max-width: 1325px) {
+    .ncp-transaction-block {
+        width: 100%;
+    }
+
+    .inner-acc-info-sec {
+        row-gap: 20px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .inner-acc-info {
+        width: 100%;
+    }
+
+    .account-plan-btn1{
+        width: 100%;
+    }
+
+    .account-status {
+        min-width: 250px;
+        max-width: 280px;
+    }
+
+    .account-status-sec {
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+   
+    .ncp_btn_normal p {
+        display: none;
+    }
+    .login_btn {
+        display: none;
+    }
+    img.btn-account-person {
+        width: 30px !important;
+        height: 30px !important;
+        margin-right: 0 !important;
+        border-radius: 50% !important;
+        padding: 0;
+    }
+
+    .accordion-ncp {
+        width: 100% !important;
+    }
+    .tp-rightarrow{
+        left: 49% !important;
+    }
+    .tp-leftarrow{
+        left: 51% !important;
+    }
+    .tparrows {
+        width: 30px !important;
+        height: 30px !important;
+    }
+    .login_btn_wrapper {
+        background: #2C487F !important;
+        padding: 10px !important;
+        border-radius: 50% !important;
+        transition: max-height 0.6s ease-in-out;
+    }
+    .tparrows:before {
+        font-size: 14px !important;
+    }
+    .tp-bullets {
+        margin-top: 3px;
+    }
+    .connection-sec {
+        flex-direction: column;
+    }
+    .tp-bullet.selected {
+        width: 14px !important;
+        height: 14px !important;
+    }
+    .ncp_btn_normal.login_btn{
+        width: auto;
+        height: auto;
+        background: rgb(44, 72, 127);
+    }
+
+    .login_btn img {
+        border-radius: 50% !important;
+        margin: 8px;
+        border: none !important;
+        padding: 0;
+    }
+
+    .login_register_btn img {
+        display: block;
+    }
+
+
+}
+
+@media screen and (max-width: 1070px) {
+    .ncp-my-account-container{
+        width: 100%;
+        margin: 0;
+    }
+    .request-list-account-number,
+    .request-list-date,
+    .request-list-price,
+    .request-list-time,
+    .account-choose {
+        width: 100%;
+    }
+
+    .ncp_bt_challenge {
+        gap: 15px;
+    }
+
+    .small-block {
+        width: 85%;
+    }
+
+    .ncp-discount-sec {
+        width: 90%;
+    }
+
+    .ncp-rules {
+        width: 100%;
+    }
+
+    .ncp-hamburger {
+        display: flex !important;
+        cursor: pointer;
+    }
+
+    .ncp-right-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .ncp-my-account-sidebar {
+        position: fixed;
+        right: -300px;
+        width: 260px;
+        height: 100vh;
+        transition: right 0.3s ease;
+        z-index: 10;
+    }
+
+    .ncp-my-account-sidebar.active {
+        right: 0;
+    }
+
+    .ncp-transaction-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ncp-transaction-block {
+        width: 100%;
+    }
+
+    .account-info-block,
+    .account-plan-block {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    
+.transaction-list-account-number,
+.transaction-list-date,
+.transaction-list-price,
+.transaction-list-time {
+    width: 100%;
+}
+    .withdrawal-input-sec-inner {
+        width: 100%;
+    }
+    #slider-2-slide-2-layer-8 {
+        line-height: 35px !important;
+        font-size: 28px;
+    }
+    .withdrawal-input-sec{
+        gap:20px;
+    }
+    .ncp-request-list{
+        flex-direction: column;
+    }
+    .ncp-select-input {
+        width: 100%;
+    }
+    .ncp-left-header{
+        display: none;
+    }
+    .login_register_btn {
+        width: unset !important;
+    }
+    .login_register_btn p {
+        display: none;
+    }
+    .ncp-upload-container {
+        padding: 20px 40px;
+        align-items: center;
+        flex-direction: column;
+    }
+    .tparrows {
+        width: 25px !important;
+        height: 25px !important;
+        top: 105% !important;
+    }
+    .tp-bullet.selected {
+        width: 12px !important;
+        height: 12px !important;
+        margin-top: 1px;
+    }
+    .tp-bullet {
+        width: 14px !important;
+        height: 14px !important;
+    }
+    .tp-bullets {
+        margin-top: 19px;
+    }
+    .request-list-wallet {
+        flex-direction: column;
+        padding: 10px 20px;
+        height: 70px;
+        align-items: flex-start;
+    }
+    img.btn-account-person {
+        width: 20px !important;
+        height: 20px !important;
+    }
+    .ncp-upload-instructions ul {
+        padding: 10px;
+        font-size: 12px;
+    }
+
+    .ncp-upload-instructions {
+        padding-left: 0;
+    }
+
+    .ncp-upload-box {
+        margin-right: 0;
+    }
+
+    .account-status {
+        margin-top: 35px;
+        min-width: 200px;
+        max-width: 280px;
+    }
+
+    .ncp-profile-sec {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .ncp-profile-name-field,
+    .ncp-profile-mobile-field,
+    .ncp-profile-name-latin-field,
+    .ncp-profile-fname-latin-field,
+    .ncp-old-pass-field,
+    .ncp-new-pass-field {
+        width: 100%;
+    }
+
+    .inner-third-account-status {
+        width: 100%;
+        min-width: 322px;
+    }
+
+    .dashboard-first-block {
+        margin: 17px;
+    }
+
+    .account-info-block,
+    .account-plan-block {
+        width: 100%;
+    }
+
+    .dashboard-first-block {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+
+    .ncp-block {
+        margin: 17px;
+        border-radius: 15px;
+        padding: 10px 16px;
+    }
+
+    .ncp-my-account-header {
+        padding: 20px 16px;
+    }
+
+    .ncp_bt_challenge {
+        gap: 26px;
+        flex-wrap: wrap;
+    }
+
+    h2.ncp-title {
+        font-size: 18px !important;
+        gap: 5px;
+    }
+
+    .ncp-title::before,
+    .ncp-title::after {
+        width: 20px;
+        height: 7px;
+    }
+
+    .ncp-withdrawal-btn {
+        margin-bottom: 13px;
+    }
+
+    .third-account-status {
+        margin-bottom: 20px;
+    }
+
+    .title {
+        font-size: 19px !important;
+    }
+
+    .ncp-support-content p {
+        color: #5D5D5D;
+        font-size: 13px;
+    }
+
+    .title::before,
+    .title::after {
+        width: 35px;
+        height: 13px;
+    }
+
+    .connection-inner-sec {
+        font-size: 20px;
+    }
+
+    .connection-inner-sec img {
+        width: 30px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .transaction-list-condition{
+        width: 50% !important;
+    }
+
+    .transaction-list-desc{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        height: fit-content;
+        row-gap: 20px;
+        padding: 8px;
+        text-align: right;
+        padding-right: 20px;
+    }
+    
+    .text-transaction-list{
+        width: 100%;
+        text-align: right;
+    }
+    .text-transaction{
+        width: 100%;
+        text-align: right;
+    }
+    .ncp-inner-transaction-list{
+        width: 100%;
+    }
+    .ncp_btn_big {
+        width: 250px;
+        height: 50px;
+        font-size: 20px;
+    }
+
+    .your-order-challenge{
+        padding: 32px;
+    }
+
+    .accordion-ncp h3 {
+        font-size: 14px !important;
+    }
+    .accordion-ncp button {
+        padding: 10px 15px 10px 15px !important;
+    }
+    .svg-icon {
+        height: 23px !important;
+        width: 23px !important;
+    }
+    .panel p {
+        font-size: 12px !important;
+    }
+    .ncp-select-input {
+        width: 100%;
+    }
+    .tparrows {
+        width: 22px !important;
+        height: 22px !important;
+        top: 102% !important;
+    }
+    #rev_slider_2_1_wrapper .ares .tp-bullet{
+        width: 10px !important;
+        height: 10px !important;
+    }
+    .tp-bullet.selected {
+        transform: scale(1.7) !important;
+        margin: 0;
+    }
+    .tp-bullets {
+        margin-top: 0;
+    }
+    .tp-bullet {
+        top: 130% !important;
+    }
+    .tp-leftarrow {
+        left: 55% !important;
+    }
+    .tp-rightarrow {
+        left: 45% !important;
+    }
+    .account-status-sec {
+        margin-bottom: 10px ;
+        gap: 20px;
+    }
+
+    .request-list-condition {
+        width: 135px;
+    }
+
+    .inner-status {
+        font-size: 12px;
+        padding-right: 10px;
+        color: #5386E4;
+    }
+
+    .inner-status img {
+        height: 25px;
+        width: 25px;
+    }
+
+    .account-status {
+        margin-top: 0;
+        min-width: 145px;
+        max-width: 280px;
+        height: 105px;
+        font-size: 23px;
+    }
+
+    .inner-third-account-status span {
+        font-size: 10px !important;
+    }
+
+    .content-status {
+        font-size: 14px;
+    }
+
+    .header-status {
+        font-size: 12px;
+    }
+
+    .inner-acc-plan {
+        min-width: 150px;
+    }
+
+    .account-plan-sec {
+        row-gap: 15px;
+        column-gap: 15px;
+        margin-top: 15px;
+    }
+
+    .transaction-50 {
+        width: 100%;
+    }
+
+    .transaction-100 {
+        width: 100%;
+    }
+
+    .transaction-wallet {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: column;
+        height: fit-content;
+        row-gap: 20px;
+        padding: 8px;
+        padding-right: 20px;
+    }
+
+    .field-transaction {
+        font-size: 11px;
+        font-weight: 500;
+        text-align: left;
+    }
+.field-transaction-list{
+    font-size: 11px !important;
+
+}
+    .your-order {
+        padding: 24px 30px;
+    }
+
+    .ncp-discount-sec,
+    .ncp-rules {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 395px) {
+    .title {
+        font-size: 16px !important;
+    }
+
+    .title::before,
+    .title::after {
+        width: 25px;
+        height: 10px;
+    }
+
+    .account-status {
+        min-width: 135px;
+        height: 95px;
+    }
+
+    .connection-inner-sec {
+        font-size: 17px;
+    }
+
+    .ncp-support-content p {
+        margin: 20px 0;
+        font-size: 12px;
+    }
+
+    .request-list-wallet .field-request-list {
+        font-size: 12px;
+        margin: 0;
+    }
+
+    .inner-acc-plan {
+        min-width: 125px;
+    }
+
+    .content-status {
+        font-size: 11px;
+    }
+
+    .inner-third-account-status {
+        min-width: 290px;
+    }
+
+    .header-status {
+        font-size: 10px;
+    }
 }
