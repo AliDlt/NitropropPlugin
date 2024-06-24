@@ -1852,7 +1852,8 @@ p.null-request-list {
 .request-list-desc {
     width: 100%;
     height: fit-content;
-    overflow-y: hidden;
+    /*overflow-y: hidden;*/
+    overflow-wrap: anywhere;
     padding: 10px;
     gap: 20px;
     /*justify-content: flex-start;*/
@@ -2939,12 +2940,12 @@ p.selected-payment {
         flex-direction: column;
         height: fit-content;
         row-gap: 8px;
-        padding: 8px;
-        padding-right: 20px;
+        padding: 8px 20px 8px 8px;
+        overflow-wrap: anywhere;
     }
 
     .field-transaction {
-        font-size: 11px;
+        /*font-size: 11px;*/
         font-weight: 500;
         text-align: left;
     }
