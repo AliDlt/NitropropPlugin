@@ -198,7 +198,7 @@ h3.accordion-title {
     display: flex;
     gap: 90px;
     padding: 35px !important;
-    height: 355px !important;
+    height: 410px !important;
     /*height: fit-content;*/
     align-items: center !important;
 }
@@ -2139,11 +2139,14 @@ a.pass-change-btn {
     outline: none;
 }
 select#status_id {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
     background-color: inherit;
     background-size: 13px;
     background-position-x: 10%;
     background-position-y: 18px;
-    padding: 0;
+    padding: 0 0 0 10px;
 }
 
 .certificate-btn,.certificate-btn:hover,.certificate-btn:focus{
@@ -2583,7 +2586,9 @@ p.selected-payment {
 }
 
 @media screen and (max-width: 768px) {
-    
+    .nitro-posts-sec {
+        height: 355px !important;
+    }
 .transaction-list-account-number,
 .transaction-list-date,
 .transaction-list-price,
