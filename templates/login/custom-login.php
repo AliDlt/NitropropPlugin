@@ -42,8 +42,9 @@
             </div>
         </div>
         <div class="cover-section">
-            <img id="login-logo-one" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/login-logo.png' ?>" alt="">
-            <img id="login-logo-two" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/mobile-login-logo.png' ?>" alt="" style="display: none">
+            <img class="" id="login-logo-one" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/login-background.webp' ?>" alt="">
+            <img id="login-logo-two" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/mobile-back.webp' ?>" alt="">
+            <img id="login-logo" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/logo-w.webp' ?>" alt="">
         </div>
     </div>
 </div>
