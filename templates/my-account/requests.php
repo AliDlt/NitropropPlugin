@@ -69,12 +69,15 @@ function requests_template($acc_id, $dataArrayVal)
                             if ($data['status'] == 'pending') {
                                 ?>
                                 <div class="request-list-condition transaction-warning ">درحال بررسی</div><?php
-                            } elseif ($data['status'] == 'comp') {
+                            } elseif ($data['status'] == 'rejected') {
                                 ?>
                                 <div class="request-list-condition transaction-error ">رد شده</div><?php
+                            }  elseif ($data['status'] == 'approved') {
+                                ?>
+                                <div class="request-list-condition transaction-error">تائید شده</div><?php
                             } else {
                                 ?>
-                                <div class="request-list-condition transaction-success ">انجام شده</div><?php
+                                <div class="request-list-condition transaction-success "><?php $data['status'] ?></div><?php
                             }
                             ?>
                         </div>
