@@ -67,12 +67,17 @@
 }
 
 .cover-section img {
-    width: 100%;
+    width: 620px;
     height: 100%;
     object-fit: cover;
     border-radius: 25px 0 0 25px;
+    position: relative;
 }
-
+#login-logo {
+    position: absolute;
+    width: 250px !important;
+    object-fit: contain;
+}
 .cover-img {
     max-height: 200px;
     border-radius: 25px;
@@ -285,7 +290,9 @@
     cursor: pointer;
     margin-bottom: 0;
 }
-
+#login-logo-two{
+    display: none;
+}
 .cover-img {
     display: none;
 }
@@ -300,7 +307,9 @@
     position: relative;
 }
 
-@media screen and (max-width: 1980px) {}
+@media screen and (min-width: 1800px) {
+
+}
 
 @media screen and (max-width: 1440px) {
     .login-container {
@@ -334,7 +343,9 @@
         min-width: 160px;
     }
 }
+@media screen and (min-width: 1080px){
 
+}
 @media screen and (max-width: 1080px) {
     .input-container svg {
         transform: none;
@@ -435,6 +446,12 @@
 }
 
 @media screen and (max-width: 720px) {
+    #login-logo{
+        width: 185px !important;
+    }
+    #login-logo-two{
+        width: 390px;
+    }
     .container {
         max-width: 1024px;
         flex-direction: column-reverse;
@@ -519,5 +536,8 @@
 @media screen and (max-width: 370px){
     .content-section,#login-logo-two {
         width: 285px;
+    }
+    #login-logo{
+        width: 150px !important;
     }
 }
