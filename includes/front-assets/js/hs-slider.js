@@ -21,10 +21,10 @@ function showSlides(n) {
         slides[i].style.display = "none";
     }
     for (i = 0; i < dots.length; i++) {
-        dots[i].className = dots[i].className.replace(" active", "");
+        dots[i].className = dots[i].className.replace(" slider-active", "");
     }
     slides[slideIndex-1].style.display = "flex";
-    dots[slideIndex-1].className += " active";
+    dots[slideIndex-1].className += " slider-active";
 }
 setInterval(function() {
     plusSlides(1);

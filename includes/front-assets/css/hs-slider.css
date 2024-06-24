@@ -139,7 +139,7 @@ button.slider-login-btn:hover {
     transition: background-color 0.6s ease;
 }
 
-.active, .dot:hover {
+.slider-active, .dot:hover {
     background-color: #5386E4;
     transform: scale(1.5);
 }
