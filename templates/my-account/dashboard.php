@@ -7,6 +7,7 @@ function dashboard_template($account_info_response, $data)
     $table_name = $wpdb->prefix . 'nitro_table';
     $query = $wpdb->prepare("SELECT auth_status FROM $table_name WHERE account_id = %d", $account_info_response['data']['id']);
     $auth_status = $wpdb->get_var($query);
+    api_account_sync($data['id']);
     ob_start(); ?>
     <div class="dashboard-first-block">
         <div class="account-info-block">

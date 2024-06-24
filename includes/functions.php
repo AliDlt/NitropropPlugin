@@ -933,6 +933,28 @@ function api_get_challenge_prices($nitro_access_token)
     return $decoded_response;
 }
 
+function api_account_sync($id)
+{
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://client.nitroprop.com/api/core/account/'.$id.'/syncAccount/',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE5ODM1NTAwLCJpYXQiOjE3MTkyMzA3MDAsImp0aSI6ImY2Mjg0Mjg0ZDJkYzQ4NDA5ZDYwZmY2MTkzZTVkODZiIiwidXNlcl9pZCI6MiwiZW1haWwiOiJwYXJzYWVmZmF0cmF2ZXNoQGdtYWlsLmNvbSJ9.2uZNlL_lXov0H8loR8CbpaSeJ5ncIMszX8ttf2pQZyw'
+        ),
+    ));
+
+    $response = curl_exec($curl);
+
+    curl_close($curl);
+}
 function api_challenges_buy($nitro_access_token, $platform, $groupID, $discountCode)
 {
 
