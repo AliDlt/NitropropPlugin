@@ -85,7 +85,9 @@ add_shortcode('ncp_login_btn', 'ncp_login_btn');
 add_shortcode('rules_template', function () {
     include_once NCP_PLUGIN_RULES . 'rules-template.php';
 });
-
+add_shortcode('faq_template', function () {
+    include_once NCP_PLUGIN_RULES . 'faq-template.php';
+});
 add_action('admin_post_custom_login_action', 'send_login_data_to_api');
 
 //template loader with ajax

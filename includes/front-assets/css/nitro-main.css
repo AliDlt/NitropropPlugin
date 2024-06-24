@@ -1248,9 +1248,7 @@ img.ncp-logo {
     margin-top: 29px;
 }
 
-.accordion-ncp-btn .svg-icon{
-    rotate: 180deg;
-}
+
 .ncp-menu-content img {
     width: 20px;
     height: 20px;
@@ -2244,13 +2242,26 @@ p.selected-payment {
     font-family: 'Kalameh', serif;
 }
 
-/* accordion */
+/* Accordion Styles */
+.accordion-npc-sec {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.accordion-column {
+    width: 48%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 
 .accordion-ncp {
     display: flex;
     flex-direction: column;
-    width: 48%;
+    margin-bottom: 20px;
 }
+
 .accordion-ncp button {
     display: flex;
     justify-content: space-between;
@@ -2268,18 +2279,37 @@ p.selected-payment {
     overflow: hidden;
     transition: border-radius 0.3s;
     max-height: 63px;
+    cursor: pointer;
 }
+
 .accordion-ncp h3 {
     font-size: 18px;
     font-weight: 700;
     color: #2C487F;
     margin: 0;
 }
+
+.accordion-ncp .panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.accordion-ncp .panel p {
+    padding: 0 18px;
+    margin: 10px 0;
+    color: #2C487F;
+}
+
 .accordion-ncp button:hover,
 .accordion-ncp button:focus,
 .accordion-ncp button:active {
     background-color: #EEF2FF;
     outline: none;
+}
+
+.accordion-ncp button.active + .panel {
+    max-height: 200px; /* Adjust this value based on content height */
 }
 
 .panel p {
@@ -2460,9 +2490,7 @@ p.selected-payment {
         padding: 0;
     }
 
-    .accordion-ncp {
-        width: 100% !important;
-    }
+   
     .tp-rightarrow{
         left: 49% !important;
     }
@@ -2768,7 +2796,7 @@ p.selected-payment {
         justify-content: space-between;
         flex-direction: column;
         height: fit-content;
-        row-gap: 20px;
+        row-gap: 8px;
         padding: 8px;
         text-align: right;
         padding-right: 20px;
@@ -2794,12 +2822,16 @@ p.selected-payment {
     .your-order-challenge{
         padding: 32px;
     }
+    .accordion-column {
+        width: 100%;
+    }
 
     .accordion-ncp h3 {
-        font-size: 14px !important;
+        font-size: 14px;
     }
+
     .accordion-ncp button {
-        padding: 10px 15px 10px 15px !important;
+        padding: 10px 15px 10px 15px;
     }
     .svg-icon {
         height: 23px !important;
@@ -2900,7 +2932,7 @@ p.selected-payment {
         justify-content: space-between;
         flex-direction: column;
         height: fit-content;
-        row-gap: 20px;
+        row-gap: 8px;
         padding: 8px;
         padding-right: 20px;
     }
