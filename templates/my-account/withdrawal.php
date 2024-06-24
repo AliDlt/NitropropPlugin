@@ -80,15 +80,15 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
                         if ($history['status'] == 'pending') {
                             $statusClass = 'transaction-warning';
                             $statusText = 'درحال بررسی';
-                        } elseif ($history['status'] == 'approved') {
-                            $statusClass = 'transaction-success';
-                            $statusText = 'انجام شده';
-                        } elseif ($history['status'] == 'rejected') {
+                        } elseif ($history['status'] == 'reject') {
                             $statusClass = 'transaction-error';
                             $statusText = 'رد شده';
+                        }  elseif ($history['status'] == 'accept') {
+                            $statusClass = 'transaction-success';
+                            $statusText = 'تائید شده';
                         } else {
-                            $statusClass = '';
-                            $statusText = '';
+                            $statusClass = 'transaction-warning';
+                            $statusText = $history['status'];
                         }
                         ?>
                         <?php if ($history['certificate'] != null) { ?>

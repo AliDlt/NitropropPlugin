@@ -560,14 +560,13 @@ img.btn-account-bell {
     flex-direction: row-reverse;
     align-items: center;
     gap: 6px;
-    font-family: 'Kalameh', sans-serif;
+    font-family: 'Kalameh';
     font-size: 22px;
     font-weight: 600;
     margin-left: 8px;
 }
 
 .ncp-dashboard {
-
     display: flex;
     justify-content: center;
     align-items: center;
@@ -575,7 +574,6 @@ img.btn-account-bell {
     color: #BBBBBB;
     font-size: 28px;
     font-weight: 600;
-
 }
 
 .ncp-block {
@@ -863,6 +861,7 @@ img.btn-account-bell {
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Kalameh';
 }
 
 .login_btn_wrapper img {
@@ -2389,7 +2388,7 @@ p.selected-payment {
     row-gap: 20px;
     flex-direction: column;
     width: 100%;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .transaction-list-border {
