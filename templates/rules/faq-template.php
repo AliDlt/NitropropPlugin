@@ -1,3 +1,4 @@
+    <div class="con">
     <div class="accordion-npc-sec">
       <div class="accordion-column">
         <div class="accordion-ncp">
@@ -124,8 +125,6 @@
             </p>
           </div>
         </div>
-      </div>
-      <div class="accordion-column">
         <div class="accordion-ncp">
           <button class="accordion-ncp-btn">
             <h3>
@@ -162,6 +161,11 @@
             </p>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="accordion-npc-sec">
+      <div class="accordion-column">
+        
         <div class="accordion-ncp">
           <button class="accordion-ncp-btn">
             <h3>
@@ -263,5 +267,69 @@
             <p>حداقل سن قانونی افراد برای تایید و تکمیل مدارک 18سال می باشد.</p>
           </div>
         </div>
+        <div class="accordion-ncp">
+          <button class="accordion-ncp-btn">
+            <h3>آیا هر شخصی با هر ملیتی می تواند احراز هویت کند؟</h3>
+            <div>
+              <svg
+                class="svg-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                viewBox="0 0 43 43"
+                fill="none"
+              >
+                <path
+                  d="M0.238593 21.7414C0.238593 10.0108 9.7481 0.501291 21.4787 0.50129C33.2092 0.50129 42.7187 10.0108 42.7187 21.7414C42.7187 33.4719 33.2092 42.9814 21.4787 42.9814C9.7481 42.9814 0.238594 33.4719 0.238593 21.7414Z"
+                  fill="#89ABEA"
+                ></path>
+                <path
+                  d="M11.334 25.1602L21.4795 15.0147L31.625 25.1602"
+                  stroke="white"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </div>
+          </button>
+          <div class="panel">
+            <p>بله، نیتروپراپ از همه افراد با تمام ملیت ها استقبال می کند.</p>
+          </div>
+        </div>
+        <div class="accordion-ncp">
+          <button class="accordion-ncp-btn">
+            <h3>در هنگام خرید از درگاه ارز دیجیتال به چه نکاتی باید توجه کرد؟</h3>
+            <div>
+              <svg
+                class="svg-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="25"
+                viewBox="0 0 43 43"
+                fill="none"
+              >
+                <path
+                  d="M0.238593 21.7414C0.238593 10.0108 9.7481 0.501291 21.4787 0.50129C33.2092 0.50129 42.7187 10.0108 42.7187 21.7414C42.7187 33.4719 33.2092 42.9814 21.4787 42.9814C9.7481 42.9814 0.238594 33.4719 0.238593 21.7414Z"
+                  fill="#89ABEA"
+                ></path>
+                <path
+                  d="M11.334 25.1602L21.4795 15.0147L31.625 25.1602"
+                  stroke="white"
+                  stroke-width="5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </div>
+          </button>
+          <div class="panel">
+          <p>
+    در هنگام خرید از درگاه ارز دیجیتال به نکات زیر توجه کنید:<br>
+    - در هنگام واریز تتر مبلغ را به صورت دقیق و با در نظر گرفتن کارمزد واریز نمایید.<br>
+    - در صورتی که کمتر از عدد نمایش داده شده واریز انجام دهید؛ تراکنش شما ناموفق خواهد شد و امکان از دست رفتن مبلغ واریزی وجود دارد. لطفا هنگام واریز، به مبلغ درج شده دقت نمایید.<br>
+    - پس از واریز مبلغ تا پایان یافتن فرایند ارسال در سایت NowPayment منتظر بمانید.
+</p>
+          </div>
+        </div>
       </div>
+    </div>
     </div>

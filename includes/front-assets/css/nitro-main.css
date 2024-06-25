@@ -2251,12 +2251,10 @@ p.selected-payment {
 /* Accordion Styles */
 .accordion-npc-sec {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
 }
 
 .accordion-column {
-    width: 47%;
+    /* width: 47%; */
     display: flex;
     flex-direction: column;
   
@@ -2293,7 +2291,6 @@ p.selected-payment {
     display: flex;
     align-items: center;
     justify-content: end;
-    width: 100%; 
     height: 100%;
     justify-self: end;
 }
@@ -2305,6 +2302,7 @@ p.selected-payment {
     margin: 0;
     text-align: right;
     text-wrap: wrap;
+    line-height: 20px;
 }
 
 .accordion-ncp .panel {
@@ -2334,6 +2332,7 @@ p.selected-payment {
     font-weight: 400 !important;
     color: #5d5d5d;
     padding: 15px;
+    line-height: 25px;
 }
 .panel {
     display: none;
@@ -2357,10 +2356,9 @@ p.selected-payment {
 }
 .accordion-npc-sec {
     display: flex;
-    flex-wrap: wrap;
     column-gap: 30px;
+    flex-direction: column;
     /* row-gap: 19px; */
-    justify-content: space-between;
 }
 .svg-icon {
     transition: transform 0.2s;
@@ -2372,8 +2370,11 @@ p.selected-payment {
     transform: rotate(0deg);
 }
 
-
-
+.con{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
 .transaction-condition {
     display: flex;
     justify-content: flex-end;
@@ -2631,11 +2632,17 @@ p.selected-payment {
     .accordion-ncp h3 {
         font-size: 11px;
     }
+    .con{
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
     .accordion-column {
         width: 100%;
     }
     .accordion-npc-sec{
         padding: 20px;
+        padding-top: 0;
+        padding-bottom: 0;
     }
     .nitro-posts-sec {
         height: 355px !important;
@@ -2852,18 +2859,11 @@ p.selected-payment {
     .your-order-challenge{
         padding: 32px;
     }
-
+    
     .accordion-column {
         width: 100%;
     }
 
-    /* .accordion-ncp h3 {
-        font-size: 14px;
-    } */
-
-    /* .accordion-ncp button {
-        padding: 10px 15px 10px 15px;
-    } */
     .svg-icon {
         height: 23px !important;
         width: 23px !important;
