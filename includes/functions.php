@@ -1557,21 +1557,15 @@ function table_section_shortcode()
             <table class="w-100">
                 <thead>
                 <tr>
-                    <th style="display: flex;">چالش ها</th>
-                    <th style="display: flex;">مرحله اول
-                        <button class="btn-next" id="btn-next-one" style="display: none;">&gt;</button>
-                    </th>
-                    <th style="display: flex;">مرحله دوم
-                        <button class="btn-next" id="btn-next-two" style="display: none;">&gt;</button>
-                    </th>
-                    <th style="display: flex;">حساب ریل
-                        <button class="btn-next" id="btn-next-three" style="display: none;">&gt;</button>
-                    </th>
+                    <th style="display: flex;">چالش‌ ها</th>
+                    <th style="display: flex;">مرحله اول</th>
+                    <th style="display: flex;">مرحله دوم</th>
+                    <th style="display: flex;">مرحله سوم</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td style="display: flex;">اکانت منیجیر</td>
+                    <td style="display: flex;">اکانت منیجر شخصی</td>
                     <td style="display: flex;"><img
                                 src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/accept.png' ?>" alt="">
                     </td>
@@ -1583,13 +1577,19 @@ function table_section_shortcode()
                     </td>
                 </tr>
                 <tr>
-                    <td style="display: flex;">مدت زمان</td>
-                    <td style="display: flex;">30 روز</td>
-                    <td style="display: flex;">30 روز</td>
+                    <td style="display: flex;">تقسیم سود چالش</td>
+                    <td style="display: flex;">5%</td>
+                    <td style="display: flex;">5%</td>
+                    <td style="display: flex;">-</td>
+                </tr>
+                <tr>
+                    <td style="display: flex;">مدت زمان چالش</td>
+                    <td style="display: flex;">نامحدود</td>
+                    <td style="display: flex;">نامحدود</td>
                     <td style="display: flex;">نامحدود</td>
                 </tr>
                 <tr>
-                    <td style="display: flex;">حد اقل روز ترید</td>
+                    <td style="display: flex;">حداقل روزهای ترید</td>
                     <td style="display: flex;">5 روز</td>
                     <td style="display: flex;">5 روز</td>
                     <td style="display: flex;"><img
@@ -1597,36 +1597,60 @@ function table_section_shortcode()
                     </td>
                 </tr>
                 <tr>
-                    <td style="display: flex;">حد ضرر روز</td>
-                    <td style="display: flex;">5 %</td>
-                    <td style="display: flex;">5 %</td>
-                    <td style="display: flex;">5 %</td>
+                    <td style="display: flex;">حد ضرر روزانه</td>
+                    <td style="display: flex;">5%</td>
+                    <td style="display: flex;">5%</td>
+                    <td style="display: flex;">5%</td>
                 </tr>
                 <tr>
                     <td style="display: flex;">حد ضرر کل</td>
-                    <td style="display: flex;">12 %</td>
-                    <td style="display: flex;">12 %</td>
-                    <td style="display: flex;">12 %</td>
+                    <td style="display: flex;">12%</td>
+                    <td style="display: flex;">12%</td>
+                    <td style="display: flex;">12%</td>
                 </tr>
                 <tr>
                     <td style="display: flex;">تارگت سود</td>
-                    <td style="display: flex;">8 %</td>
-                    <td style="display: flex;">8 %</td>
+                    <td style="display: flex;">8%</td>
+                    <td style="display: flex;">4%</td>
                     <td style="display: flex;"><img
                                 src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/delete.png' ?>" alt="">
                     </td>
                 </tr>
                 <tr>
-                    <td style="display: flex;">پاتفرم معامله</td>
+                    <td style="display: flex;">ترید در زمان خبر</td>
+                    <td style="display: flex;"><img
+                                src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/accept.png' ?>" alt="">
+                    </td>
+                    <td style="display: flex;"><img
+                                src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/accept.png' ?>" alt="">
+                    </td>
+                    <td style="display: flex;"><img
+                                src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/accept.png' ?>" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="display: flex;">سواپ فری</td>
+                    <td style="display: flex;"><img
+                                src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/accept.png' ?>" alt="">
+                    </td>
+                    <td style="display: flex;"><img
+                                src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/accept.png' ?>" alt="">
+                    </td>
+                    <td style="display: flex;"><img
+                                src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/accept.png' ?>" alt="">
+                    </td>
+                </tr>
+                <tr>
+                    <td style="display: flex;">پلتفرم معامله</td>
                     <td style="display: flex;">MT5</td>
                     <td style="display: flex;">MT5</td>
                     <td style="display: flex;">MT5</td>
                 </tr>
                 <tr>
-                    <td style="display: flex;">هزینه یکبارپرداخت</td>
-                    <?php echo is_front_page()||is_page('plans') ? '<td style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">59$ خرید</a></td>' : '<td style="display: flex;"><a>$59</a></td>' ?>
+                    <td style="display: flex;">هزینه یک بار پرداخت</td>
+                    <?php echo is_front_page()||is_page('plans') ? '<td style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">$59 خرید</a></td>' : '<td style="display: flex;"><a>$59</a></td>' ?>
                     <td style="display: flex;">رایگان</td>
-                    <td style="display: flex;">عودت هزینه</td>
+                    <td style="display: flex;">عودت هزینه ثبت نام شما (ریفاند)</td>
                 </tr>
                 </tbody>
             </table>
@@ -1639,6 +1663,7 @@ function table_section_shortcode()
     <?php
     return ob_get_clean();
 }
+
 
 
 function nitro_slider()
