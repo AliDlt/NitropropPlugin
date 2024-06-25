@@ -33,31 +33,6 @@
     cursor: pointer;
     width: 30px;
 }
-/*.ncp_btn_normal {*/
-/*    width: 138px;*/
-/*    height: 43px;*/
-/*    background: #5386E4;*/
-/*    border-radius: 35px;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    color: #fff !important;*/
-/*    font-size: 15px;*/
-/*    font-weight: 600;*/
-/*    border: none !important;*/
-/*    cursor: pointer;*/
-/*}*/
-/*.ncp_btn_normal:hover {*/
-/*    background: #355999 !important;*/
-/*    color: #fff !important;*/
-/*    border: none !important;*/
-/*    outline: none !important;*/
-/*}*/
-/*.btn-active {*/
-/*    background: inherit;*/
-/*    color: #5386E4 !important;*/
-/*    border: 2px solid #5386E4 !important;*/
-/*}*/
 
 table tbody>tr:nth-child(odd)>td,
 table tbody>tr:nth-child(odd)>th {
@@ -105,10 +80,13 @@ th {
     align-items: center;
     min-width: 100px;
     justify-content: center;
+    width: 100%;
 }
 
 .ncp-table tr td {
     font-size: 15px;
+    width: 100%;
+    text-wrap: nowrap;
 }
 
 table tr td img {
