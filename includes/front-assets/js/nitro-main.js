@@ -6,6 +6,7 @@ jQuery(function ($) {
     let nitro_access_token = $.cookie('nitro_access_token');
     var acc = document.getElementsByClassName("accordion");
     var i;
+    var reloadRequest;
     for (i = 0; i < acc.length; i++) {
         acc[i].addEventListener("click", function() {
             this.classList.toggle("active");
@@ -19,7 +20,6 @@ jQuery(function ($) {
     }
 
     $(document).ready(function () {
-
         $('.background-spinner').fadeIn();
         $('#ncp-withdrawal').on('click', function () {
             $('.background-spinner').fadeIn();
@@ -55,6 +55,7 @@ jQuery(function ($) {
                 complete: function (){
                     $('#withdrawal-type ').val(dataArrayVal).select();
                     request.abort();
+                    clearInterval(reloadRequest);
                 }
             })
         });
@@ -86,6 +87,7 @@ jQuery(function ($) {
                 },
                 complete: function () {
                     $('.background-spinner').fadeOut();
+                    clearInterval(reloadRequest);
                 }
             });
         });
@@ -93,7 +95,7 @@ jQuery(function ($) {
             $('.background-spinner').fadeIn();
             var selectedOption = $('#status_id ').find('option:selected');
             var dataArrayId = selectedOption.data('array-id');
-            dashboardAjaxLoader(dataArrayId);
+            dashboardAjaxLoader(dataArrayId,dataId,1);
         });
         $('#ncp-request').on('click', function () {
             $('.background-spinner').fadeIn();
@@ -131,7 +133,7 @@ jQuery(function ($) {
                         $('#request-account ').val(dataArrayVal).select();
                         $('.background-spinner').fadeOut();
                     })
-
+                    clearInterval(reloadRequest);
                 }
             })
         });
@@ -190,8 +192,8 @@ jQuery(function ($) {
                     $('.background-spinner').fadeOut();
                 },
                 complete: function () {
+                    clearInterval(reloadRequest);
                 }
-
             })
         });
         $('#ncp-support').on('click', function () {
@@ -221,8 +223,8 @@ jQuery(function ($) {
                     $('.background-spinner').fadeOut();
                 },
                 complete: function () {
+                    clearInterval(reloadRequest);
                 }
-
             })
         });
         $('#ncp-exit').on('click', function () {
@@ -406,15 +408,12 @@ jQuery(function ($) {
                     console.error("Error occurred:", error);
                     showToast(error.statusText, 'error');
                     $('.background-spinner').fadeOut();
-
-
                 }
             })
         } else {
             showToast('آدرس کیف پول را خالیست!', 'error')
             $('.background-spinner').fadeOut();
         }
-
     })
     $(document).on('click', '#birth_date', function (e) {
         e.preventDefault();
@@ -587,6 +586,7 @@ jQuery(function ($) {
                 $('.background-spinner').fadeOut();
             },
             complete: function () {
+                clearInterval(reloadRequest);
             }
         });
     })
@@ -619,7 +619,7 @@ jQuery(function ($) {
         $('.background-spinner').fadeIn();
         var selectedOption = $('#status_id').find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
-        dashboardAjaxLoader(dataArrayId)
+        dashboardAjaxLoader(dataArrayId,dataId)
     });
 
     $(document).on('change', '#cart_melli_upload', function (e) {
@@ -643,7 +643,7 @@ jQuery(function ($) {
         var dataArrayVal = selectedOption.val();
         var landPage = getCookie('ncp_is_page');
         if (landPage === 'dashboard'){
-            dashboardAjaxLoader(dataArrayId)
+            dashboardAjaxLoader(dataArrayId,dataId)
         }else if (landPage === 'request'){
             stateLoader(dataArrayId,function (){
                 $('#request-account').val(dataArrayVal).trigger('change');
@@ -714,7 +714,7 @@ jQuery(function ($) {
     })
 
 
-    function dashboardAjaxLoader(dataArrayId) {
+    function dashboardAjaxLoader(dataArrayId,dataId,val=0) {
         $.ajax({
             url: ajax_filter_params.ajax_url,
             type: 'POST',
@@ -723,6 +723,7 @@ jQuery(function ($) {
                 nitro_access_token: nitro_access_token,
                 nonce: nonce,
                 dataArrayId: dataArrayId,
+                dataId:dataId,
             },
             success: function (response) {
                 $('#ncp-my-account-wrapper').html(response.template);
@@ -733,6 +734,9 @@ jQuery(function ($) {
                 $('#ncp-dashboard .menu-pointer').fadeIn();
                 history.pushState(null, '', '?land=dashboard');
                 setCookie('ncp_is_page', 'dashboard', 7);
+                if (val){
+                    reloadRequest = setInterval(sendRequest, 20000);
+                }
             },
             error: function (error) {
                 console.error("Error occurred:", error);
@@ -741,6 +745,32 @@ jQuery(function ($) {
             }
         })
     }
+    
+    function dashboardAjaxReloader(dataArrayId,dataId) {
+        controller = new AbortController();
+        const signal = controller.signal;
+        $.ajax({
+            url: ajax_filter_params.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'ncp_dashboard_loader',
+                nitro_access_token: nitro_access_token,
+                nonce: nonce,
+                dataArrayId: dataArrayId,
+                dataId:dataId,
+            },
+            success: function (response) {
+                $('#dashboard-content').html(response.template);
+                $('#account-condition').html(response.step)
+            },
+            error: function (error) {
+                console.error("Error occurred:", error);
+                showToast(error.statusText, 'error');
+                $('.background-spinner').fadeOut();
+            }
+        })
+    }
+
     function stateLoader(dataArrayId,callBack = null) {
         $.ajax({
             url: ajax_filter_params.ajax_url,
@@ -760,12 +790,13 @@ jQuery(function ($) {
             },
             complete: function (){
                 callBack();
+                clearInterval(reloadRequest);
             }
         })
     }
     const actions = {
         'dashboard': function(dataArrayId) {
-            dashboardAjaxLoader(dataArrayId);
+            dashboardAjaxLoader(dataArrayId,dataId);
         },
         'request': function(dataArrayId, dataArrayVal) {
             stateLoader(dataArrayId);
@@ -796,15 +827,17 @@ jQuery(function ($) {
         }
     };
     function sendRequest() {
-        if (getCookie('ncp_is_page') === 'dashboard') {
-            var selectedOption = $('#status_id').find('option:selected');
-            var dataArrayId = selectedOption.data('array-id');
-            dashboardAjaxLoader(dataArrayId);
-        }
+        var selectedOption = $('#status_id').find('option:selected');
+        var dataArrayId = selectedOption.data('array-id');
+        var dataId = selectedOption.data('id');
+        dashboardAjaxReloader(dataArrayId,dataId);
     }
-    // if (land === 'dashboard') {
-    //     setInterval(sendRequest, 20000);
-    // }
+
+    if (land === 'dashboard') {
+        $('.ncp-menu-content .menu-pointer').fadeOut();
+        $('#ncp-dashboard .menu-pointer').fadeIn();
+        reloadRequest = setInterval(sendRequest, 20000);
+    }
 });
 
 function addThousandsSeparator(number) {
