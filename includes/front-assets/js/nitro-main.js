@@ -618,13 +618,33 @@ jQuery(function ($) {
         e.preventDefault();
         $('#payment-warning-text').text('توجه داشته باشید که اطلاعات وارد شده با اطلاعات دارنده کارت بانکی یکسان باشد.');
     });
-    $('#refresh-dashboard').on('click', function (e) {
+    $(document).on('click', '#refresh-dashboard', function (e) {
         e.preventDefault();
         $('.background-spinner').fadeIn();
         var selectedOption = $('#status_id').find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
-        dataId = selectedOption.data('id'); 
-        dashboardAjaxLoader(dataArrayId, dataId);
+        dataId = selectedOption.data('id');
+        $.ajax({
+            url: ajax_filter_params.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'ncp_dashboard_loader',
+                nitro_access_token: nitro_access_token,
+                nonce: nonce,
+                dataArrayId: dataArrayId,
+                dataId:dataId,
+            },
+            success: function (response) {
+                $('#dashboard-content').html(response.template);
+                $('#account-condition').html(response.step)
+                $('.background-spinner').fadeOut();
+            },
+            error: function (error) {
+                console.error("Error occurred:", error);
+                showToast(error.statusText, 'error');
+                $('.background-spinner').fadeOut();
+            }
+        })
     });
     
 
@@ -753,8 +773,6 @@ jQuery(function ($) {
     }
     
     function dashboardAjaxReloader(dataArrayId,dataId) {
-        controller = new AbortController();
-        const signal = controller.signal;
         $.ajax({
             url: ajax_filter_params.ajax_url,
             type: 'POST',
