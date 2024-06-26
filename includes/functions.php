@@ -1533,24 +1533,19 @@ function table_section_shortcode()
             <div class="btn-price">
                 <button class="ncp_btn_normal btn-table btn-active" id="btn-price-0" data-id="1"
                    data-price="$5000"
-                   name="one">$ 5000
-                </button>
+                   name="one">5000 $</button>
             </div>
             <div class="btn-price">
                 <button class="ncp_btn_normal btn-table" id="btn-price-1" data-id="2" data-price="$10000"
-                   name="two">
-                    $ 10000
-                </button>
+                   name="two">10000 $</button>
             </div>
             <div class="btn-price">
                 <button class="ncp_btn_normal btn-table" id="btn-price-2" data-id="3" data-price="$25000"
-                   name="three">$ 25000
-                </button>
+                   name="three">25000 $</button>
             </div>
             <div class="btn-price">
                 <button class="ncp_btn_normal btn-table" id="btn-price-3" data-id="4" data-price="$50000"
-                   name="four">$ 50000
-                </button>
+                   name="four">50000 $</button>
             </div>
         </div>
         <div class="ncp-table w-100 d-flex center">
@@ -1650,7 +1645,7 @@ function table_section_shortcode()
                     <td style="display: flex;">هزینه یک بار پرداخت</td>
                     <?php echo is_front_page() || is_page('plans') ? '<td id="payment-cell" style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">$59 خرید</a></td>' : '<td id="payment-cell" style="display: flex;"><a>$59</a></td>' ?>
                     <td style="display: flex;">رایگان</td>
-                    <td style="display: flex; font-size: 13px !important;">عودت هزینه ثبت نام شما (ریفاند)</td>
+                    <td style="display: flex; font-size: 13px !important;">ریفاند هزینه</td>
                 </tr>
                 </tbody>
             </table>
