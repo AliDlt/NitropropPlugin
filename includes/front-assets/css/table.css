@@ -74,11 +74,9 @@ td .ncp-table-btn {
     height: 45px;
 }
 
-.ncp-table tr td,
-th {
+.ncp-table tr td,th {
     display: flex;
     align-items: center;
-    min-width: 100px;
     justify-content: center;
     width: 100%;
 }
