@@ -54,6 +54,7 @@ jQuery(function ($) {
                 },
                 complete: function (){
                     $('#withdrawal-type ').val(dataArrayVal).select();
+                    request.abort();
                 }
             })
         });
@@ -800,9 +801,9 @@ jQuery(function ($) {
             dashboardAjaxLoader(dataArrayId);
         }
     }
-    if (land === 'dashboard') {
-        setInterval(sendRequest, 20000);
-    }
+    // if (land === 'dashboard') {
+    //     setInterval(sendRequest, 20000);
+    // }
 });
 
 function addThousandsSeparator(number) {

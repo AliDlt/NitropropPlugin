@@ -112,7 +112,7 @@ if ($nitro_access_token && $account_info_response['status']==200) {
                 <div class="account-condition" id="account-condition">
                     <?php
                     $state = $datas[0]["state"];
-                    echo state_svg($state);
+                    echo state_svg($state)?:'';
                     ?>
                 </div>
             </div>
