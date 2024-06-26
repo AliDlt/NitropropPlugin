@@ -79,11 +79,11 @@ function challenge_page($account_info_response, $nitro_access_token)
                 <p class="selected-payment" style="text-align=center;">شما درگاه ریالی را انتخاب کرده اید</p>
             </div>
             <div class="ncp-rules">
-                <label class="rules-container">قوانین را مطالعه کرده و شرایط چالش ها را می پذیرم.
+                <label class="rules-container" style="padding-right:20px;">قوانین را مطالعه کرده و شرایط چالش ها را می پذیرم.
                     <input type="checkbox" id="challenge-rule">
                     <span class="checkmark"></span>
                 </label>
-                <label class="rules-container">پس از خرید چالش، امکان عودت وجه وجود ندارد.
+                <label class="rules-container" style="padding-right:20px;">پس از خرید چالش، امکان عودت وجه وجود ندارد.
                     <input type="checkbox" id="challenge-pay-back">
                     <span class="checkmark"></span>
                 </label>
