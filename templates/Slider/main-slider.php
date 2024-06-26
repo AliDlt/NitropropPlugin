@@ -43,8 +43,8 @@
     </div>
     <div class="mySlides fade slider-01" style="display: none">
         <div class="left-slider-01">
-            <h2>با نیتروپراپ بدون محدودیت زمانی معامله کنید!</h2>
-            <p>در نیتروپراپ چالش ها محدودیت زمانی ندارند و بدون نگرانی از بابت محدودیت های ۳۰ و ۶۰ روزه برای پاس کردن چالش ها ، می توانید مراحل چالش خود را طی کنید.</p>
+            <h2>بدون قانون ریسک شناور و mdl</h2>
+            <p>در نیتروپراپ قوانین محدود کننده ای مثل ریسک شناور و mdl نداریم و با خیال راحت می توانید سبک و استراتژی معاملاتی خود را پیاده سازی کنید و نگرانی از بابت این قوانین نداشته باشید.</p>
             <div class="btn-sec-slider-01">
             <button onclick="window.location.href='https://nitroprop.live/panel/" class="slider-login-btn">خرید چالش</button>
             <button class="slider-preview-dashboard-btn">ورود به داشبورد</button>
