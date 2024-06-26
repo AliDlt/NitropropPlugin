@@ -2851,10 +2851,6 @@ p.selected-payment {
 }
 
 @media screen and (max-width: 480px) {
-
-    .ncp-block span, .ncp-block label{
-        padding-right: 0;
-    }
     .transaction-list-condition{
         width: 50% !important;
     }
