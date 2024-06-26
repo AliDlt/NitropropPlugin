@@ -1,4 +1,5 @@
 jQuery(function ($) {
+    var dataId = null;
     var site_url = ajax_filter_params.siteUrl;
     var nonce = ajax_filter_params.nonce;
     const urlParams = new URLSearchParams(window.location.search);
@@ -95,8 +96,11 @@ jQuery(function ($) {
             $('.background-spinner').fadeIn();
             var selectedOption = $('#status_id ').find('option:selected');
             var dataArrayId = selectedOption.data('array-id');
-            dashboardAjaxLoader(dataArrayId,dataId,1);
+            dataId = selectedOption.data('id');
+            dashboardAjaxLoader(dataArrayId, dataId, 1);
         });
+        
+        
         $('#ncp-request').on('click', function () {
             $('.background-spinner').fadeIn();
             var selectedOption = $('#status_id ').find('option:selected');
@@ -614,13 +618,15 @@ jQuery(function ($) {
         e.preventDefault();
         $('#payment-warning-text').text('توجه داشته باشید که اطلاعات وارد شده با اطلاعات دارنده کارت بانکی یکسان باشد.');
     });
-    $(document).on('click', '#refresh-dashboard', function (e) {
+    $('#refresh-dashboard').on('click', function (e) {
         e.preventDefault();
         $('.background-spinner').fadeIn();
         var selectedOption = $('#status_id').find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
-        dashboardAjaxLoader(dataArrayId,dataId)
+        dataId = selectedOption.data('id'); 
+        dashboardAjaxLoader(dataArrayId, dataId);
     });
+    
 
     $(document).on('change', '#cart_melli_upload', function (e) {
         e.preventDefault();
