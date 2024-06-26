@@ -1648,9 +1648,9 @@ function table_section_shortcode()
                 </tr>
                 <tr>
                     <td style="display: flex;">هزینه یک بار پرداخت</td>
-                    <?php echo is_front_page()||is_page('plans') ? '<td style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">$59 خرید</a></td>' : '<td style="display: flex;"><a>$59</a></td>' ?>
+                    <?php echo is_front_page() || is_page('plans') ? '<td id="payment-cell" style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">$59 خرید</a></td>' : '<td id="payment-cell" style="display: flex;"><a>$59</a></td>' ?>
                     <td style="display: flex;">رایگان</td>
-                    <td style="display: flex;">عودت هزینه ثبت نام شما (ریفاند)</td>
+                    <td style="display: flex; font-size: 13px !important;">عودت هزینه ثبت نام شما (ریفاند)</td>
                 </tr>
                 </tbody>
             </table>
