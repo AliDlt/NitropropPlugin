@@ -448,6 +448,7 @@
 @media screen and (max-width: 720px) {
     #login-logo{
         width: 185px !important;
+        height: auto;
     }
     #login-logo-two{
         width: 390px;
