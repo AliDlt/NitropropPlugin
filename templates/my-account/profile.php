@@ -9,8 +9,7 @@ function profile_template( $account_info_response)
         <h2>حساب کاربری</h2>
         <div class="ncp-warning"><img
                     src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/warning.svg' ?>" alt="">برای
-            تغییر اطلاعات کاربری خود از طریق پشتیبانی آنلاین و یا تیکت اقدام نمایید.
-        </div>
+                    برای تغییر اطلاعات کاربری خود از طریق پشتیبانی آنلاین و یا پشتیبانی تلگرام اقدام نمایید.</div>
         <div class="field-sec">
             <div class="ncp-profile-sec">
                 <div class="ncp-profile-name-field">

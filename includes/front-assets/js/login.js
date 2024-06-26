@@ -175,7 +175,7 @@ jQuery(function ($) {
                                 recaptcha_token: token
                             },
                             success: function (response) {
-                                console.log(response)
+                                console.log(response);
                                 if (response.success) {
                                     showToast("خوش آمدید", "success");
                                     window.location.href = sit_url + '/panel/?land=dashboard';
@@ -418,21 +418,17 @@ jQuery(function ($) {
 
     function showToast(message, type) {
         Toastify({
-            text: message, // Prepend the icon to the message
+            text: message,
             duration: 3000,
-            closeButton: false, // Disable close button
+            closeButton: false,
             gravity: "top",
             position: "right",
             newWindow: true,
             stopOnFocus: true,
             style: {
-                background: type === 'success'
-                    ? "#fff"
-                    : "red",
+                background: type === 'success' ? "green" : "red",
                 direction: "rtl",
-                color: type === 'success'
-                    ? "green"
-                    : "#fff",
+                color: type === 'success' ? "white" : "#fff",
                 borderRadius: "14px",
                 minWidth: "150px",
                 boxShadow: "0 3px 6px rgba(0,0,0,0.1)",
