@@ -457,7 +457,9 @@ function ncp_dashboard_loader()
 {
     check_ajax_referer('my_ajax_nonce', 'nonce');
     $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+    $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
     if ($dataArrayId !== null) {
+        api_account_sync($dataId);
         $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
         $account_info_response = api_account_info($nitro_access_token);
         $account_file_response = api_account_file($nitro_access_token);
@@ -551,6 +553,7 @@ function ncp_dashboard_loader()
         wp_send_json_error('access denied');
     }
 }
+
 
 function ncp_state_loader()
 {
@@ -1340,29 +1343,30 @@ function ncp_request_list()
         $listHTML = '';
         if ($datas) {
             foreach ($datas as $data) {
+
                 $listHTML .= '<div class="ncp-inner-request-list-block"><div class="request-condition">';
                 if ($data['status'] == 'pending') {
                     $listHTML .= '<div class="request-list-condition transaction-warning ">درحال بررسی</div>';
-                } elseif ($data['status'] == 'comp') {
+                } elseif ($data['status'] == 'rejected') {
                     $listHTML .= '<div class="request-list-condition transaction-success ">انجام شده</div>';
-                } else {
-                    $listHTML .= '<div class="request-list-condition transaction-error ">رد شده</div>';
+                } elseif($data['status'] == 'approved') {
+                    $listHTML .= '<div class="request-list-condition transaction-done">تایید شده</div>';
+                }else{
+                    $listHTML .= '<div class="request-list-condition "></div>';
                 }
                 $listHTML .= '</div><div class="ncp-inner-request-list"><div class="request-list-account-number request-list-border">';
                 $listHTML .= '<div class="text-request-list">شماره حساب</div><div class="field-request-list">' . $dataArrayVal . '</div></div>';
                 $listHTML .= '<div class="request-list-price  request-list-border">';
                 $listHTML .= '<div class="text-request-list">موضوع</div><div class="field-request-list">' . $data['title'] . '</div></div>';
                 $listHTML .= '<div class="request-list-time request-list-border"><div class="text-request-list">ساعت</div>';
+
                 $start_ts = $data["created_ts"];
-                $timestamp = strtotime($start_ts);
-                $formatterh = new IntlDateFormatter(
-                    'fa-IR',
-                    IntlDateFormatter::NONE,
-                    IntlDateFormatter::SHORT,
-                    'Asia/Tehran',
-                    IntlDateFormatter::TRADITIONAL,
-                );
-                $listHTML .= '<div class="field-request-list">' . $formatterh->format($timestamp) . '</div>';
+                $timestamp = new DateTime($start_ts, new DateTimeZone('Asia/Tehran'));
+                // Format the DateTime object to get only the hour and minute
+                $formatted_time = $timestamp->format('H:i');
+                // Output the formatted time
+
+                $listHTML .= '<div class="field-request-list">' . $formatted_time . '</div>';
                 $listHTML .= '</div><div class="request-list-date request-list-border"><div class="text-request-list">تاریخ</div>';
                 $formatter = new IntlDateFormatter(
                     'fa-IR',

@@ -48,11 +48,11 @@ function requests_template($acc_id, $dataArrayVal)
     </div>
     <div class="ncp-request-list-block ncp-block">
        <div class="header-request-list">
-    <h2>لیست درخواست ها</h2>
-    <div class="tooltip-container">
-        <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/info.svg' ?>" alt="">
-        <span class="tooltip-text">برای مشاهده لیست درخواست ها، لطفا حساب موردنظر را انتخاب نمایید.</span>
-    </div>
+            <h2>لیست درخواست ها</h2>
+            <div class="tooltip-container">
+                <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/info.svg' ?>" alt="">
+                <span class="tooltip-text">برای مشاهده لیست درخواست ها، لطفا حساب موردنظر را انتخاب نمایید.</span>
+            </div>
         </div>
         <div class="ncp-request-list">
             <?php
@@ -66,18 +66,27 @@ function requests_template($acc_id, $dataArrayVal)
                     <div class="ncp-inner-request-list-block">
                         <div class="request-condition">
                             <?php
-                            if ($data['status'] == 'pending') {
-                                ?>
-                                <div class="request-list-condition transaction-warning ">درحال بررسی</div><?php
-                            } elseif ($data['status'] == 'rejected') {
-                                ?>
-                                <div class="request-list-condition transaction-error ">رد شده</div><?php
-                            }  elseif ($data['status'] == 'approved') {
-                                ?>
-                                <div class="request-list-condition transaction-done">تائید شده</div><?php
-                            } else {
-                                ?>
-                                <div class="request-list-condition transaction-success "><?php $data['status'] ?></div><?php
+                            switch ($data['status']) {
+                                case 'pending':
+                                    ?>
+                                    <div class="request-list-condition transaction-warning">درحال بررسی</div>
+                                    <?php
+                                    break;
+                                case 'rejected':
+                                    ?>
+                                    <div class="request-list-condition transaction-error">رد شده</div>
+                                    <?php
+                                    break;
+                                case 'approved':
+                                    ?>
+                                    <div class="request-list-condition transaction-done">تایید شده</div>
+                                    <?php
+                                    break;
+                                default:
+                                    ?>
+                                    <div class="request-list-condition transaction-success"><?php echo $data['status'] ?></div>
+                                    <?php
+                                    break;
                             }
                             ?>
                         </div>
@@ -86,7 +95,7 @@ function requests_template($acc_id, $dataArrayVal)
                                 <div class="text-request-list">شماره حساب</div>
                                 <div class="field-request-list"><?php echo $dataArrayVal ?></div>
                             </div>
-                            <div class="request-list-price  request-list-border">
+                            <div class="request-list-price request-list-border">
                                 <div class="text-request-list">موضوع</div>
                                 <div class="field-request-list"><?php echo $data['title'] ?></div>
                             </div>
@@ -94,18 +103,14 @@ function requests_template($acc_id, $dataArrayVal)
                                 <div class="text-request-list">ساعت</div>
                                 <?php
                                 $start_ts = $data["created_ts"];
-                                $timestamp = new DateTime($start_ts, new DateTimeZone('Asia/Tehran'));
-
-                                // Format the DateTime object to get only the hour and minute
-                                $formatted_time = $timestamp->format('H:i');
-                                // Output the formatted time
-                                echo '<div class="field-request-list">' . $formatted_time . '</div>';
+                                $time = substr($start_ts, 11, 5); // Extract hour and minute
+                                echo '<div class="field-request-list">' . $time . '</div>';
                                 ?>
                             </div>
                             <div class="request-list-date request-list-border">
                                 <div class="text-request-list">تاریخ</div>
                                 <?php
-                                $timestamp = strtotime($start_ts);
+                                $date = substr($start_ts, 0, 10); // Extract date
                                 $formatter = new IntlDateFormatter(
                                     'fa-IR',
                                     IntlDateFormatter::SHORT,
@@ -113,7 +118,7 @@ function requests_template($acc_id, $dataArrayVal)
                                     'Asia/Tehran',
                                     IntlDateFormatter::TRADITIONAL,
                                 );
-                                echo '<div class="field-request-list">' . $formatter->format($timestamp) . '</div>';
+                                echo '<div class="field-request-list">' . $formatter->format(strtotime($date)) . '</div>';
                                 ?>
                             </div>
                             <?php if (!empty($data['response'])) { ?>
@@ -133,3 +138,4 @@ function requests_template($acc_id, $dataArrayVal)
     <?php
     return ob_get_clean();
 }
+?>
