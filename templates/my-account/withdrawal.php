@@ -84,7 +84,7 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
                             $statusClass = 'transaction-error';
                             $statusText = 'رد شده';
                         }  elseif ($history['status'] == 'accept') {
-                            $statusClass = 'transaction-success';
+                            $statusClass = 'transaction-done';
                             $statusText = 'تائید شده';
                         } else {
                             $statusClass = 'transaction-warning';
