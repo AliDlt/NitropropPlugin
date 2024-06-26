@@ -74,10 +74,10 @@ function requests_template($acc_id, $dataArrayVal)
                                 <div class="request-list-condition transaction-error ">رد شده</div><?php
                             }  elseif ($data['status'] == 'approved') {
                                 ?>
-                                <div class="request-list-condition transaction-error">تائید شده</div><?php
+                                <div class="request-list-condition transaction-success">تائید شده</div><?php
                             } else {
                                 ?>
-                                <div class="request-list-condition transaction-success "><?php $data['status'] ?></div><?php
+                                <div class="request-list-condition "></div><?php
                             }
                             ?>
                         </div>
@@ -95,7 +95,6 @@ function requests_template($acc_id, $dataArrayVal)
                                 <?php
                                 $start_ts = $data["created_ts"];
                                 $timestamp = new DateTime($start_ts, new DateTimeZone('Asia/Tehran'));
-
                                 // Format the DateTime object to get only the hour and minute
                                 $formatted_time = $timestamp->format('H:i');
                                 // Output the formatted time

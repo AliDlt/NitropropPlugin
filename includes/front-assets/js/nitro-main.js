@@ -6,27 +6,17 @@ jQuery(function ($) {
     let nitro_access_token = $.cookie('nitro_access_token');
     var acc = document.getElementsByClassName("accordion");
     var i;
-    for (i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-        });
-    }
+    var reloadRequest;
+    let controller;
+
 
     $(document).ready(function () {
-
         $('.background-spinner').fadeIn();
         $('#ncp-withdrawal').on('click', function () {
             $('.background-spinner').fadeIn();
             var selectedOption = $('#status_id ').find('option:selected');
             var dataArrayId = selectedOption.data('array-id');
             var dataArrayVal = selectedOption.val();
-
             $.ajax({
                 url: ajax_filter_params.ajax_url,
                 type: 'POST',
@@ -52,9 +42,9 @@ jQuery(function ($) {
                     }
                     $('.background-spinner').fadeOut();
                 },
-                complete: function (){
+                complete: function () {
                     $('#withdrawal-type ').val(dataArrayVal).select();
-                    request.abort();
+                    clearInterval(reloadRequest);
                 }
             })
         });
@@ -86,6 +76,8 @@ jQuery(function ($) {
                 },
                 complete: function () {
                     $('.background-spinner').fadeOut();
+                    clearInterval(reloadRequest);
+                    console.log(reloadRequest)
                 }
             });
         });
@@ -93,7 +85,8 @@ jQuery(function ($) {
             $('.background-spinner').fadeIn();
             var selectedOption = $('#status_id ').find('option:selected');
             var dataArrayId = selectedOption.data('array-id');
-            dashboardAjaxLoader(dataArrayId);
+            var dataId = selectedOption.data('id');
+            dashboardAjaxLoader(dataArrayId,dataId,1);
         });
         $('#ncp-request').on('click', function () {
             $('.background-spinner').fadeIn();
@@ -126,12 +119,12 @@ jQuery(function ($) {
                     }
                     $('.background-spinner').fadeOut();
                 },
-                complete: function (){
-                    stateLoader(dataArrayId,function (){
+                complete: function () {
+                    stateLoader(dataArrayId, function () {
                         $('#request-account ').val(dataArrayVal).select();
                         $('.background-spinner').fadeOut();
                     })
-
+                    clearInterval(reloadRequest);
                 }
             })
         });
@@ -160,6 +153,9 @@ jQuery(function ($) {
                         showToast(error.statusText, 'error');
                     }
                     $('.background-spinner').fadeOut();
+                },
+                complete: function () {
+                    clearInterval(reloadRequest);
                 }
             })
         });
@@ -190,6 +186,7 @@ jQuery(function ($) {
                     $('.background-spinner').fadeOut();
                 },
                 complete: function () {
+                    clearInterval(reloadRequest);
                 }
 
             })
@@ -221,6 +218,7 @@ jQuery(function ($) {
                     $('.background-spinner').fadeOut();
                 },
                 complete: function () {
+                    clearInterval(reloadRequest);
                 }
 
             })
@@ -285,11 +283,11 @@ jQuery(function ($) {
         e.preventDefault();
         jalaliDatepicker.startWatch({
             hideAfterChange: true,
-            autoHide:true,
-            showTodayBtn:false,
-            showEmptyBtn:false,
-            showCloseBtn:true,
-            useDropDownYears:true
+            autoHide: true,
+            showTodayBtn: false,
+            showEmptyBtn: false,
+            showCloseBtn: true,
+            useDropDownYears: true
         });
     });
     $(document).on('click', '#buy-challenge', function (e) {
@@ -318,9 +316,9 @@ jQuery(function ($) {
                     discountCode: discountCode
                 },
                 success: function (response) {
-                    if (response.code === 200){
+                    if (response.code === 200) {
                         window.location.href = response.data.link;
-                    }else {
+                    } else {
                         showToast(response.data, 'error')
                     }
                     $('.background-spinner').fadeOut();
@@ -380,6 +378,7 @@ jQuery(function ($) {
     })
     $(document).on('click', '#withdrawal-btn', function (e) {
         e.preventDefault();
+        controller.abort();
         let code = $('#withdrawal-input').val()
         var dataId = $('#withdrawal-btn').data('id');
         var selectedOption = $('#withdrawal-type').find('option:selected');
@@ -395,8 +394,8 @@ jQuery(function ($) {
                     nonce: nonce,
                     code: code,
                     dataId: dataId,
-                    dataArrayVal:dataArrayVal,
-                    dataArrayId:dataArrayId
+                    dataArrayVal: dataArrayVal,
+                    dataArrayId: dataArrayId
                 },
                 success: function (response) {
                     showToast('درخواست شما ارسال شد', 'success')
@@ -420,7 +419,7 @@ jQuery(function ($) {
         e.preventDefault();
         var $this = $(this);
         $('#code_melli').trigger('focus');
-        setTimeout(function() {
+        setTimeout(function () {
             $this.trigger('focus');
         }, 100);
     })
@@ -618,7 +617,8 @@ jQuery(function ($) {
         $('.background-spinner').fadeIn();
         var selectedOption = $('#status_id').find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
-        dashboardAjaxLoader(dataArrayId)
+        var dataId = selectedOption.data('id');
+        dashboardAjaxLoader(dataArrayId,dataId)
     });
 
     $(document).on('change', '#cart_melli_upload', function (e) {
@@ -639,36 +639,37 @@ jQuery(function ($) {
         $('.background-spinner').fadeIn();
         var selectedOption = $(this).find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
+        var dataId = selectedOption.data('id');
         var dataArrayVal = selectedOption.val();
         var landPage = getCookie('ncp_is_page');
-        if (landPage === 'dashboard'){
-            dashboardAjaxLoader(dataArrayId)
-        }else if (landPage === 'request'){
-            stateLoader(dataArrayId,function (){
+        if (landPage === 'dashboard') {
+            dashboardAjaxLoader(dataArrayId,dataId)
+        } else if (landPage === 'request') {
+            stateLoader(dataArrayId, function () {
                 $('#request-account').val(dataArrayVal).trigger('change');
             })
-        }else if (landPage === 'challenge'){
-            stateLoader(dataArrayId,function (){
+        } else if (landPage === 'challenge') {
+            stateLoader(dataArrayId, function () {
                 $('.background-spinner').fadeOut();
             })
-        }else if (landPage === 'withdrawal'){
-            stateLoader(dataArrayId , function (){
+        } else if (landPage === 'withdrawal') {
+            stateLoader(dataArrayId, function () {
                 $('#ncp-withdrawal').trigger('click')
             });
-        }else if (landPage === 'authentication'){
-            stateLoader(dataArrayId,function (){
+        } else if (landPage === 'authentication') {
+            stateLoader(dataArrayId, function () {
                 $('.background-spinner').fadeOut();
             });
-        }else if (landPage === 'profile'){
-            stateLoader(dataArrayId,function (){
+        } else if (landPage === 'profile') {
+            stateLoader(dataArrayId, function () {
                 $('.background-spinner').fadeOut();
             });
-        }else if (landPage === 'support'){
-            stateLoader(dataArrayId,function (){
+        } else if (landPage === 'support') {
+            stateLoader(dataArrayId, function () {
                 $('.background-spinner').fadeOut();
             });
-        }else{
-            stateLoader(dataArrayId,function (){
+        } else {
+            stateLoader(dataArrayId, function () {
                 $('.background-spinner').fadeOut();
             });
         }
@@ -678,7 +679,7 @@ jQuery(function ($) {
         var selectedOption = $(this).find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
         var dataArrayVal = selectedOption.val();
-        stateLoader(dataArrayId , function (){
+        stateLoader(dataArrayId, function () {
             $('#status_id ').val(dataArrayVal).select();
         });
         $.ajax({
@@ -707,13 +708,13 @@ jQuery(function ($) {
         var dataArrayId = selectedOption.data('array-id');
         var dataArrayVal = selectedOption.val();
         $('#status_id ').val(dataArrayVal).select();
-        stateLoader(dataArrayId , function (){
+        stateLoader(dataArrayId, function () {
             $('#ncp-withdrawal').trigger('click')
         });
     })
 
 
-    function dashboardAjaxLoader(dataArrayId) {
+    function dashboardAjaxLoader(dataArrayId,dataId,val=0) {
         $.ajax({
             url: ajax_filter_params.ajax_url,
             type: 'POST',
@@ -722,6 +723,7 @@ jQuery(function ($) {
                 nitro_access_token: nitro_access_token,
                 nonce: nonce,
                 dataArrayId: dataArrayId,
+                dataId:dataId,
             },
             success: function (response) {
                 $('#ncp-my-account-wrapper').html(response.template);
@@ -732,6 +734,10 @@ jQuery(function ($) {
                 $('#ncp-dashboard .menu-pointer').fadeIn();
                 history.pushState(null, '', '?land=dashboard');
                 setCookie('ncp_is_page', 'dashboard', 7);
+                if (val){
+                    reloadRequest = setInterval(sendRequest, 20000);
+                }
+
             },
             error: function (error) {
                 console.error("Error occurred:", error);
@@ -740,7 +746,35 @@ jQuery(function ($) {
             }
         })
     }
-    function stateLoader(dataArrayId,callBack = null) {
+
+    function dashboardAjaxReloader(dataArrayId,dataId) {
+        controller = new AbortController();
+        const signal = controller.signal;
+        $.ajax({
+            url: ajax_filter_params.ajax_url,
+            type: 'POST',
+            data: {
+                action: 'ncp_dashboard_loader',
+                nitro_access_token: nitro_access_token,
+                nonce: nonce,
+                dataArrayId: dataArrayId,
+                dataId:dataId,
+            },
+            success: function (response) {
+                $('#dashboard-content').html(response.template);
+                $('#account-condition').html(response.step)
+                // $('.btn-account-code').find('option:first').prop('selected', true);
+                // $('.background-spinner').fadeOut();
+            },
+            error: function (error) {
+                console.error("Error occurred:", error);
+                showToast(error.statusText, 'error');
+                $('.background-spinner').fadeOut();
+            }
+        })
+    }
+
+    function stateLoader(dataArrayId, callBack = null) {
         $.ajax({
             url: ajax_filter_params.ajax_url,
             type: 'POST',
@@ -757,53 +791,57 @@ jQuery(function ($) {
                 showToast(error.statusText, 'error');
                 $('.background-spinner').fadeOut();
             },
-            complete: function (){
+            complete: function () {
                 callBack();
             }
         })
     }
+
     const actions = {
-        'dashboard': function(dataArrayId) {
-            dashboardAjaxLoader(dataArrayId);
+        'dashboard': function (dataArrayId) {
+            dashboardAjaxLoader(dataArrayId,dataId);
         },
-        'request': function(dataArrayId, dataArrayVal) {
+        'request': function (dataArrayId, dataArrayVal) {
             stateLoader(dataArrayId);
             $('#request-account').val(dataArrayVal).trigger('change');
         },
-        'challenge': function(dataArrayId) {
+        'challenge': function (dataArrayId) {
             stateLoader(dataArrayId);
         },
-        'withdrawal': function(dataArrayId) {
+        'withdrawal': function (dataArrayId) {
             stateLoader(dataArrayId);
             $('#ncp-withdrawal').trigger('click');
         },
-        'authentication': function(dataArrayId) {
+        'authentication': function (dataArrayId) {
             stateLoader(dataArrayId);
             $('.background-spinner').fadeOut();
         },
-        'profile': function(dataArrayId) {
+        'profile': function (dataArrayId) {
             stateLoader(dataArrayId);
             $('.background-spinner').fadeOut();
         },
-        'support': function(dataArrayId) {
+        'support': function (dataArrayId) {
             stateLoader(dataArrayId);
             $('.background-spinner').fadeOut();
         },
-        'default': function(dataArrayId) {
+        'default': function (dataArrayId) {
             stateLoader(dataArrayId);
             $('.background-spinner').fadeOut();
         }
     };
+
     function sendRequest() {
-        if (getCookie('ncp_is_page') === 'dashboard') {
-            var selectedOption = $('#status_id').find('option:selected');
-            var dataArrayId = selectedOption.data('array-id');
-            dashboardAjaxLoader(dataArrayId);
-        }
+        var selectedOption = $('#status_id').find('option:selected');
+        var dataArrayId = selectedOption.data('array-id');
+        var dataId = selectedOption.data('id');
+        dashboardAjaxReloader(dataArrayId,dataId);
     }
-    // if (land === 'dashboard') {
-    //     setInterval(sendRequest, 20000);
-    // }
+
+    if (land === 'dashboard') {
+        $('.ncp-menu-content .menu-pointer').fadeOut();
+        $('#ncp-dashboard .menu-pointer').fadeIn();
+        reloadRequest = setInterval(sendRequest, 20000);
+    }
 });
 
 function addThousandsSeparator(number) {
@@ -831,7 +869,7 @@ function showToast(message, type) {
                 ? "green"
                 : "red",
             direction: "rtl",
-            color:"#fff",
+            color: "#fff",
             borderRadius: "14px",
             minWidth: "150px",
             boxShadow: "0 3px 6px rgba(0,0,0,0.1)",
@@ -863,8 +901,8 @@ function getCookie(name) {
     return null;
 }
 
-function table_loader(){
-    jQuery(function ($){
+function table_loader() {
+    jQuery(function ($) {
         let currentStep = 1;
         $(document).on('click', '.btn-table', function (e) {
             e.preventDefault();
@@ -882,7 +920,7 @@ function table_loader(){
             var $targetPrice = $('tr td:first-child:contains("هزینه یکبارپرداخت")').closest('tr').find('td:eq(1) a');
             $targetPrice.text('$86')
             let price = $('#price-two').val();
-            if (price){
+            if (price) {
                 $("#rial-price").text(addThousandsSeparator(price));
                 $("#dollar-price").text('$86');
                 $("#discount-code").val('').prop('disabled', false);
@@ -897,7 +935,7 @@ function table_loader(){
             var $targetPrice = $('tr td:first-child:contains("هزینه یکبارپرداخت")').closest('tr').find('td:eq(1) a');
             $targetPrice.text('$159')
             let price = $('#price-three').val();
-            if (price){
+            if (price) {
                 $("#rial-price").text(addThousandsSeparator(price));
                 $("#dollar-price").text('$159');
                 $("#discount-code").val('').prop('disabled', false);
@@ -912,12 +950,13 @@ function table_loader(){
             var $targetPrice = $('tr td:first-child:contains("هزینه یکبارپرداخت")').closest('tr').find('td:eq(1) a');
             $targetPrice.text('$289')
             let price = $('#price-fore').val();
-            if (price){
+            if (price) {
                 $("#rial-price").text(addThousandsSeparator(price));
                 $("#dollar-price").text('$289');
                 $("#discount-code").val('').prop('disabled', false);
             }
         })
+
         function hideColumn() {
             if ($(window).width() < 768) {
                 showStep(currentStep);
@@ -928,24 +967,26 @@ function table_loader(){
                 $('#btn-next-one').hide();
             }
         }
+
         hideColumn();
-        $(window).resize(function() {
+        $(window).resize(function () {
             hideColumn();
         });
+
         function showStep(step) {
             $('th, td').hide(); // مخفی کردن همه ستون‌ها
             $('th:nth-child(1), td:nth-child(1)').show(); // نمایش ستون اول (چالش ها)
             $('th:nth-child(' + (step + 1) + '), td:nth-child(' + (step + 1) + ')').show(); // نمایش ستون فعلی
         }
 
-        $(document).on('click', '#btn-next', function (e){
+        $(document).on('click', '#btn-next', function (e) {
             e.preventDefault();
             if (currentStep < 3) {
                 currentStep++;
                 showStep(currentStep);
             }
         })
-        $(document).on('click', '#btn-priv', function (e){
+        $(document).on('click', '#btn-priv', function (e) {
             e.preventDefault();
             if (currentStep > 1) {
                 currentStep--;

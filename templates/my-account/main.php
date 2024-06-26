@@ -95,7 +95,11 @@ if ($nitro_access_token && $account_info_response['status']==200) {
                             foreach ($datas as $data) {
                                 ?>
                                 <option value="<?php echo $data['login'] ?>"
-                                        data-array-id="<?php echo $first_array ?>"><?php echo $data['login'] ?></option>
+                                        data-array-id="<?php echo $first_array ?>"
+                                        data-id="<?php echo $data['id'] ?>"
+                                ><?php echo $data['login'] ?>
+
+                                </option>
                                 <?php
                                 $first_array++;
                             }
