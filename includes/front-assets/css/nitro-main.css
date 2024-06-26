@@ -624,7 +624,7 @@ img.btn-account-bell {
     margin-bottom: 0;
 }
 
-.ncp-withdrawal input,.ncp-withdrawal select {
+.ncp-withdrawal input, .ncp-withdrawal select {
     height: 55px;
     /*margin-top: 25px;*/
     direction: ltr;
@@ -632,7 +632,31 @@ img.btn-account-bell {
     border-radius: 20px !important;
     color: #5D5D5D;
     outline: none;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /* Adjust as needed */
+    padding: 0; /* Remove default padding */
 }
+
+/* Ensuring the input type text has the same style */
+.ncp-withdrawal input[type="text"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Ensuring the select element has the same style */
+.ncp-withdrawal select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
 .withdrawal-input-sec {
     position: relative;
     display: flex;
@@ -1174,11 +1198,11 @@ select {
 input[type=checkbox]
 {
   /* Double-sized Checkboxes */
-  -ms-transform: scale(1.5); /* IE */
-  -moz-transform: scale(1.5); /* FF */
-  -webkit-transform: scale(1.5); /* Safari and Chrome */
-  -o-transform: scale(1.5); /* Opera */
-  transform: scale(1.5);
+  -ms-transform: scale(1.3); /* IE */
+  -moz-transform: scale(1.3); /* FF */
+  -webkit-transform: scale(1.3); /* Safari and Chrome */
+  -o-transform: scale(1.3); /* Opera */
+  transform: scale(1.3);
   padding: 10px;
 }
 
@@ -1868,6 +1892,7 @@ p.null-request-list {
     font-size: 14px;
     font-weight: 400;
     color: #A0A0A0;
+    text-wrap: nowrap;
 }
 
 .field-request-list {
@@ -2126,7 +2151,6 @@ a.pass-change-btn {
     align-items: center;
     justify-content: center;
 }
-
 .btn-account-code {
     /*width: 128px;*/
     /*height: 45px;*/
@@ -2135,7 +2159,11 @@ a.pass-change-btn {
     color: #5386E4;
     text-align: center;
     outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 select#status_id {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -2152,8 +2180,6 @@ select#status_id {
     color: white;
 }
 
-
-
 select.btn-account-code {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -2161,6 +2187,9 @@ select.btn-account-code {
     text-overflow: '';
     z-index: 2;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .select-option-sec img {
@@ -2185,15 +2214,14 @@ select option {
     text-align: center;
     border-radius: 0 10px !important;
     border: none !important;
-
 }
 
 select option:hover,
 select option:active,
 select option:focus {
     background: #5386E4 !important;
-
 }
+
 
 .w-100 {
     width: 100%;
@@ -2823,6 +2851,10 @@ p.selected-payment {
 }
 
 @media screen and (max-width: 480px) {
+
+    .ncp-block span, .ncp-block label{
+        padding-right: 0;
+    }
     .transaction-list-condition{
         width: 50% !important;
     }

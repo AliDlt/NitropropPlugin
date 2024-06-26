@@ -56,12 +56,12 @@ function dashboard_template($account_info_response, $data)
                     <div class="pln-btn-sec">
                         <div class="account-plan-btn1">
                             <a style="background:#56CFB9;" href="https://download.mql5.com/cdn/web/mishov.markets.llc/mt5/mishovmarkets5setup.exe">
-                                دانلود متاتریدر ۵ برای ویندوز
+                                دانلود متاتریدر ۵
                             </a>
                         </div>
                         <div class="account-plan-btn1">
                             <a style="background:#4EBCF0;" href="https://t.me/amiri_nitroprop">
-                                لینک اکانت منیجر
+                                ارتباط با اکانت منیجر
                             </a>
                         </div>
                     </div>
@@ -225,7 +225,7 @@ function dashboard_template($account_info_response, $data)
                 </div>
                 <div class="account-status">
                     <div class="inner-status">
-                        تارگت چالش شما
+                        تارگت چالش
                         <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/status-03.svg' ?>" alt="">
                     </div>
                     <?php
@@ -264,7 +264,7 @@ function dashboard_template($account_info_response, $data)
                         </div>
                         <div class="content-status">
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>" alt="">
-                            حداقل روزهای معاملاتی شما: <?php echo $data['trade_days'] ?> روز
+                            روزهای معاملاتی شما: <?php echo $data['trade_days'] ?> روز
                         </div>
                     </div>
                     <div class="left">
@@ -286,7 +286,7 @@ function dashboard_template($account_info_response, $data)
                         </div>
                         <div class="content-status">
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>" alt="">
-                            بالانس ابتدای صبح: <?php
+                            بالانس ابتدای روز: <?php
                             $morning = $data["balance_in_morning"];
                             $morning_num = intval($morning);
                             if ($morning_num < 0) {
@@ -301,7 +301,7 @@ function dashboard_template($account_info_response, $data)
                         </div>
                         <div class="content-status">
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>" alt="">
-                            درادون روزانه امروز: <?php
+                            درادون روزانه مجاز: <?php
                             $daily = $data["daily_drawdown"];
                             $daily_num = intval($daily);
                             if ($daily_num < 0) {
@@ -326,7 +326,7 @@ function dashboard_template($account_info_response, $data)
                         </div>
                         <div class="content-status">
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>" alt="">
-                            درادون کل: <?php
+                            حداکثر درادون کل: <?php
                             switch ($data['group']) {
                                 case 1:
                                     $amount = 600;
@@ -349,7 +349,7 @@ function dashboard_template($account_info_response, $data)
                         </div>
                         <div class="content-status">
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>" alt="">
-                            درادون حال حاضر: <?php
+                            درادون کل مجاز: <?php
                             $total = $data["total_drawdown"];
                             $total_num = intval($total);
                             if ($total_num < 0) {
@@ -377,48 +377,50 @@ function dashboard_template($account_info_response, $data)
                             تارگت چالش
                         </div>
                         <div class="content-status">
-                            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>" alt="">
-                            تارگت چالش این مرحله: <?php
-                            switch ($data['group']) {
-                                case 1:
-                                    $amount = match ($data['step']) {
-                                        'first' => 400,
-                                        'second' => 200,
-                                        'third' => "ندارد",
-                                        default => "نامعتبر",
-                                    };
-                                    break;
-                                case 2:
-                                    $amount = match ($data['step']) {
-                                        'first' => 800,
-                                        'second' => 400,
-                                        'third' => "ندارد",
-                                        default => "نامعتبر",
-                                    };
-                                    break;
-                                case 3:
-                                    $amount = match ($data['step']) {
-                                        'first' => 2000,
-                                        'second' => 1000,
-                                        'third' => "ندارد",
-                                        default => "نامعتبر",
-                                    };
-                                    break;
-                                case 4:
-                                    $amount = match ($data['step']) {
-                                        'first' => 4000,
-                                        'second' => 2000,
-                                        'third' => "ندارد",
-                                        default => "نامعتبر",
-                                    };
-                                    break;
-                                default:
-                                    $amount = "گروه نامعتبر";
-                                    break;
-                            }
-                            echo $amount . '$';
-                            ?>
-                        </div>
+    <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>" alt="">
+    تارگت مورد نیاز: 
+    <?php
+    switch ($data['group']) {
+        case 1:
+            $amount = match ($data['step']) {
+                'first' => 400,
+                'second' => 200,
+                'third' => "ندارد",
+                default => "نامعتبر",
+            };
+            break;
+        case 2:
+            $amount = match ($data['step']) {
+                'first' => 800,
+                'second' => 400,
+                'third' => "ندارد",
+                default => "نامعتبر",
+            };
+            break;
+        case 3:
+            $amount = match ($data['step']) {
+                'first' => 2000,
+                'second' => 1000,
+                'third' => "ندارد",
+                default => "نامعتبر",
+            };
+            break;
+        case 4:
+            $amount = match ($data['step']) {
+                'first' => 4000,
+                'second' => 2000,
+                'third' => "ندارد",
+                default => "نامعتبر",
+            };
+            break;
+        default:
+            $amount = "گروه نامعتبر";
+            break;
+    }
+    echo is_numeric($amount) ? $amount . '$' : $amount;
+    ?>
+</div>
+
                         <div class="content-status">
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>" alt="">
                             تارگت کسب شده: <?php

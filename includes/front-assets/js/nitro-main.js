@@ -607,11 +607,12 @@ jQuery(function ($) {
     });
     $(document).on('click', '#payment-digital', function (e) {
         e.preventDefault();
-        $('#payment-digital').val('شما درگاه ارزدیجیتالی را انتخاب کرده اید')
+        $('#payment-warning-text').text('برای خرید از درگاه ارز دیجیتال لطفا فیلترشکن خود را روشن نمایید.');
     });
+
     $(document).on('click', '#payment-rial', function (e) {
         e.preventDefault();
-        $('#payment-digital').val('شما درگاه ریالی را انتخاب کرده اید')
+        $('#payment-warning-text').text('توجه داشته باشید که اطلاعات وارد شده با اطلاعات دارنده کارت بانکی یکسان باشد.');
     });
     $(document).on('click', '#refresh-dashboard', function (e) {
         e.preventDefault();

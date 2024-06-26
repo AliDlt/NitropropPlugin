@@ -24,12 +24,10 @@ function challenge_page($account_info_response, $nitro_access_token)
     <div class="challenge-block ncp-block">
         <div class="container-payment">
             <h2 class="ncp-title header-sec">انتخاب درگاه پرداخت</h2>
-            <!--                <p class="selected-payment">شما درگاه ریالی را انتخاب کرده اید</p>-->
-            <div class="ncp-warning"><img
-                        src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/warning.svg' ?>"
-                        alt=""> در صورت انتخاب درگاه ریالی باید اطلاعات سفارش شما با اطلاعات شماره کارت
-                یکسان باشد
-            </div>
+            <div class="ncp-warning">
+    <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/warning.svg' ?>" alt="">
+    <span id="payment-warning-text">در صورت انتخاب درگاه ریالی باید اطلاعات سفارش .شما با اطلاعات شماره کارت یکسان باشد</span>
+</div>
             <div class="payment-method-sec">
                 <a class="ncp_btn_big payment-btn" id="payment-digital" data-method="digital">درگاه ارزدیجیتال</a>
                 <a class="ncp_btn_big payment-btn btn-active" id="payment-rial" data-method="rial">درگاه ریالی</a>

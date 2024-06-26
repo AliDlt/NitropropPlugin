@@ -10,7 +10,7 @@ function add_meta_tag()
 function display_main_page_blog_slider()
 {
     $args = array(
-        'posts_per_page' => 4,
+        'posts_per_page' => 3,
         'orderby' => 'date',
         'order' => 'DESC',
     );

@@ -74,7 +74,7 @@ function requests_template($acc_id, $dataArrayVal)
                                 <div class="request-list-condition transaction-error ">رد شده</div><?php
                             }  elseif ($data['status'] == 'approved') {
                                 ?>
-                                <div class="request-list-condition transaction-error">تائید شده</div><?php
+                                <div class="request-list-condition transaction-done">تائید شده</div><?php
                             } else {
                                 ?>
                                 <div class="request-list-condition transaction-success "><?php $data['status'] ?></div><?php

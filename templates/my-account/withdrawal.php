@@ -15,8 +15,7 @@ function withdrawal_loader($dataArrayId, $nitro_access_token)
             <h2>برداشت سود</h2>
             <div class="ncp-warning"><img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/warning.svg' ?>"
                                           alt="توجه">
-                داشته باشید درخواست برداشت سود در روز های شنبه و یکشنبه امکان پذیر است.
-            </div>
+                                          واریز سود در تاریخ های ۱۴ ام و ۲۸ ام ماه میلادی انجام می شود. لطفا حداقل یک روز قبل از تاریخ های مذکور درخواست برداشت سود را ثبت نمایید.</div>
             <div class="hcp-profit-withdrawal">
                 سود قابل برداشت (80%):
                 <p>$<?php echo $dataArray['profit'] ?: '0' ?></p>
