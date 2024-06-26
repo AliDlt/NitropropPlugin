@@ -4,13 +4,14 @@
  *
  * Plugin Name: پلاگین اختصاصی نیتروپراپ
  * Description: این افزونه برای سایت نیتروپراپ طراحی شده و تمامی کدهای بخش های مختلف سایت در این پلاگین گنجانده شده
- * Version:     8.1.1
+
+ * Version:     8.1.8
  * Author:      Hamed Safari & AliDlt
  */
 
 defined('ABSPATH') or die('Access Denied!');
 
-const NCP_VER = '8.1.1';
+const NCP_VER = '8.1.8';
 
 define('NCP_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('NCP_PLUGIN_URL', plugin_dir_url(__FILE__));
