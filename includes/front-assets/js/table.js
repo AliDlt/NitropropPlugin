@@ -28,21 +28,25 @@ jQuery(function ($) {
 
     $(document).on('click', '#btn-price-0', function (e) {
         e.preventDefault();
+        updatePrice('$86');
         updateDiscountedPrice('$42');
     });
 
     $(document).on('click', '#btn-price-1', function (e) {
         e.preventDefault();
+        updatePrice('$86');
         updateDiscountedPrice('$68');
     });
 
     $(document).on('click', '#btn-price-2', function (e) {
         e.preventDefault();
+        updatePrice('$159');
         updateDiscountedPrice('$129');
     });
 
     $(document).on('click', '#btn-price-3', function (e) {
         e.preventDefault();
+        updatePrice('$289');
         updateDiscountedPrice('$239');
     });
 
@@ -56,7 +60,10 @@ jQuery(function ($) {
             $('#btn-next-one').hide();
         }
     }
-
+    function updatePrice(newPrice) {
+        var $targetPrice = $('#payment-cell a');
+        $targetPrice.text(newPrice);
+    }
     hideColumn();
     $(window).resize(function() {
         hideColumn();

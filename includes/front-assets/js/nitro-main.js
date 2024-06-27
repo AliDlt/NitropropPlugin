@@ -1056,24 +1056,57 @@ function table_loader(){
             e.preventDefault();
             updatePrice('$59');
             updateDiscountedPrice('$42');
+            var rial = $('#price-one').val();
+            var rialNumber = Number(rial);
+            rialNumber = rialNumber * 10;
+            var formattedRial = rialNumber.toLocaleString('en-US');
+            $('#rial-price').text(formattedRial);
+            $('#dollar-price').text('$59');
+            $('#discount-code').val('').prop('disabled', false);
+            $('.ncp-discount .ncp_btn_normal').prop('disabled', false);
         });
     
         $(document).on('click', '#btn-price-1', function (e) {
             e.preventDefault();
             updatePrice('$86');
             updateDiscountedPrice('$68');
+            var rial = $('#price-two').val();
+            var rialNumber = Number(rial);
+            rialNumber = rialNumber * 10;
+            var formattedRial = rialNumber.toLocaleString('en-US');
+            $('#rial-price').text(formattedRial);
+            $('#dollar-price').text('$86');
+            $('#discount-code').val('').prop('disabled', false);
+            $('.ncp-discount .ncp_btn_normal').prop('disabled', false);
         });
     
         $(document).on('click', '#btn-price-2', function (e) {
             e.preventDefault();
             updatePrice('$159');
             updateDiscountedPrice('$129');
+            var rial = $('#price-three').val();
+            var rialNumber = Number(rial);
+            rialNumber = rialNumber * 10;
+            var formattedRial = rialNumber.toLocaleString('en-US');
+            $('#rial-price').text(formattedRial);
+            $('#dollar-price').text('$159');
+            $('#discount-code').val('').prop('disabled', false);
+            $('.ncp-discount .ncp_btn_normal').prop('disabled', false);
+
         });
     
         $(document).on('click', '#btn-price-3', function (e) {
             e.preventDefault();
             updatePrice('$289');
             updateDiscountedPrice('$239');
+            var rial = $('#price-fore').val();
+            var rialNumber = Number(rial);
+            rialNumber = rialNumber * 10;
+            var formattedRial = rialNumber.toLocaleString('en-US');
+            $('#rial-price').text(formattedRial);
+            $('#dollar-price').text('$289');
+            $('#discount-code').val('').prop('disabled', false);
+            $('.ncp-discount .ncp_btn_normal').prop('disabled', false);
         });
     
         function hideColumn() {
