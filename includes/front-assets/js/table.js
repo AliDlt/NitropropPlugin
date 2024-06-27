@@ -28,26 +28,26 @@ jQuery(function ($) {
 
     $(document).on('click', '#btn-price-0', function (e) {
         e.preventDefault();
-        updatePrice('$86');
-        updateDiscountedPrice('$42');
+        updatePrice('$59');
+        updateDiscountedPrice('$42 خرید');
     });
 
     $(document).on('click', '#btn-price-1', function (e) {
         e.preventDefault();
         updatePrice('$86');
-        updateDiscountedPrice('$68');
+        updateDiscountedPrice('$68 خرید');
     });
 
     $(document).on('click', '#btn-price-2', function (e) {
         e.preventDefault();
         updatePrice('$159');
-        updateDiscountedPrice('$129');
+        updateDiscountedPrice('$129 خرید');
     });
 
     $(document).on('click', '#btn-price-3', function (e) {
         e.preventDefault();
         updatePrice('$289');
-        updateDiscountedPrice('$239');
+        updateDiscountedPrice('$239 خرید');
     });
 
     function hideColumn() {

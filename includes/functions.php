@@ -762,8 +762,10 @@ function ncp_login_btn()
     if (is_user_logged_in()) {
         ?>
         <div class="login_btn_wrapper">
-            <img class="btn-account-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg' ?>"
-                 alt="">
+            <a href="/panel">
+                <img class="btn-account-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg' ?>"
+                     alt="">
+            </a>
             <div class="btn-account-name login_btn">
                 حساب کاربری
                 <div class="dropdown-menu">

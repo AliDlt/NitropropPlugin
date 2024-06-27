@@ -637,10 +637,10 @@ img.btn-account-bell {
     justify-content: center;
     font-size: 16px; /* Adjust as needed */
     padding: 0 50px 0 50px; /* Adjusted padding to add space */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: inherit;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    background-color: inherit !important;
 }
 
 .ncp-withdrawal input[type="text"] {
@@ -884,17 +884,17 @@ img.btn-account-bell {
 
 
 
-.login_btn_wrapper {
-    background: #5386e4 !important;
-    padding: 10px 15px !important;
-    color: #fff !important;
-    border-radius: 25px !important;
-    transition: max-height 0.6s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Kalameh';
-}
+/*.login_btn_wrapper {*/
+/*    background: #5386e4 !important;*/
+/*    padding: 10px 15px !important;*/
+/*    color: #fff !important;*/
+/*    border-radius: 25px !important;*/
+/*    transition: max-height 0.6s ease-in-out;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    font-family: 'Kalameh';*/
+/*}*/
 
 .login_btn_wrapper img {
     width: 20px !important;
@@ -1245,6 +1245,7 @@ label.rules-container {
     gap: 7px;
     font-size: 14px;
     color: #5d5d5d;
+    padding: 0 !important;
 }
 
 .ncp-buy-challenge {
@@ -1305,9 +1306,6 @@ img.btn-account-bell {
 }
 
 img.btn-account-person {
-    width: 41px;
-    height: 41px;
-    margin-right: 6px;
     display: none;
 }
 
@@ -2546,11 +2544,9 @@ p.selected-payment {
         display: none;
     }
     img.btn-account-person {
+        display: block;
         width: 30px !important;
         height: 30px !important;
-        margin-right: 0 !important;
-        border-radius: 50% !important;
-        padding: 0;
     }
 
    
@@ -2564,12 +2560,12 @@ p.selected-payment {
         width: 30px !important;
         height: 30px !important;
     }
-    .login_btn_wrapper {
-        background: #2C487F !important;
-        padding: 10px !important;
-        border-radius: 50% !important;
-        transition: max-height 0.6s ease-in-out;
-    }
+    /*.login_btn_wrapper {*/
+    /*    background: #2C487F !important;*/
+    /*    padding: 10px !important;*/
+    /*    border-radius: 50% !important;*/
+    /*    transition: max-height 0.6s ease-in-out;*/
+    /*}*/
     .tparrows:before {
         font-size: 14px !important;
     }
@@ -2749,10 +2745,10 @@ p.selected-payment {
         height: 70px;
         align-items: flex-start;
     }
-    img.btn-account-person {
-        width: 20px !important;
-        height: 20px !important;
-    }
+    /*img.btn-account-person {*/
+    /*    width: 20px !important;*/
+    /*    height: 20px !important;*/
+    /*}*/
     .ncp-upload-instructions ul {
         padding: 10px;
         font-size: 12px;
