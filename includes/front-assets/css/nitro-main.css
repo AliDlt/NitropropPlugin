@@ -636,7 +636,7 @@ img.btn-account-bell {
     align-items: center;
     justify-content: center;
     font-size: 16px; /* Adjust as needed */
-    padding: 0 30px 0 10px; /* Adjusted padding to add space */
+    padding: 0 50px 0 50px; /* Adjusted padding to add space */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -681,9 +681,6 @@ img.btn-account-bell {
 ::placeholder {
     color: #89ABEA !important;
 }
-
-
-
 
 .ncp-withdrawal-btn a {
     width: 266px;
@@ -1311,6 +1308,7 @@ img.btn-account-person {
     width: 41px;
     height: 41px;
     margin-right: 6px;
+    display: none;
 }
 
 .btn-account-name {
