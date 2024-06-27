@@ -842,7 +842,6 @@ jQuery(function ($) {
                 $('#dashboard-content').html(response.template);
                 $('#account-condition').html(response.step);
                 $('.select-option-sec').html(response.select)
-                console.log(response.select)
             },
             error: function (error) {
                 console.error("Error occurred:", error);
