@@ -1024,36 +1024,12 @@ function table_loader(){
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
     
-        function updatePrice(newPrice, price) {
+    
+        function updatePrice(newPrice) {
             var $targetPrice = $('#payment-cell a');
             $targetPrice.text(newPrice);
-            if (price) {
-                $("#rial-price").text(addThousandsSeparator(price));
-                $("#dollar-price").text(newPrice);
-                $("#discount-code").val('').prop('disabled', false);
-            }
         }
-    
-        $(document).on('click', '#btn-price-0', function (e) {
-            e.preventDefault();
-            updatePrice('$58', '58000');
-        });
-    
-        $(document).on('click', '#btn-price-1', function (e) {
-            e.preventDefault();
-            updatePrice('$86', '86000');
-        });
-    
-        $(document).on('click', '#btn-price-2', function (e) {
-            e.preventDefault();
-            updatePrice('$159', '159000');
-        });
-    
-        $(document).on('click', '#btn-price-3', function (e) {
-            e.preventDefault();
-            updatePrice('$289', '289000');
-        });
-    
+
         function updateDiscountedPrice(newPrice) {
             var $targetPrice = $('#discounted-payment-cell a');
             $targetPrice.text(newPrice);
@@ -1061,21 +1037,25 @@ function table_loader(){
     
         $(document).on('click', '#btn-price-0', function (e) {
             e.preventDefault();
+            updatePrice('$59');
             updateDiscountedPrice('$42');
         });
     
         $(document).on('click', '#btn-price-1', function (e) {
             e.preventDefault();
+            updatePrice('$86');
             updateDiscountedPrice('$68');
         });
     
         $(document).on('click', '#btn-price-2', function (e) {
             e.preventDefault();
+            updatePrice('$159');
             updateDiscountedPrice('$129');
         });
     
         $(document).on('click', '#btn-price-3', function (e) {
             e.preventDefault();
+            updatePrice('$289');
             updateDiscountedPrice('$239');
         });
     
