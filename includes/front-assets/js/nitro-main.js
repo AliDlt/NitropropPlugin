@@ -666,6 +666,7 @@ jQuery(function ($) {
         $('.background-spinner').fadeIn();
         var selectedOption = $(this).find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
+        var dataId = selectedOption.data('id');
         var dataArrayVal = selectedOption.val();
         var landPage = getCookie('ncp_is_page');
         if (landPage === 'dashboard'){

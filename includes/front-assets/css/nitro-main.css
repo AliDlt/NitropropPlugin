@@ -692,7 +692,12 @@ img.btn-account-bell {
     justify-content: center;
     border-radius: 80px;
 }
-
+.nitro-post img {
+    height: 150px !important;
+    object-fit: cover;
+    border-radius: 41px 41px 0 0 !important;
+    object-position: top;
+}
 .ncp-withdrawal-btn {
     display: flex;
     justify-content: center;

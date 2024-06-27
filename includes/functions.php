@@ -456,14 +456,21 @@ function ncp_challenge_loader()
 function ncp_dashboard_loader()
 {
     check_ajax_referer('my_ajax_nonce', 'nonce');
-    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+//    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
     $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
-    if ($dataArrayId !== null) {
-        api_account_sync($dataId);
+    if ($dataId !== null) {
         $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
+        api_account_sync($nitro_access_token,$dataId);
         $account_info_response = api_account_info($nitro_access_token);
         $account_file_response = api_account_file($nitro_access_token);
-        $data = $account_file_response['data'][$dataArrayId];
+//        $data = $account_file_response['data'][$dataArrayId];
+        $data = [];
+        foreach ($account_file_response['data'] as $item) {
+            if ($item['id'] == $dataId) {
+                $data = $item;
+                break;
+            }
+        }
         $state = $data["state"];
         $stateHTML = state_svg($state);
         $cookie_name = "ncp_is_page";
@@ -936,7 +943,7 @@ function api_get_challenge_prices($nitro_access_token)
     return $decoded_response;
 }
 
-function api_account_sync($id)
+function api_account_sync($nitro_access_token,$id)
 {
     $curl = curl_init();
 
@@ -950,7 +957,7 @@ function api_account_sync($id)
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE5ODM1NTAwLCJpYXQiOjE3MTkyMzA3MDAsImp0aSI6ImY2Mjg0Mjg0ZDJkYzQ4NDA5ZDYwZmY2MTkzZTVkODZiIiwidXNlcl9pZCI6MiwiZW1haWwiOiJwYXJzYWVmZmF0cmF2ZXNoQGdtYWlsLmNvbSJ9.2uZNlL_lXov0H8loR8CbpaSeJ5ncIMszX8ttf2pQZyw'
+            'Authorization: Bearer '.$nitro_access_token,
         ),
     ));
 

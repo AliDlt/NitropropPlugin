@@ -187,7 +187,7 @@ function dashboard_template($account_info_response, $data)
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/status-01.svg' ?>" alt="">
                         </div>
                         <?php
-                        if ($data["step"] == 'first' || $data["step"] == 'second') {
+                        if ($data["step"] === 'first' || $data["step"] === 'second') {
                             echo $data["trade_days"];
                         } else {
                             echo 'ندارد';
@@ -243,7 +243,7 @@ function dashboard_template($account_info_response, $data)
         }
         ?>
         <div class="dashboard-third ncp-block">
-            <h2>وضعیت حساب</h2>
+            <h2>جزئیات حساب</h2>
             <div class="third-account-status">
                 <?php
                 if ($data) {
@@ -259,7 +259,7 @@ function dashboard_template($account_info_response, $data)
                                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>"
                                      alt="">
                                 حداقل روزهای معاملاتی: <?php
-                                if ($data["step"] == 'first' || $data["step"] == 'second') {
+                                if ($data["step"] === 'first' || $data["step"] === 'second') {
                                     echo '5 روز';
                                 } else {
                                     echo 'ندارد';
@@ -268,7 +268,13 @@ function dashboard_template($account_info_response, $data)
                             <div class="content-status">
                                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>"
                                      alt="">
-                                روزهای معاملاتی شما: <?php echo $data['trade_days'] ?> روز
+                                روزهای معاملاتی شما: <?php
+                                if ($data["step"] === 'first' || $data["step"] === 'second') {
+                                    echo $data["trade_days"];
+                                } else {
+                                    echo 'ندارد';
+                                }
+                                ?> روز
                             </div>
                         </div>
                         <div class="left">
