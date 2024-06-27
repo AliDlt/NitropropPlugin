@@ -11,35 +11,15 @@ jQuery(function ($) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    function updatePrice(newPrice, price) {
-        var $targetPrice = $('#payment-cell a');
-        $targetPrice.text(newPrice);
-        if (price) {
-            $("#rial-price").text(addThousandsSeparator(price));
-            $("#dollar-price").text(newPrice);
-            $("#discount-code").val('').prop('disabled', false);
-        }
-    }
-
-    $(document).on('click', '#btn-price-0', function (e) {
-        e.preventDefault();
-        updatePrice('$58', '58000');
-    });
-
-    $(document).on('click', '#btn-price-1', function (e) {
-        e.preventDefault();
-        updatePrice('$86', '86000');
-    });
-
-    $(document).on('click', '#btn-price-2', function (e) {
-        e.preventDefault();
-        updatePrice('$159', '159000');
-    });
-
-    $(document).on('click', '#btn-price-3', function (e) {
-        e.preventDefault();
-        updatePrice('$289', '289000');
-    });
+    // function updatePrice(newPrice, price) {
+    //     var $targetPrice = $('#payment-cell a');
+    //     $targetPrice.text(newPrice);
+    //     if (price) {
+    //         $("#rial-price").text(addThousandsSeparator(price));
+    //         $("#dollar-price").text(newPrice);
+    //         $("#discount-code").val('').prop('disabled', false);
+    //     }
+    // }
 
     function updateDiscountedPrice(newPrice) {
         var $targetPrice = $('#discounted-payment-cell a');

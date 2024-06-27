@@ -50,8 +50,8 @@ function challenge_page($challenge_prices_response, $nitro_access_token)
                         </div>
                     </div>
                     <div class="small-block">
-                        پلتفرم معاملاتی
-                        <div class="inner-small-block-challenge" id="dollar-price">$59</div>
+                    قیمت کل به دلار
+                    <div class="inner-small-block-challenge" id="dollar-price">$59</div>
                     </div>
                     <div class="small-block">
                         قیمت کل به ریال

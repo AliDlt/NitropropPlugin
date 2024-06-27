@@ -1785,7 +1785,7 @@ function table_section_shortcode() {
                 </tr>
                 <tr>
                     <td style="display: flex;">هزینه چالش</td>
-                    <?php echo is_front_page() || is_page('plans') ? '<td id="payment-cell" style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">$58 خرید</a></td>' : '<td id="payment-cell" style="display: flex;"><a>$58</a></td>' ?>
+                    <td id="payment-cell" style="display: flex;"><a>$59</a></td>
                     <td style="display: flex;">رایگان</td>
                     <td style="display: flex; font-size: 13px !important;">ریفاند هزینه</td>
                 </tr>
