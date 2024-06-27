@@ -473,9 +473,12 @@ function ncp_dashboard_loader()
     check_ajax_referer('my_ajax_nonce', 'nonce');
 //    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
     $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
+    $refresh_dashboard = isset($_POST['refresh_dashboard']) ? sanitize_text_field($_POST['refresh_dashboard']) : '';
     if ($dataId !== null) {
         $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-        api_account_sync($nitro_access_token,$dataId);
+        if ($refresh_dashboard){
+            api_account_sync($nitro_access_token,$dataId);
+        }
         $account_info_response = api_account_info($nitro_access_token);
         $account_file_response = api_account_file($nitro_access_token);
 //        $data = $account_file_response['data'][$dataArrayId];

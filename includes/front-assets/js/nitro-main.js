@@ -627,7 +627,8 @@ jQuery(function ($) {
         $('.background-spinner').fadeIn();
         var selectedOption = $('#status_id').find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
-        dataId = selectedOption.data('id');
+        var dataId = selectedOption.data('id');
+        var refresh_dashboard = true;
         $.ajax({
             url: ajax_filter_params.ajax_url,
             type: 'POST',
@@ -637,6 +638,7 @@ jQuery(function ($) {
                 nonce: nonce,
                 dataArrayId: dataArrayId,
                 dataId:dataId,
+                refresh_dashboard:refresh_dashboard,
             },
             success: function (response) {
                 $('#dashboard-content').html(response.template);
@@ -673,6 +675,7 @@ jQuery(function ($) {
         var dataId = selectedOption.data('id');
         var dataArrayVal = selectedOption.val();
         var landPage = getCookie('ncp_is_page');
+
         if (landPage === 'dashboard'){
             dashboardAjaxLoader(dataArrayId,dataId)
         }else if (landPage === 'request'){
