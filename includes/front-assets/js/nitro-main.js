@@ -26,8 +26,8 @@ jQuery(function ($) {
             $('.background-spinner').fadeIn();
             var selectedOption = $('#status_id ').find('option:selected');
             var dataArrayId = selectedOption.data('array-id');
+            var dataId = selectedOption.data('id');
             var dataArrayVal = selectedOption.val();
-
             $.ajax({
                 url: ajax_filter_params.ajax_url,
                 type: 'POST',
@@ -35,6 +35,7 @@ jQuery(function ($) {
                     action: 'ncp_withdrawal_loader',
                     nonce: nonce,
                     dataArrayId: dataArrayId,
+                    dataId:dataId,
                 },
                 success: function (response) {
                     $('#ncp-my-account-wrapper').html(response)
@@ -55,7 +56,6 @@ jQuery(function ($) {
                 },
                 complete: function (){
                     $('#withdrawal-type ').val(dataArrayVal).select();
-                    request.abort();
                     clearInterval(reloadRequest);
                 }
             })

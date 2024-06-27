@@ -426,11 +426,14 @@ function my_account_template_function()
 function ncp_withdrawal_loader()
 {
     $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-    $account_info_response = api_account_info($nitro_access_token);
-    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
-    if ($dataArrayId !== null) {
-        if ($nitro_access_token && $account_info_response['status'] == 200) {
-            wp_send_json(withdrawal_loader($dataArrayId, $nitro_access_token));
+//    $account_info_response = api_account_info($nitro_access_token);
+//    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+    $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
+    $account_file_response = api_account_file($nitro_access_token);
+    if ($dataId !== null) {
+        if ($nitro_access_token && $account_file_response['status'] == 200) {
+
+            wp_send_json(withdrawal_loader($dataId,$account_file_response, $nitro_access_token));
         } else {
             log_out_ncp();
             die();
@@ -439,6 +442,25 @@ function ncp_withdrawal_loader()
         wp_send_json_error('access denied');
     }
 }
+//function ncp_withdrawal_loader()
+//{
+//    $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
+////    $account_info_response = api_account_info($nitro_access_token);
+////    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+//    $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
+//    $account_file_response = api_account_file($nitro_access_token);
+//    if ($dataArrayId !== null) {
+//        if ($nitro_access_token && $account_file_response['status'] == 200) {
+//
+//            wp_send_json(withdrawal_loader($dataArrayId, $nitro_access_token));
+//        } else {
+//            log_out_ncp();
+//            die();
+//        }
+//    } else {
+//        wp_send_json_error('access denied');
+//    }
+//}
 
 function ncp_challenge_loader()
 {

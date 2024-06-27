@@ -1,13 +1,25 @@
 <?php
 defined('ABSPATH') or die('Access Denied!');
-function withdrawal_loader($dataArrayId, $nitro_access_token)
+function withdrawal_loader($dataId,$account_file_response, $nitro_access_token)
 {
-    $response = api_account_file($nitro_access_token);
-    $dataArray = $response['data'][$dataArrayId];
-    $datas = $response['data'];
+//    $response = api_account_file($nitro_access_token);
+//    $dataArray = $response['data'][$dataArrayId];
+//    $datas = $response['data'];
+//
+//    $nitro_access_token = $_COOKIE['nitro_access_token'];
+//    $historys = api_withdrawal_history($nitro_access_token, $dataArray['id'])['data'];
 
+    $dataArray = [];
+    foreach ($account_file_response['data'] as $item) {
+        if ($item['id'] == $dataId) {
+            $dataArray = $item;
+            break;
+        }
+    }
+    $datas = $account_file_response['data'];
     $nitro_access_token = $_COOKIE['nitro_access_token'];
     $historys = api_withdrawal_history($nitro_access_token, $dataArray['id'])['data'];
+
     ob_start();
     ?>
     <div class="ncp-my-account-withdrawal">
