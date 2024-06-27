@@ -805,7 +805,7 @@ img.btn-account-bell {
 .login_register_btn {
     width: 138px;
     height: 43px;
-    background: #5386E4;
+    background: #2c487f;
     border-radius: 35px;
     display: flex;
     justify-content: center;
@@ -815,6 +815,7 @@ img.btn-account-bell {
     border: none !important;
     cursor: pointer;
     align-items: center;
+    font-family: 'Kalameh';
 }
 .login_register_btn p {
     margin: 0;
