@@ -677,7 +677,37 @@ jQuery(function ($) {
         var landPage = getCookie('ncp_is_page');
 
         if (landPage === 'dashboard'){
-            dashboardAjaxLoader(dataArrayId,dataId)
+            $.ajax({
+                url: ajax_filter_params.ajax_url,
+                type: 'POST',
+                data: {
+                    action: 'ncp_dashboard_loader',
+                    nitro_access_token: nitro_access_token,
+                    nonce: nonce,
+                    dataArrayId: dataArrayId,
+                    dataId:dataId,
+                },
+                success: function (response) {
+                    $('#ncp-my-account-wrapper').html(response.template);
+                    $('#account-condition').html(response.step)
+                    $('.select-option-sec').html(response.select)
+                    console.log(response.select)
+                    // $('.btn-account-code').find('option:first').prop('selected', true);
+                    $('.background-spinner').fadeOut();
+                    $('.ncp-menu-content .menu-pointer').fadeOut();
+                    $('#ncp-dashboard .menu-pointer').fadeIn();
+                    history.pushState(null, '', '?land=dashboard');
+                    setCookie('ncp_is_page', 'dashboard', 7);
+                    if (val){
+                        reloadRequest = setInterval(sendRequest, 20000);
+                    }
+                },
+                error: function (error) {
+                    console.error("Error occurred:", error);
+                    showToast(error.statusText, 'error');
+                    $('.background-spinner').fadeOut();
+                }
+            })
         }else if (landPage === 'request'){
             stateLoader(dataArrayId,function (){
                 // $('#request-account').val(dataArrayVal).trigger('change');
