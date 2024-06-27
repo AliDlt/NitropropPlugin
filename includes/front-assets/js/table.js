@@ -1,10 +1,11 @@
-jQuery(function ($){
+jQuery(function ($) {
     let currentStep = 1;
+
     $(document).on('click', '.btn-table', function (e) {
         e.preventDefault();
         $('.btn-table').removeClass('btn-active');
         $(this).addClass('btn-active');
-    })
+    });
 
     function addThousandsSeparator(num) {
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -13,7 +14,7 @@ jQuery(function ($){
     function updatePrice(newPrice, price) {
         var $targetPrice = $('#payment-cell a');
         $targetPrice.text(newPrice);
-        if (price){
+        if (price) {
             $("#rial-price").text(addThousandsSeparator(price));
             $("#dollar-price").text(newPrice);
             $("#discount-code").val('').prop('disabled', false);
@@ -22,23 +23,48 @@ jQuery(function ($){
 
     $(document).on('click', '#btn-price-0', function (e) {
         e.preventDefault();
-        updatePrice('$59 خرید', '59000');
-    })
+        updatePrice('$58', '58000');
+    });
 
     $(document).on('click', '#btn-price-1', function (e) {
         e.preventDefault();
-        updatePrice('$86 خرید', '86000');
-    })
+        updatePrice('$86', '86000');
+    });
 
     $(document).on('click', '#btn-price-2', function (e) {
         e.preventDefault();
-        updatePrice('$159 خرید', '159000');
-    })
+        updatePrice('$159', '159000');
+    });
 
     $(document).on('click', '#btn-price-3', function (e) {
         e.preventDefault();
-        updatePrice('$289 خرید', '289000');
-    })
+        updatePrice('$289', '289000');
+    });
+
+    function updateDiscountedPrice(newPrice) {
+        var $targetPrice = $('#discounted-payment-cell a');
+        $targetPrice.text(newPrice);
+    }
+
+    $(document).on('click', '#btn-price-0', function (e) {
+        e.preventDefault();
+        updateDiscountedPrice('$42');
+    });
+
+    $(document).on('click', '#btn-price-1', function (e) {
+        e.preventDefault();
+        updateDiscountedPrice('$68');
+    });
+
+    $(document).on('click', '#btn-price-2', function (e) {
+        e.preventDefault();
+        updateDiscountedPrice('$129');
+    });
+
+    $(document).on('click', '#btn-price-3', function (e) {
+        e.preventDefault();
+        updateDiscountedPrice('$239');
+    });
 
     function hideColumn() {
         if ($(window).width() < 768) {
@@ -57,24 +83,24 @@ jQuery(function ($){
     });
 
     function showStep(step) {
-        $('th, td').hide(); // مخفی کردن همه ستون‌ها
-        $('th:nth-child(1), td:nth-child(1)').show(); // نمایش ستون اول (چالش ها)
-        $('th:nth-child(' + (step + 1) + '), td:nth-child(' + (step + 1) + ')').show(); // نمایش ستون فعلی
+        $('th, td').hide(); // Hide all columns
+        $('th:nth-child(1), td:nth-child(1)').show(); // Show first column (Challenges)
+        $('th:nth-child(' + (step + 1) + '), td:nth-child(' + (step + 1) + ')').show(); // Show current column
     }
 
-    $(document).on('click', '#btn-next', function (e){
+    $(document).on('click', '#btn-next', function (e) {
         e.preventDefault();
         if (currentStep < 3) {
             currentStep++;
             showStep(currentStep);
         }
-    })
+    });
 
-    $(document).on('click', '#btn-priv', function (e){
+    $(document).on('click', '#btn-priv', function (e) {
         e.preventDefault();
         if (currentStep > 1) {
             currentStep--;
             showStep(currentStep);
         }
-    })
-})
+    });
+});

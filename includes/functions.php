@@ -1665,8 +1665,7 @@ function delete_nitro_row_callback()
     wp_die();
 }
 
-function table_section_shortcode()
-{
+function table_section_shortcode() {
     ob_start();
     ?>
     <div class="ncp-container-table d-flex center">
@@ -1785,8 +1784,14 @@ function table_section_shortcode()
                     <td style="display: flex;">MT5</td>
                 </tr>
                 <tr>
-                    <td style="display: flex;">هزینه یک بار پرداخت</td>
-                    <?php echo is_front_page() || is_page('plans') ? '<td id="payment-cell" style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">$59 خرید</a></td>' : '<td id="payment-cell" style="display: flex;"><a>$59</a></td>' ?>
+                    <td style="display: flex;">هزینه چالش</td>
+                    <?php echo is_front_page() || is_page('plans') ? '<td id="payment-cell" style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">$58 خرید</a></td>' : '<td id="payment-cell" style="display: flex;"><a>$58</a></td>' ?>
+                    <td style="display: flex;">رایگان</td>
+                    <td style="display: flex; font-size: 13px !important;">ریفاند هزینه</td>
+                </tr>
+                <tr>
+                    <td style="display: flex;">هزینه چالش با تخفیف</td>
+                    <?php echo is_front_page() || is_page('plans') ? '<td id="discounted-payment-cell" style="display: flex;"><a href="' . site_url() . '/panel/?land=challenge" class="ncp-table-btn">$42 خرید</a></td>' : '<td id="discounted-payment-cell" style="display: flex;"><a>$42</a></td>' ?>
                     <td style="display: flex;">رایگان</td>
                     <td style="display: flex; font-size: 13px !important;">ریفاند هزینه</td>
                 </tr>
@@ -1801,6 +1806,7 @@ function table_section_shortcode()
     <?php
     return ob_get_clean();
 }
+
 
 
 
