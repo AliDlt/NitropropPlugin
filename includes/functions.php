@@ -446,11 +446,22 @@ function ncp_withdrawal_loader()
 
 function ncp_challenge_loader()
 {
+//    check_ajax_referer('my_ajax_nonce', 'nonce');
+//    $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
+//    $account_info_response = api_account_info($nitro_access_token);
+//    if ($nitro_access_token && $account_info_response['status'] == 200) {
+//        wp_send_json(challenge_page($account_info_response, $nitro_access_token));
+//    } else {
+//        log_out_ncp();
+//        die();
+//    }
+
     check_ajax_referer('my_ajax_nonce', 'nonce');
     $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-    $account_info_response = api_account_info($nitro_access_token);
-    if ($nitro_access_token && $account_info_response['status'] == 200) {
-        wp_send_json(challenge_page($account_info_response, $nitro_access_token));
+//    $account_info_response = api_account_info($nitro_access_token);
+    $challenge_prices_response = api_get_challenge_prices($nitro_access_token);
+    if ($challenge_prices_response['status'] == 200) {
+        wp_send_json(challenge_page($challenge_prices_response, $nitro_access_token));
     } else {
         log_out_ncp();
         die();
@@ -1374,70 +1385,134 @@ function ncp_request_send()
 
 }
 
-function ncp_request_list()
-{
-    check_ajax_referer('my_ajax_nonce', 'nonce');
-    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
-    $dataArrayVal = isset($_POST['dataArrayVal']) ? sanitize_text_field($_POST['dataArrayVal']) : '';
-    if ($dataArrayId !== 'undefined') {
-        $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-        $account_file_response = api_account_file($nitro_access_token);
-        $acc_id = $account_file_response['data'][$dataArrayId]['id'];
-        $responseL = api_list_request($acc_id);
-        $datas = $responseL['data'];
-        $listHTML = '';
-        if ($datas) {
-            foreach ($datas as $data) {
-
-                $listHTML .= '<div class="ncp-inner-request-list-block"><div class="request-condition">';
-                if ($data['status'] == 'pending') {
-                    $listHTML .= '<div class="request-list-condition transaction-warning ">درحال بررسی</div>';
-                } elseif ($data['status'] == 'rejected') {
-                    $listHTML .= '<div class="request-list-condition transaction-success ">انجام شده</div>';
-                } elseif($data['status'] == 'approved') {
-                    $listHTML .= '<div class="request-list-condition transaction-done">تایید شده</div>';
-                }else{
-                    $listHTML .= '<div class="request-list-condition "></div>';
-                }
-                $listHTML .= '</div><div class="ncp-inner-request-list"><div class="request-list-account-number request-list-border">';
-                $listHTML .= '<div class="text-request-list">شماره حساب</div><div class="field-request-list">' . $dataArrayVal . '</div></div>';
-                $listHTML .= '<div class="request-list-price  request-list-border">';
-                $listHTML .= '<div class="text-request-list">موضوع</div><div class="field-request-list">' . $data['title'] . '</div></div>';
-                $listHTML .= '<div class="request-list-time request-list-border"><div class="text-request-list">ساعت</div>';
-
-                $start_ts = $data["created_ts"];
-                $timestamp = new DateTime($start_ts, new DateTimeZone('Asia/Tehran'));
-                // Format the DateTime object to get only the hour and minute
-                $formatted_time = $timestamp->format('H:i');
-                // Output the formatted time
-
-                $listHTML .= '<div class="field-request-list">' . $formatted_time . '</div>';
-                $listHTML .= '</div><div class="request-list-date request-list-border"><div class="text-request-list">تاریخ</div>';
-                $formatter = new IntlDateFormatter(
-                    'fa-IR',
-                    IntlDateFormatter::SHORT,
-                    IntlDateFormatter::NONE,
-                    'Asia/Tehran',
-                    IntlDateFormatter::TRADITIONAL,
-                );
-                $listHTML .= '<div class="field-request-list">' . $formatter->format($timestamp) . '</div></div>';
-                if (!empty($data['response'])) {
-                    $listHTML .= '<div class="request-list-desc request-list-border"><div class="text-request-list">توضیحات</div>';
-                    $listHTML .= '<div class="field-request-list">'. $data['response'] .'</div></div>';
-                }
-                $listHTML .= '</div></div>';
-            }
-        } else {
-            $listHTML .= '<p class="null-request-list">درخواستی وجود ندارد</p>';
-        }
-        wp_send_json([
-            'listHTML' => $listHTML
-        ]);
-    } else {
-        wp_send_json(['code' => 401]);
-    }
-}
-
+//function ncp_request_list()
+//{
+//    check_ajax_referer('my_ajax_nonce', 'nonce');
+//    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+//    $dataArrayVal = isset($_POST['dataArrayVal']) ? sanitize_text_field($_POST['dataArrayVal']) : '';
+//    $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
+//    if ($dataId !== 'undefined') {
+////        $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
+////        $account_file_response = api_account_file($nitro_access_token);
+////        $acc_id = $account_file_response['data'][$dataArrayId]['id'];
+//        $responseL = api_list_request($dataId);
+//        $datas = $responseL['data'];
+//        $listHTML = '';
+//        if ($datas) {
+//            foreach ($datas as $data) {
+//
+//                $listHTML .= '<div class="ncp-inner-request-list-block"><div class="request-condition">';
+//                if ($data['status'] == 'pending') {
+//                    $listHTML .= '<div class="request-list-condition transaction-warning ">درحال بررسی</div>';
+//                } elseif ($data['status'] == 'rejected') {
+//                    $listHTML .= '<div class="request-list-condition transaction-success ">انجام شده</div>';
+//                } elseif($data['status'] == 'approved') {
+//                    $listHTML .= '<div class="request-list-condition transaction-done">تایید شده</div>';
+//                }else{
+//                    $listHTML .= '<div class="request-list-condition "></div>';
+//                }
+//                $listHTML .= '</div><div class="ncp-inner-request-list"><div class="request-list-account-number request-list-border">';
+//                $listHTML .= '<div class="text-request-list">شماره حساب</div><div class="field-request-list">' . $dataArrayVal . '</div></div>';
+//                $listHTML .= '<div class="request-list-price  request-list-border">';
+//                $listHTML .= '<div class="text-request-list">موضوع</div><div class="field-request-list">' . $data['title'] . '</div></div>';
+//                $listHTML .= '<div class="request-list-time request-list-border"><div class="text-request-list">ساعت</div>';
+//
+//                $start_ts = $data["created_ts"];
+//                $timestamp = new DateTime($start_ts, new DateTimeZone('Asia/Tehran'));
+//                // Format the DateTime object to get only the hour and minute
+//                $formatted_time = $timestamp->format('H:i');
+//                // Output the formatted time
+//
+//                $listHTML .= '<div class="field-request-list">' . $formatted_time . '</div>';
+//                $listHTML .= '</div><div class="request-list-date request-list-border"><div class="text-request-list">تاریخ</div>';
+//                $formatter = new IntlDateFormatter(
+//                    'fa-IR',
+//                    IntlDateFormatter::SHORT,
+//                    IntlDateFormatter::NONE,
+//                    'Asia/Tehran',
+//                    IntlDateFormatter::TRADITIONAL,
+//                );
+//                $listHTML .= '<div class="field-request-list">' . $formatter->format($timestamp) . '</div></div>';
+//                if (!empty($data['response'])) {
+//                    $listHTML .= '<div class="request-list-desc request-list-border"><div class="text-request-list">توضیحات</div>';
+//                    $listHTML .= '<div class="field-request-list">'. $data['response'] .'</div></div>';
+//                }
+//                $listHTML .= '</div></div>';
+//            }
+//        } else {
+//            $listHTML .= '<p class="null-request-list">درخواستی وجود ندارد</p>';
+//        }
+//        wp_send_json([
+//            'listHTML' => $listHTML
+//        ]);
+//    } else {
+//        wp_send_json(['code' => 401]);
+//    }
+//}
+//function ncp_request_list()
+//{
+//    check_ajax_referer('my_ajax_nonce', 'nonce');
+//    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+//    $dataArrayVal = isset($_POST['dataArrayVal']) ? sanitize_text_field($_POST['dataArrayVal']) : '';
+//    $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
+//    if ($dataId !== 'undefined') {
+//        $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
+//        $account_file_response = api_account_file($nitro_access_token);
+//        $acc_id = $account_file_response['data'][$dataArrayId]['id'];
+//        $responseL = api_list_request($acc_id);
+//        $datas = $responseL['data'];
+//        $listHTML = '';
+//        if ($datas) {
+//            foreach ($datas as $data) {
+//
+//                $listHTML .= '<div class="ncp-inner-request-list-block"><div class="request-condition">';
+//                if ($data['status'] == 'pending') {
+//                    $listHTML .= '<div class="request-list-condition transaction-warning ">درحال بررسی</div>';
+//                } elseif ($data['status'] == 'rejected') {
+//                    $listHTML .= '<div class="request-list-condition transaction-success ">انجام شده</div>';
+//                } elseif($data['status'] == 'approved') {
+//                    $listHTML .= '<div class="request-list-condition transaction-done">تایید شده</div>';
+//                }else{
+//                    $listHTML .= '<div class="request-list-condition "></div>';
+//                }
+//                $listHTML .= '</div><div class="ncp-inner-request-list"><div class="request-list-account-number request-list-border">';
+//                $listHTML .= '<div class="text-request-list">شماره حساب</div><div class="field-request-list">' . $dataArrayVal . '</div></div>';
+//                $listHTML .= '<div class="request-list-price  request-list-border">';
+//                $listHTML .= '<div class="text-request-list">موضوع</div><div class="field-request-list">' . $data['title'] . '</div></div>';
+//                $listHTML .= '<div class="request-list-time request-list-border"><div class="text-request-list">ساعت</div>';
+//
+//                $start_ts = $data["created_ts"];
+//                $timestamp = new DateTime($start_ts, new DateTimeZone('Asia/Tehran'));
+//                // Format the DateTime object to get only the hour and minute
+//                $formatted_time = $timestamp->format('H:i');
+//                // Output the formatted time
+//
+//                $listHTML .= '<div class="field-request-list">' . $formatted_time . '</div>';
+//                $listHTML .= '</div><div class="request-list-date request-list-border"><div class="text-request-list">تاریخ</div>';
+//                $formatter = new IntlDateFormatter(
+//                    'fa-IR',
+//                    IntlDateFormatter::SHORT,
+//                    IntlDateFormatter::NONE,
+//                    'Asia/Tehran',
+//                    IntlDateFormatter::TRADITIONAL,
+//                );
+//                $listHTML .= '<div class="field-request-list">' . $formatter->format($timestamp) . '</div></div>';
+//                if (!empty($data['response'])) {
+//                    $listHTML .= '<div class="request-list-desc request-list-border"><div class="text-request-list">توضیحات</div>';
+//                    $listHTML .= '<div class="field-request-list">'. $data['response'] .'</div></div>';
+//                }
+//                $listHTML .= '</div></div>';
+//            }
+//        } else {
+//            $listHTML .= '<p class="null-request-list">درخواستی وجود ندارد</p>';
+//        }
+//        wp_send_json([
+//            'listHTML' => $listHTML
+//        ]);
+//    } else {
+//        wp_send_json(['code' => 401]);
+//    }
+//}
 //admin functions
 function nitro_prop_menu()
 {
