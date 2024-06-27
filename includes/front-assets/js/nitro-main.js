@@ -388,9 +388,15 @@ jQuery(function ($) {
     })
     $(document).on('click', '#withdrawal-btn', function (e) {
         e.preventDefault();
-        let code = $('#withdrawal-input').val()
+        let code = $('#withdrawal-input').val();
         var dataId = $('#withdrawal-btn').data('id');
         var selectedOption = $('#withdrawal-type').find('option:selected');
+        // Check if selectedOption is null or has no value
+        if (!selectedOption || !selectedOption.val()) {
+            showToast('حسابی وجود ندارد.', 'error');
+            return;
+        }
+        
         var dataArrayVal = selectedOption.val();
         var dataArrayId = selectedOption.data('array-id');
         if (code) {
@@ -403,24 +409,26 @@ jQuery(function ($) {
                     nonce: nonce,
                     code: code,
                     dataId: dataId,
-                    dataArrayVal:dataArrayVal,
-                    dataArrayId:dataArrayId
+                    dataArrayVal: dataArrayVal,
+                    dataArrayId: dataArrayId
                 },
                 success: function (response) {
-                    showToast('درخواست شما ارسال شد', 'success')
-                    $('#ncp-withdrawal').trigger('click')
+                    showToast('درخواست شما ارسال شد', 'success');
+                    $('#ncp-withdrawal').trigger('click');
                 },
                 error: function (error) {
                     console.error("Error occurred:", error);
                     showToast(error.statusText, 'error');
                     $('.background-spinner').fadeOut();
                 }
-            })
+            });
         } else {
-            showToast('آدرس کیف پول را خالیست!', 'error')
+            showToast('آدرس کیف پول را خالیست!', 'error');
             $('.background-spinner').fadeOut();
         }
-    })
+    });
+
+    
     $(document).on('click', '#birth_date', function (e) {
         e.preventDefault();
         var $this = $(this);
@@ -554,12 +562,20 @@ jQuery(function ($) {
         tempInput.remove();
         showToast("کپی شد!", "success");
     })
+    
     $(document).on('click', '#ncp-btn-request', function (e) {
         e.preventDefault();
         // $('#ncp-request').trigger('click')
         let description = $('#request-description').val();
         let request_type = $('#request-type').val();
-        var selectedOption = $('#status_id ').find('option:selected');
+        var selectedOption = $('#status_id').find('option:selected');
+    
+        // Check if selectedOption is null or has no value
+        if (!selectedOption || !selectedOption.val()) {
+            showToast('حسابی وجود ندارد.', 'error');
+            return;
+        }
+    
         var dataArrayId = selectedOption.data('array-id');
         var dataId = selectedOption.data('id');
         var dataArrayVal = selectedOption.val();
@@ -572,6 +588,7 @@ jQuery(function ($) {
         formData.append('dataArrayId', dataArrayId);
         formData.append('dataId', dataId);
         formData.append('dataArrayVal', dataArrayVal);
+    
         $.ajax({
             url: ajax_filter_params.ajax_url,
             type: 'POST',
@@ -580,9 +597,8 @@ jQuery(function ($) {
             contentType: false,
             success: function (response) {
                 if (response.res.code === 201) {
-                    $('#ncp-request').trigger('click')
+                    $('#ncp-request').trigger('click');
                     showToast('درخواست ارسال شد', 'success');
-
                     // $('.ncp-request-list').html(response.listHTML);
                 } else {
                     showToast('درخواست ارسال نشد', 'error');
@@ -597,7 +613,8 @@ jQuery(function ($) {
                 clearInterval(reloadRequest);
             }
         });
-    })
+    });
+
     $(document).on('click', '.payment-btn', function (e) {
         e.preventDefault();
 
