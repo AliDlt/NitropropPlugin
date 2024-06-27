@@ -807,6 +807,8 @@ jQuery(function ($) {
             success: function (response) {
                 $('#ncp-my-account-wrapper').html(response.template);
                 $('#account-condition').html(response.step)
+                $('.select-option-sec').html(response.select)
+                console.log(response.select)
                 // $('.btn-account-code').find('option:first').prop('selected', true);
                 $('.background-spinner').fadeOut();
                 $('.ncp-menu-content .menu-pointer').fadeOut();
@@ -838,7 +840,9 @@ jQuery(function ($) {
             },
             success: function (response) {
                 $('#dashboard-content').html(response.template);
-                $('#account-condition').html(response.step)
+                $('#account-condition').html(response.step);
+                $('.select-option-sec').html(response.select)
+                console.log(response.select)
             },
             error: function (error) {
                 console.error("Error occurred:", error);
