@@ -442,25 +442,7 @@ function ncp_withdrawal_loader()
         wp_send_json_error('access denied');
     }
 }
-//function ncp_withdrawal_loader()
-//{
-//    $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-////    $account_info_response = api_account_info($nitro_access_token);
-////    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
-//    $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
-//    $account_file_response = api_account_file($nitro_access_token);
-//    if ($dataArrayId !== null) {
-//        if ($nitro_access_token && $account_file_response['status'] == 200) {
-//
-//            wp_send_json(withdrawal_loader($dataArrayId, $nitro_access_token));
-//        } else {
-//            log_out_ncp();
-//            die();
-//        }
-//    } else {
-//        wp_send_json_error('access denied');
-//    }
-//}
+
 
 function ncp_challenge_loader()
 {
@@ -587,13 +569,22 @@ function ncp_dashboard_loader()
 function ncp_state_loader()
 {
     check_ajax_referer('my_ajax_nonce', 'nonce');
-    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+//    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+    $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
     $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-    $account_file_response = api_account_file($nitro_access_token);
-    $data = $account_file_response['data'][$dataArrayId];
-    $state = $data["state"];
-    $stateHTML = state_svg($state);
-    if ($dataArrayId !== null) {
+
+    if ($dataId !== null) {
+        $account_file_response = api_account_file($nitro_access_token);
+        $data = [];
+//    $data = $account_file_response['data'][$dataArrayId];
+        foreach ($account_file_response['data'] as $item) {
+            if ($item['id'] == $dataId) {
+                $data = $item;
+                break;
+            }
+        }
+        $state = $data["state"];
+        $stateHTML = state_svg($state);
         wp_send_json([
             "step" => $stateHTML
         ]);
@@ -605,19 +596,36 @@ function ncp_state_loader()
 function ncp_requests_loader()
 {
     check_ajax_referer('my_ajax_nonce', 'nonce');
-    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+//    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+    $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
     $dataArrayVal = isset($_POST['dataArrayVal']) ? sanitize_text_field($_POST['dataArrayVal']) : '';
     $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-    $account_info_response = api_account_info($nitro_access_token);
-    if ($nitro_access_token && $account_info_response['status'] == 200) {
-        $account_file_response = api_account_file($nitro_access_token);
-        $acc_id = $account_file_response['data'][$dataArrayId]['id'];
-        wp_send_json(requests_template($acc_id, $dataArrayVal));
+    $account_file_response = api_account_file($nitro_access_token);
+//    $account_info_response = api_account_info($nitro_access_token);
+    if ($nitro_access_token && $account_file_response['status'] == 200) {
+//        $acc_id = $account_file_response['data'][$dataArrayId]['id'];
+        wp_send_json(requests_template($dataId, $account_file_response));
     } else {
         log_out_ncp();
         die();
     }
 }
+//function ncp_requests_loader()
+//{
+//    check_ajax_referer('my_ajax_nonce', 'nonce');
+//    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+//    $dataArrayVal = isset($_POST['dataArrayVal']) ? sanitize_text_field($_POST['dataArrayVal']) : '';
+//    $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
+//    $account_info_response = api_account_info($nitro_access_token);
+//    if ($nitro_access_token && $account_info_response['status'] == 200) {
+//        $account_file_response = api_account_file($nitro_access_token);
+//        $acc_id = $account_file_response['data'][$dataArrayId]['id'];
+//        wp_send_json(requests_template($acc_id, $dataArrayVal));
+//    } else {
+//        log_out_ncp();
+//        die();
+//    }
+//}
 
 function ncp_profile_loader()
 {
@@ -1062,13 +1070,12 @@ function api_discount_checker($nitro_access_token, $code, $groupID)
 
 }
 
-function api_withdrawal_request($code, $nitro_access_token, $dataId,$dataArrayVal,$rounded_value)
+function api_withdrawal_request($code, $nitro_access_token, $dataId ,$dataArrayVal)
 {
     $curl = curl_init();
     $body = [
         'address' => $code,
-        'login'=>$dataArrayVal,
-        'profit'=>$rounded_value
+        'login'=>$dataArrayVal
     ];
     curl_setopt_array($curl, [
         CURLOPT_URL => 'https://client.nitroprop.com/api/users/accounts/' . $dataId . '/withdraws/create/',
@@ -1277,16 +1284,23 @@ function ncp_withdrawal_request()
     $code = isset($_POST['code']) ? sanitize_text_field($_POST['code']) : '';
     $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
     $dataArrayVal = isset($_POST['dataArrayVal']) ? sanitize_text_field($_POST['dataArrayVal']) : '';
-    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+//    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
     $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
 
     if ($code && $dataId) {
-        $response = api_account_file($nitro_access_token);
-        $dataArray = $response['data'][$dataArrayId];
-        $current_balance = $dataArray ? $dataArray['current_balance'] : 0;
-        $percentage_value = $current_balance * 0.8;
-        $rounded_value = round($percentage_value);
-        $response = api_withdrawal_request($code, $nitro_access_token, $dataId,$dataArrayVal,$rounded_value);
+//        $response = api_account_file($nitro_access_token);
+//        $dataArray = $response['data'][$dataArrayId];
+        $dataArray = [];
+//        foreach ($response['data'] as $item) {
+//            if ($item['id'] == $dataId) {
+//                $dataArray = $item;
+//                break;
+//            }
+//        }
+//        $current_balance = $dataArray ? $dataArray['current_balance'] : 0;
+//        $percentage_value = $current_balance * 0.8;
+//        $rounded_value = round($percentage_value);
+        $response = api_withdrawal_request($code, $nitro_access_token, $dataId,$dataArrayVal);
         if ($response){
             wp_send_json($response);
         }else{
@@ -1303,12 +1317,14 @@ function ncp_request_send()
     $request_type = isset($_POST['request_type']) ? sanitize_text_field($_POST['request_type']) : '';
     $description = isset($_POST['description']) ? sanitize_text_field($_POST['description']) : '';
     $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
+    $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
     $dataArrayVal = isset($_POST['dataArrayVal']) ? sanitize_text_field($_POST['dataArrayVal']) : '';
-    if ($dataArrayId !== 'undefined') {
+    if ($dataId !== 'undefined') {
         $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-        $account_file_response = api_account_file($nitro_access_token);
-        $acc_id = $account_file_response['data'][$dataArrayId]['id'];
-        $response = api_send_request($request_type, $description, $acc_id, $nitro_access_token);
+//        $account_file_response = api_account_file($nitro_access_token);
+//        $acc_id = $account_file_response['data'][$dataArrayId]['id'];
+
+        $response = api_send_request($request_type, $description, $dataId, $nitro_access_token);
 //        $account_file_response = api_account_file($nitro_access_token);
 //        $acc_id = $account_file_response['data'][$dataArrayId]['id'];
 //        $responseL = api_list_request($acc_id);

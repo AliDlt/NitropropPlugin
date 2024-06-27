@@ -8,7 +8,6 @@ function withdrawal_loader($dataId,$account_file_response, $nitro_access_token)
 //
 //    $nitro_access_token = $_COOKIE['nitro_access_token'];
 //    $historys = api_withdrawal_history($nitro_access_token, $dataArray['id'])['data'];
-
     $dataArray = [];
     foreach ($account_file_response['data'] as $item) {
         if ($item['id'] == $dataId) {
@@ -19,7 +18,6 @@ function withdrawal_loader($dataId,$account_file_response, $nitro_access_token)
     $datas = $account_file_response['data'];
     $nitro_access_token = $_COOKIE['nitro_access_token'];
     $historys = api_withdrawal_history($nitro_access_token, $dataArray['id'])['data'];
-
     ob_start();
     ?>
     <div class="ncp-my-account-withdrawal">

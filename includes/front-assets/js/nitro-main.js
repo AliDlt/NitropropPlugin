@@ -105,6 +105,7 @@ jQuery(function ($) {
             $('.background-spinner').fadeIn();
             var selectedOption = $('#status_id ').find('option:selected');
             var dataArrayId = selectedOption.data('array-id');
+            var dataId = selectedOption.data('id');
             var dataArrayVal = selectedOption.val();
             $.ajax({
                 url: ajax_filter_params.ajax_url,
@@ -114,6 +115,7 @@ jQuery(function ($) {
                     nonce: nonce,
                     dataArrayId: dataArrayId,
                     dataArrayVal: dataArrayVal,
+                    dataId:dataId,
                 },
                 success: function (response) {
                     $('#ncp-my-account-wrapper').html(response);
@@ -554,19 +556,21 @@ jQuery(function ($) {
     })
     $(document).on('click', '#ncp-btn-request', function (e) {
         e.preventDefault();
-        $('#ncp-request').trigger('click')
+        // $('#ncp-request').trigger('click')
         let description = $('#request-description').val();
         let request_type = $('#request-type').val();
-        var selectedOption = $('#request-account ').find('option:selected');
+        var selectedOption = $('#status_id ').find('option:selected');
         var dataArrayId = selectedOption.data('array-id');
+        var dataId = selectedOption.data('id');
         var dataArrayVal = selectedOption.val();
-        $('.background-spinner').fadeIn();
+        // $('.background-spinner').fadeIn();
         var formData = new FormData();
         formData.append('action', 'ncp_request_send');
         formData.append('nonce', nonce);
         formData.append('request_type', request_type);
         formData.append('description', description);
         formData.append('dataArrayId', dataArrayId);
+        formData.append('dataId', dataId);
         formData.append('dataArrayVal', dataArrayVal);
         $.ajax({
             url: ajax_filter_params.ajax_url,
@@ -583,7 +587,7 @@ jQuery(function ($) {
                 } else {
                     showToast('درخواست ارسال نشد', 'error');
                 }
-                // $('.background-spinner').fadeOut();
+                $('.background-spinner').fadeOut();
             },
             error: function (error) {
                 showToast(error.statusText, 'error');
@@ -797,6 +801,8 @@ jQuery(function ($) {
     }
 
     function stateLoader(dataArrayId,callBack = null) {
+        var selectedOption = $('#status_id ').find('option:selected');
+        var dataId = selectedOption.data('id');
         $.ajax({
             url: ajax_filter_params.ajax_url,
             type: 'POST',
@@ -804,6 +810,7 @@ jQuery(function ($) {
                 action: 'ncp_state_loader',
                 nonce: nonce,
                 dataArrayId: dataArrayId,
+                dataId:dataId,
             },
             success: function (response) {
                 $('#account-condition').html(response.step)
