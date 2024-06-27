@@ -474,6 +474,7 @@ function ncp_dashboard_loader()
 //    $dataArrayId = isset($_POST['dataArrayId']) ? sanitize_text_field($_POST['dataArrayId']) : '';
     $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
     $refresh_dashboard = isset($_POST['refresh_dashboard']) ? sanitize_text_field($_POST['refresh_dashboard']) : '';
+    $statusLoader = isset($_POST['$statusLoader']) ? sanitize_text_field($_POST['$statusLoader']) : '';
     if ($dataId !== null) {
         $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
         if ($refresh_dashboard){
@@ -565,15 +566,20 @@ function ncp_dashboard_loader()
                 </circle>
             </svg>';
         }
-        $selectHTML = '<select class="btn-account-code appearance-none" name="status_id " id="status_id">';
-        $first_array = 0;
-        foreach ($account_file_response['data'] as $dataSellect) {
-            $selectHTML .= '<option value="' . $dataSellect['login'] . '" data-array-id="'. $first_array.'"data-id="'. $dataSellect['id'].'">';
-            $selectHTML .= $dataSellect['login'];
-            $selectHTML .= '</option>';
-            $first_array++;
-        }
-        $selectHTML .= '</select>';
+        $selectHTML = '';
+
+            $selectHTML .= '<select class="btn-account-code appearance-none" name="status_id " id="status_id">';
+            $first_array = 0;
+            foreach ($account_file_response['data'] as $dataSellect) {
+                $selectHTML .= '<option value="' . $dataSellect['login'] . '"';
+                $selectHTML .= $data['login'] == $dataSellect['login'] ? 'selected="selected "':'';
+                $selectHTML .= 'data-array-id="'. $first_array.'"data-id="'. $dataSellect['id'].'">';
+                $selectHTML .= $dataSellect['login'];
+                $selectHTML .= '</option>';
+                $first_array++;
+            }
+            $selectHTML .= '</select>';
+
         if ($nitro_access_token && $account_info_response['status'] == 200) {
             wp_send_json([
                 "template" => dashboard_template($account_info_response, $data),
@@ -682,12 +688,12 @@ function ncp_support_loader()
 function ncp_exit()
 {
     check_ajax_referer('my_ajax_nonce', 'nonce');
-    if (isset($_COOKIE['nitro_access_token'])) {
-        $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
-        setcookie('nitro_access_token', '', time() - 3600, '/', $domain);
-        unset($_COOKIE['nitro_access_token']);
-        wp_logout();
+    $domain = $_SERVER['HTTP_HOST'];
+    if ($domain == 'localhost' || $domain == '127.0.0.1' || preg_match('/^192\.168\.\d+\.\d+$/', $domain)) {
+        $domain = false;
     }
+    setcookie('nitro_access_token', '', time() - 3600, '/', $domain);
+    wp_logout();
     wp_send_json('done');
 }
 
@@ -756,7 +762,7 @@ function ncp_login_btn()
     if (is_user_logged_in()) {
         ?>
         <div class="login_btn_wrapper">
-            <img class="btn-account-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/07.svg' ?>"
+            <img class="btn-account-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg' ?>"
                  alt="">
             <div class="btn-account-name login_btn">
                 حساب کاربری
