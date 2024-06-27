@@ -565,10 +565,20 @@ function ncp_dashboard_loader()
                 </circle>
             </svg>';
         }
+        $selectHTML = '<select class="btn-account-code appearance-none" name="status_id " id="status_id">';
+        $first_array = 0;
+        foreach ($account_file_response['data'] as $dataSellect) {
+            $selectHTML .= '<option value="' . $dataSellect['login'] . '" data-array-id="'. $first_array.'"data-id="'. $dataSellect['id'].'">';
+            $selectHTML .= $dataSellect['login'];
+            $selectHTML .= '</option>';
+            $first_array++;
+        }
+        $selectHTML .= '</select>';
         if ($nitro_access_token && $account_info_response['status'] == 200) {
             wp_send_json([
                 "template" => dashboard_template($account_info_response, $data),
-                "step" => $stateHTML
+                "step" => $stateHTML,
+                "select" => $selectHTML,
             ]);
         } else {
             log_out_ncp();
