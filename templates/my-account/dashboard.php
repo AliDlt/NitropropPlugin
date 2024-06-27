@@ -82,11 +82,11 @@ function dashboard_template($account_info_response, $data)
                         <span>نوع پلن</span>
                     </div>
                     <div class="inner-acc-plan">
-                        <h3>$<?php echo $data ? $data['current_balance'] : 0 ?></h3>
+                        <h3>$<?php echo isset($data['current_balance']) ? $data['current_balance'] : 0 ?></h3>
                         <span>بالانس فعلی</span>
                     </div>
                     <div class="inner-acc-plan">
-                        <h3>$<?php echo $data ? $data['first_balance'] : 0 ?></h3>
+                        <h3>$<?php echo isset($data['first_balance']) ? $data['first_balance'] : 0 ?></h3>
                         <span>بالانس اولیه</span>
                     </div>
                     <div class="inner-acc-plan">
@@ -172,9 +172,6 @@ function dashboard_template($account_info_response, $data)
                 </div>
             </div>
         </div>
-        <?php
-        if ($data) {
-            ?>
             <div class="dashboard-second ncp-block">
                 <div class="ncp-update-btn-contianer">
                     <h2>وضعیت حساب</h2>
@@ -187,8 +184,8 @@ function dashboard_template($account_info_response, $data)
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/status-01.svg' ?>" alt="">
                         </div>
                         <?php
-                        if ($data["step"] === 'first' || $data["step"] === 'second') {
-                            echo $data["trade_days"];
+                        if (isset($data["step"]) && ($data["step"] === 'first' || $data["step"] === 'second')) {
+                            echo isset($data["trade_days"]) ? $data["trade_days"] : 'ندارد';
                         } else {
                             echo 'ندارد';
                         }
@@ -200,12 +197,16 @@ function dashboard_template($account_info_response, $data)
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/status-02.svg' ?>" alt="">
                         </div>
                         <?php
-                        $daily = $data["daily_drawdown"];
-                        $daily_num = intval($daily);
-                        if ($daily_num < 0) {
-                            echo '-$' . abs($daily_num);
+                        if (isset($data["daily_drawdown"])) {
+                            $daily = $data["daily_drawdown"];
+                            $daily_num = intval($daily);
+                            if ($daily_num < 0) {
+                                echo '-$' . abs($daily_num);
+                            } else {
+                                echo '$' . $daily;
+                            }
                         } else {
-                            echo '$' . $data["daily_drawdown"];
+                            echo '$0';
                         }
                         ?>
                     </div>
@@ -215,12 +216,16 @@ function dashboard_template($account_info_response, $data)
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/status-02.svg' ?>" alt="">
                         </div>
                         <?php
-                        $total = $data["total_drawdown"];
-                        $total_num = intval($total);
-                        if ($total_num < 0) {
-                            echo '-$' . abs($total_num);
+                        if (isset($data["total_drawdown"])) {
+                            $total = $data["total_drawdown"];
+                            $total_num = intval($total);
+                            if ($total_num < 0) {
+                                echo '-$' . abs($total_num);
+                            } else {
+                                echo '$' . $total;
+                            }
                         } else {
-                            echo '$' . $data["total_drawdown"];
+                            echo '$0';
                         }
                         ?>
                     </div>
@@ -230,24 +235,18 @@ function dashboard_template($account_info_response, $data)
                             <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/status-03.svg' ?>" alt="">
                         </div>
                         <?php
-                        if ($data["target"]) {
+                        if (isset($data["target"])) {
                             echo '$' . $data["target"];
                         } else {
-                            echo '$' . 0;
+                            echo '$0';
                         }
                         ?>
                     </div>
                 </div>
             </div>
-            <?php
-        }
-        ?>
         <div class="dashboard-third ncp-block">
             <h2>جزئیات حساب</h2>
             <div class="third-account-status">
-                <?php
-                if ($data) {
-                    ?>
                     <div class="inner-third-account-status">
                         <div class="right">
                             <div class="header-status">
@@ -259,7 +258,7 @@ function dashboard_template($account_info_response, $data)
                                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>"
                                      alt="">
                                 حداقل روزهای معاملاتی: <?php
-                                if ($data["step"] === 'first' || $data["step"] === 'second') {
+                                if (isset($data["step"]) && ($data["step"] === 'first' || $data["step"] === 'second')) {
                                     echo '5 روز';
                                 } else {
                                     echo 'ندارد';
@@ -269,12 +268,16 @@ function dashboard_template($account_info_response, $data)
                                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>"
                                      alt="">
                                 روزهای معاملاتی شما: <?php
-                                if ($data["step"] === 'first' || $data["step"] === 'second') {
-                                    echo $data["trade_days"];
+                                if (isset($data["step"]) && ($data["step"] === 'first' || $data["step"] === 'second')) {
+                                    if (isset($data["trade_days"])) {
+                                        echo $data["trade_days"] . ' روز';
+                                    } else {
+                                        echo 'ندارد';
+                                    }
                                 } else {
                                     echo 'ندارد';
                                 }
-                                ?> روز
+                                ?>                                
                             </div>
                         </div>
                         <div class="left">
@@ -299,14 +302,18 @@ function dashboard_template($account_info_response, $data)
                                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>"
                                      alt="">
                                 بالانس ابتدای روز: <?php
-                                $morning = $data["balance_in_morning"];
-                                $morning_num = intval($morning);
-                                if ($morning_num < 0) {
-                                    echo abs($morning_num) . '$-';
-                                } elseif ($morning_num == 0) {
-                                    echo '0 $';
+                                if (isset($data["balance_in_morning"])) {
+                                    $morning = $data["balance_in_morning"];
+                                    $morning_num = intval($morning);
+                                    if ($morning_num < 0) {
+                                        echo abs($morning_num) . '$-';
+                                    } elseif ($morning_num == 0) {
+                                        echo '0$';
+                                    } else {
+                                        echo $morning . '$';
+                                    }
                                 } else {
-                                    echo $data["balance_in_morning"] . '$';
+                                    echo '0$';
                                 }
                                 ?>
                             </div>
@@ -314,12 +321,16 @@ function dashboard_template($account_info_response, $data)
                                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>"
                                      alt="">
                                 درادون روزانه مجاز: <?php
-                                $daily = $data["daily_drawdown"];
-                                $daily_num = intval($daily);
-                                if ($daily_num < 0) {
-                                    echo abs($daily_num) . '$-';
+                                if (isset($data["daily_drawdown"])) {
+                                    $daily = $data["daily_drawdown"];
+                                    $daily_num = intval($daily);
+                                    if ($daily_num < 0) {
+                                        echo abs($daily_num) . '$-';
+                                    } else {
+                                        echo $daily . '$';
+                                    }
                                 } else {
-                                    echo $data["daily_drawdown"] . '$';
+                                    echo '0$';
                                 }
                                 ?>
                             </div>
@@ -365,12 +376,16 @@ function dashboard_template($account_info_response, $data)
                                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>"
                                      alt="">
                                 درادون کل مجاز: <?php
-                                $total = $data["total_drawdown"];
-                                $total_num = intval($total);
-                                if ($total_num < 0) {
-                                    echo abs($total_num) . '$-';
+                                if (isset($data["total_drawdown"])) {
+                                    $total = $data["total_drawdown"];
+                                    $total_num = intval($total);
+                                    if ($total_num < 0) {
+                                        echo abs($total_num) . '$-';
+                                    } else {
+                                        echo $total . '$';
+                                    }
                                 } else {
-                                    echo $data["total_drawdown"] . '$';
+                                    echo '0$';
                                 }
                                 ?>
                             </div>
@@ -431,7 +446,7 @@ function dashboard_template($account_info_response, $data)
                                         };
                                         break;
                                     default:
-                                        $amount = "گروه نامعتبر";
+                                        $amount = "بدون گروه";
                                         break;
                                 }
                                 echo is_numeric($amount) ? $amount . '$' : $amount;
@@ -442,7 +457,7 @@ function dashboard_template($account_info_response, $data)
                                 <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/check-mark.svg' ?>"
                                      alt="">
                                 تارگت کسب شده: <?php
-                                if ($data["target"]) {
+                                if (isset($data["target"])) {
                                     echo $data["target"] . '$';
                                 } else {
                                     echo 0 . '$';
@@ -460,11 +475,6 @@ function dashboard_template($account_info_response, $data)
                             ?>
                         </div>
                     </div>
-                    <?php
-                } else {
-                    echo '<p class="null-data">درخواستی وجود ندرد</p>';
-                }
-                ?>
             </div>
         </div>
     </div>
@@ -472,3 +482,4 @@ function dashboard_template($account_info_response, $data)
     <?php
     return ob_get_clean();
 }
+?>
