@@ -626,7 +626,6 @@ img.btn-account-bell {
 
 .ncp-withdrawal input, .ncp-withdrawal select {
     height: 55px;
-    /*margin-top: 25px;*/
     direction: ltr;
     border: 1px solid #89ABEA !important;
     border-radius: 20px !important;
@@ -637,10 +636,13 @@ img.btn-account-bell {
     align-items: center;
     justify-content: center;
     font-size: 16px; /* Adjust as needed */
-    padding: 0; /* Remove default padding */
+    padding: 0 30px 0 10px; /* Adjusted padding to add space */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: inherit;
 }
 
-/* Ensuring the input type text has the same style */
 .ncp-withdrawal input[type="text"] {
     display: flex;
     align-items: center;
@@ -648,14 +650,13 @@ img.btn-account-bell {
     text-align: center;
 }
 
-/* Ensuring the select element has the same style */
 .ncp-withdrawal select {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding-right: 30px;
 }
-
 
 .withdrawal-input-sec {
     position: relative;
@@ -665,20 +666,24 @@ img.btn-account-bell {
     gap: 10px;
     margin-top: 25px;
 }
+
 .withdrawal-input-sec-inner {
     width: 48%;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
+
 .ncp-withdrawal input:focus {
     border: 3px solid #89ABEA !important;
-
 }
 
 ::placeholder {
     color: #89ABEA !important;
 }
+
+
+
 
 .ncp-withdrawal-btn a {
     width: 266px;
@@ -805,7 +810,7 @@ img.btn-account-bell {
 .login_register_btn {
     width: 138px;
     height: 43px;
-    background: #2c487f;
+    background: #5386E4;
     border-radius: 35px;
     display: flex;
     justify-content: center;
@@ -1898,7 +1903,7 @@ p.null-request-list {
     font-size: 14px;
     font-weight: 400;
     color: #A0A0A0;
-    text-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .field-request-list {
@@ -2157,11 +2162,8 @@ a.pass-change-btn {
     align-items: center;
     justify-content: center;
 }
+
 .btn-account-code {
-    /*width: 128px;*/
-    /*height: 45px;*/
-    /*font-size: 15px;*/
-    /*background: inherit;*/
     color: #5386E4;
     text-align: center;
     outline: none;
@@ -2170,20 +2172,34 @@ a.pass-change-btn {
     justify-content: center;
 }
 
+.select-option-sec {
+    position: relative;
+}
+
+.select-option-sec img {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 13px;
+    z-index: 0;
+    cursor: pointer;
+}
+
 select#status_id {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
     background-color: inherit;
-    background-size: 13px;
-    background-position-x: 10%;
-    background-position-y: 18px;
-    padding: 0 0 0 10px;
-}
-
-.certificate-btn,.certificate-btn:hover,.certificate-btn:focus{
-    background-color: #5386E4 !important;
-    color: white;
+    padding: 0 10px 0 30px;
+    height: 45px;
+    line-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    position: relative;
 }
 
 select.btn-account-code {
@@ -2196,23 +2212,12 @@ select.btn-account-code {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.select-option-sec img {
-    position: absolute;
-    right: 18px;
-    top: 20px;
-    width: 13px;
-    z-index: 0;
-    cursor: pointer;
-}
-
-.select-option-sec {
-    position: relative;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
 }
 
 select option {
-    margin: 40px;
     background: #EEF2FE !important;
     color: #5386E4;
     font-weight: 700;
@@ -2226,6 +2231,7 @@ select option:hover,
 select option:active,
 select option:focus {
     background: #5386E4 !important;
+    color: #fff !important;
 }
 
 
@@ -2620,7 +2626,7 @@ p.selected-payment {
     }
 
     .ncp-rules {
-        width: 100%;
+        width: 90%;
     }
 
     .ncp-hamburger {
@@ -3003,14 +3009,10 @@ p.selected-payment {
     }
 
     .field-transaction {
-        /*font-size: 11px;*/
         font-weight: 500;
         text-align: left;
     }
-.field-transaction-list{
-    font-size: 11px !important;
 
-}
     .your-order {
         padding: 24px 30px;
     }
