@@ -1,13 +1,23 @@
 <?php
 defined('ABSPATH') or die('Access Denied!');
-function requests_template($acc_id, $dataArrayVal)
+function requests_template($dataId, $account_file_response)
 {
-    $nitro_access_token = $_COOKIE['nitro_access_token'];
-    $response = api_list_request($acc_id);
-    $datas = $response['data'];
-    $account_file_response = api_account_file($nitro_access_token);
-    $file_datas = $account_file_response['data'];
+//    $nitro_access_token = $_COOKIE['nitro_access_token'];
+//    $response = api_list_request($acc_id);
+//    $datas = $response['data'];
+//    $account_file_response = api_account_file($nitro_access_token);
+//    $file_datas = $account_file_response['data'];
+//
 
+    $response = api_list_request($dataId);
+    $datas = $response['data'];
+    $file_datas = $account_file_response['data'];
+    foreach ($file_datas as $item) {
+        if ($item['id'] == $dataId) {
+            $account_login = $item['login'];
+            break;
+        }
+    }
     ob_start();
     ?>
     <div class="ncp-request-block ncp-block">
@@ -93,7 +103,7 @@ function requests_template($acc_id, $dataArrayVal)
                         <div class="ncp-inner-request-list">
                             <div class="request-list-account-number request-list-border">
                                 <div class="text-request-list">شماره حساب</div>
-                                <div class="field-request-list"><?php echo $dataArrayVal ?></div>
+                                <div class="field-request-list"><?php echo $account_login ?></div>
                             </div>
                             <div class="request-list-price request-list-border">
                                 <div class="text-request-list">موضوع</div>
