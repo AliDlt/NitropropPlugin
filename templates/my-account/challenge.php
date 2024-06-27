@@ -1,9 +1,9 @@
 <?php
 defined('ABSPATH') or die('Access Denied!');
-function challenge_page($account_info_response, $nitro_access_token)
+function challenge_page($challenge_prices_response, $nitro_access_token)
 {
-    $account_data = $account_info_response['data'];
-    $challenge_prices_response = api_get_challenge_prices($nitro_access_token);
+//    $account_data = $account_info_response['data'];
+//    $challenge_prices_response = api_get_challenge_prices($nitro_access_token);
     usort($challenge_prices_response['data'], function ($a, $b) {
         return $a['group'] <=> $b['group'];
     });

@@ -563,7 +563,7 @@ jQuery(function ($) {
         var dataArrayId = selectedOption.data('array-id');
         var dataId = selectedOption.data('id');
         var dataArrayVal = selectedOption.val();
-        // $('.background-spinner').fadeIn();
+        $('.background-spinner').fadeIn();
         var formData = new FormData();
         formData.append('action', 'ncp_request_send');
         formData.append('nonce', nonce);
@@ -677,7 +677,42 @@ jQuery(function ($) {
             dashboardAjaxLoader(dataArrayId,dataId)
         }else if (landPage === 'request'){
             stateLoader(dataArrayId,function (){
-                $('#request-account').val(dataArrayVal).trigger('change');
+                // $('#request-account').val(dataArrayVal).trigger('change');
+                $.ajax({
+                    url: ajax_filter_params.ajax_url,
+                    type: 'POST',
+                    data: {
+                        action: 'ncp_requests_loader',
+                        nonce: nonce,
+                        dataArrayId: dataArrayId,
+                        dataArrayVal: dataArrayVal,
+                        dataId:dataId,
+                    },
+                    success: function (response) {
+                        $('#ncp-my-account-wrapper').html(response);
+                        // $('.background-spinner').fadeOut();
+                        $('.ncp-menu-content .menu-pointer').fadeOut();
+                        $('#ncp-request .menu-pointer').fadeIn();
+                        history.pushState(null, '', '?land=request');
+                        setCookie('ncp_is_page', 'request', 7);
+                    },
+                    error: function (error) {
+                        console.error("Error occurred:", error);
+                        if (error.status === 403) {
+                            showToast("صفحه را دوباره بارگذاری کنید!", 'error');
+                        } else {
+                            showToast(error.statusText, 'error');
+                        }
+                        $('.background-spinner').fadeOut();
+                    },
+                    complete: function (){
+                        stateLoader(dataArrayId,function (){
+                            $('#request-account ').val(dataArrayVal).select();
+                            $('.background-spinner').fadeOut();
+                        })
+                        clearInterval(reloadRequest);
+                    }
+                })
             })
         }else if (landPage === 'challenge'){
             stateLoader(dataArrayId,function (){
@@ -706,42 +741,52 @@ jQuery(function ($) {
         }
     })
     $(document).on('change', '#request-account', function () {
-        $('.background-spinner').fadeIn();
         var selectedOption = $(this).find('option:selected');
-        var dataArrayId = selectedOption.data('array-id');
         var dataArrayVal = selectedOption.val();
-        stateLoader(dataArrayId , function (){
-            $('#status_id ').val(dataArrayVal).select();
-        });
-        $.ajax({
-            url: ajax_filter_params.ajax_url,
-            type: 'POST',
-            data: {
-                action: 'ncp_request_list',
-                nonce: nonce,
-                dataArrayId: dataArrayId,
-                dataArrayVal: dataArrayVal,
-            },
-            success: function (response) {
-                $('.ncp-request-list').html(response.listHTML);
-                $('.background-spinner').fadeOut();
-            },
-            error: function (error) {
-                console.error("Error occurred:", error);
-                showToast(error.statusText, 'error');
-                $('.background-spinner').fadeOut();
-            }
-        })
+        $('#status_id ').val(dataArrayVal).trigger('change');
+        // $('.background-spinner').fadeIn();
+        // var selectedOption = $(this).find('option:selected');
+        // var dataArrayId = selectedOption.data('array-id');
+        // var dataId = selectedOption.data('id');
+        // var dataArrayVal = selectedOption.val();
+        // stateLoader(dataArrayId , function (){
+        //     $('#status_id ').val(dataArrayVal).select();
+        //     $('#npc_request').trigger('click')
+        //     $('.background-spinner').fadeOut();
+        // });
+        // $.ajax({
+        //     url: ajax_filter_params.ajax_url,
+        //     type: 'POST',
+        //     data: {
+        //         action: 'ncp_request_list',
+        //         nonce: nonce,
+        //         dataArrayId: dataArrayId,
+        //         dataArrayVal: dataArrayVal,
+        //         dataId:dataId,
+        //     },
+        //     success: function (response) {
+        //         $('.ncp-request-list').html(response.listHTML);
+        //         $('.background-spinner').fadeOut();
+        //     },
+        //     error: function (error) {
+        //         console.error("Error occurred:", error);
+        //         showToast(error.statusText, 'error');
+        //         $('.background-spinner').fadeOut();
+        //     }
+        // })
     })
     $(document).on('change', '#withdrawal-type', function () {
-        $('.background-spinner').fadeIn();
         var selectedOption = $(this).find('option:selected');
-        var dataArrayId = selectedOption.data('array-id');
         var dataArrayVal = selectedOption.val();
-        $('#status_id ').val(dataArrayVal).select();
-        stateLoader(dataArrayId , function (){
-            $('#ncp-withdrawal').trigger('click')
-        });
+        $('#status_id ').val(dataArrayVal).trigger('change');
+        // $('.background-spinner').fadeIn();
+        // var selectedOption = $(this).find('option:selected');
+        // var dataArrayId = selectedOption.data('array-id');
+        // var dataArrayVal = selectedOption.val();
+        // $('#status_id ').val(dataArrayVal).select();
+        // stateLoader(dataArrayId , function (){
+        //     $('#ncp-withdrawal').trigger('click')
+        // });
     })
 
 
