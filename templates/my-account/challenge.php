@@ -56,7 +56,7 @@ function challenge_page($challenge_prices_response, $nitro_access_token)
                     <div class="small-block">
                         قیمت کل به ریال
                         <div class="inner-small-block-challenge"
-                             id="rial-price"><?php echo number_format($challenge_prices_response['data'][0]['price']) ?></div>
+                             id="rial-price"><?php echo number_format($challenge_prices_response['data'][0]['price'].'0') ?></div>
                     </div>
                 </div>
             </div>
@@ -79,13 +79,13 @@ function challenge_page($challenge_prices_response, $nitro_access_token)
                 <p class="selected-payment" style="text-align=center;">شما درگاه ریالی را انتخاب کرده اید</p>
             </div>
             <div class="ncp-rules">
-                <label class="rules-container" style="padding-right:20px;">قوانین را مطالعه کرده و شرایط چالش ها را می پذیرم.
+                <label class="rules-container"">قوانین را مطالعه کرده و شرایط چالش ها را می پذیرم.
                     <input type="checkbox" id="challenge-rule">
-                    <span class="checkmark"></span>
+<!--                    <span class="checkmark"></span>-->
                 </label>
-                <label class="rules-container" style="padding-right:20px;">پس از خرید چالش، امکان عودت وجه وجود ندارد.
+                <label class="rules-container"">پس از خرید چالش، امکان عودت وجه وجود ندارد.
                     <input type="checkbox" id="challenge-pay-back">
-                    <span class="checkmark"></span>
+<!--                    <span class="checkmark"></span>-->
                 </label>
                 <div class="error-sec challenge-rule-error">
                     <p class="input-error" id="challenge-rule-error" style="display: none">لطفا قوانین و شرایط را

@@ -2162,7 +2162,12 @@ a.pass-change-btn {
     align-items: center;
     justify-content: center;
 }
-
+.cover-section a {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .btn-account-code {
     color: #5386E4;
     text-align: center;
