@@ -755,11 +755,11 @@ img.btn-account-person {
     width: 25px;
     border: none;
     padding: 0;
-    border-radius: 50% !important;
+    /* border-radius: 50% !important; */
     margin: 8px;
     display: none;
-
 }
+
 .login_register_btn {
     width: 138px;
     height: 43px;
@@ -2579,12 +2579,6 @@ p.selected-payment {
         border: none !important;
         padding: 0;
     }
-
-    .login_register_btn img {
-        display: block;
-    }
-
-
 }
 
 @media screen and (max-width: 1070px) {
@@ -2656,6 +2650,11 @@ p.selected-payment {
 }
 
 @media screen and (max-width: 768px) {
+    
+    .login_register_btn img {
+        display: block;
+    }
+    
     .accordion-ncp h3 {
         font-size: 11px;
     }
@@ -2744,6 +2743,7 @@ p.selected-payment {
     }
     .login_register_btn {
         width: unset !important;
+        background-color: white !important;
     }
     .login_register_btn p {
         display: none;

@@ -766,8 +766,8 @@ function ncp_login_btn()
         ?>
         <div class="login_btn_wrapper">
             <a href="/panel">
-                <img class="btn-login-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg' ?>"
-                     alt="">
+                <img class="btn-login-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg'?>"
+                     alt="iconProfile">
             </a>
             <div class="btn-account-name login_btn">
                 حساب کاربری
@@ -788,7 +788,7 @@ function ncp_login_btn()
         ?>
         <a href="/login-register" class="login_register_btn">
             <p>ورود/عضویت</p>
-            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/07.svg' ?>" alt="">
+            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg' ?>" alt="">
         </a>
         <?php
     }
