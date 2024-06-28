@@ -11,7 +11,13 @@ function dashboard_template($account_info_response, $data)
     <div id="dashboard-content">
         <div class="dashboard-first-block">
             <div class="account-info-block">
-                <h2>اطلاعات حساب</h2>
+                <div class="account-info-block-certificate">
+                    <h2>اطلاعات حساب</h2>
+                    <?php if ($data['certificate'] != null) { ?>
+                                <a class="ncp-update-btn"
+                                   href="<?php echo $data['certificate']; ?>" target="_blank">دریافت سرتیفیکیت</a>
+                            <?php } ?>
+                </div>
                 <div class="info-btn">
                     <div class="inner-acc-info-sec">
                         <div class="inner-acc-info">

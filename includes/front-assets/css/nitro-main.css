@@ -1182,11 +1182,18 @@ input[type=checkbox]
     color: white !important;
     background-color: #5386E4;
     padding: 4px 8px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
     border: none !important;
     cursor: pointer;
+    width: 130px;
+    height: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+    justify-content: center;
+    font-weight: 500;
+    border-radius: 35px;
+    row-gap: 8px;
 }
 
 .rules-container input[type="checkbox"] {
@@ -1341,15 +1348,28 @@ img.btn-account-person {
     gap: 10px;
     width: 100%;
 }
+
 .account-info-block {
     width: 60%;
     display: flex;
     background: #fff;
     border-radius: 20px;
-    padding: 22px 20px;
+    padding: 27px 35px;
     /* height: max-content; */
     flex-direction: column;
     /* row-gap: 20px; */
+}
+
+.account-info-block-certificate{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.account-info-block-certificate a,.account-info-block-certificate a:hover{
+    /* width: fit-content; */
+    padding: 10px;
+    color: white;
 }
 
 .account-plan-block {
@@ -1564,7 +1584,7 @@ img.btn-account-person {
     background: #DEE9FF;
     border: 1px solid #89ABEA;
     border-radius: 14px;
-    width: 48%;
+    width: 47%;
     padding: 14px;
     display: flex;
     justify-content: space-between;
@@ -2817,7 +2837,7 @@ p.selected-payment {
     .ncp-block {
         margin: 17px;
         border-radius: 15px;
-        padding: 10px 16px;
+        /* padding: 10px 16px; */
     }
 
     .ncp-my-account-header {
@@ -3047,7 +3067,7 @@ p.selected-payment {
     }
 
     .account-status {
-        min-width: 135px;
+        min-width: 125px;
         height: 95px;
     }
 
