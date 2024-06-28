@@ -560,7 +560,7 @@ img.btn-account-bell {
     flex-direction: row-reverse;
     align-items: center;
     gap: 6px;
-    font-family: 'Kalameh';
+    font-family: 'Kalameh', serif;
     font-size: 22px;
     font-weight: 600;
     margin-left: 8px;
@@ -817,7 +817,7 @@ img.btn-account-bell {
     border: none !important;
     cursor: pointer;
     align-items: center;
-    font-family: 'Kalameh';
+    font-family: 'Kalameh', serif;
 }
 .login_register_btn p {
     margin: 0;
@@ -893,7 +893,7 @@ img.btn-account-bell {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Kalameh';
+    font-family: 'Kalameh', serif;
 }
 
 .login_btn_wrapper img {
@@ -2684,12 +2684,10 @@ p.selected-payment {
         width: 100%;
     }
     .accordion-npc-sec{
-        padding: 20px;
-        padding-top: 0;
-        padding-bottom: 0;
+        padding: 0 20px;
     }
     .nitro-posts-sec {
-        height: 355px !important;
+        height: 375px !important;
     }
 .transaction-list-account-number,
 .transaction-list-date,

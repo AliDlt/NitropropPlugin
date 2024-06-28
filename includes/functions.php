@@ -568,6 +568,7 @@ function ncp_dashboard_loader()
         }
         $selectHTML = '';
 
+        if ($account_file_response['data']){
             $selectHTML .= '<select class="btn-account-code appearance-none" name="status_id " id="status_id">';
             $first_array = 0;
             foreach ($account_file_response['data'] as $dataSellect) {
@@ -579,7 +580,9 @@ function ncp_dashboard_loader()
                 $first_array++;
             }
             $selectHTML .= '</select>';
-
+        }else{
+            $selectHTML .= '<div class="btn-account-code appearance-none">-</div>';
+        }
         if ($nitro_access_token && $account_info_response['status'] == 200) {
             wp_send_json([
                 "template" => dashboard_template($account_info_response, $data),
