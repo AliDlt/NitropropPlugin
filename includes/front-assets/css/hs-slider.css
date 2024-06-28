@@ -192,6 +192,9 @@
 }
 @media screen and (max-width: 768px) {
     .slideshow-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin: 15px;
         max-height: 610px;
         min-height: 610px;
@@ -211,7 +214,7 @@
         justify-content: center;
     }
     .left-slider-01 h2 {
-        font-size: 30px;
+        font-size: 27px;
         text-align: center;
         line-height: inherit;
         margin-top: 0;
@@ -246,7 +249,7 @@
         width: 75%;
     }
     .left-slider-01 h2 {
-        font-size: 30px;
+        font-size: 27px;
         text-align: center;
         line-height: inherit;
         margin-top: 0;
@@ -283,5 +286,8 @@
     }
     .right-slider-01 img {
         width: 85%;
+        height: 230px !important;
+        width: initial;
+        object-fit: contain;
     }
 }
