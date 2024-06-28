@@ -1028,6 +1028,10 @@ function table_loader(){
     jQuery(function ($) {
         let currentStep = 1;
     
+        $(document).ready(function() {
+            $('#btn-price-1').trigger('click');
+        });
+        
         $(document).on('click', '.btn-table', function (e) {
             e.preventDefault();
             $('.btn-table').removeClass('btn-active');
@@ -1037,7 +1041,6 @@ function table_loader(){
         function addThousandsSeparator(num) {
             return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         }
-    
     
         function updatePrice(newPrice) {
             var $targetPrice = $('#payment-cell a');
@@ -1055,10 +1058,9 @@ function table_loader(){
             updateDiscountedPrice('$42');
             var rial = $('#price-one').val();
             var rialNumber = Number(rial);
-            rialNumber = rialNumber * 10;
             var formattedRial = rialNumber.toLocaleString('en-US');
             $('#rial-price').text(formattedRial);
-            $('#dollar-price').text('$59');
+            $('#dollar-price').text('$42');
             $('#discount-code').val('').prop('disabled', false);
             $('.ncp-discount .ncp_btn_normal').prop('disabled', false);
         });
@@ -1069,10 +1071,9 @@ function table_loader(){
             updateDiscountedPrice('$68');
             var rial = $('#price-two').val();
             var rialNumber = Number(rial);
-            rialNumber = rialNumber * 10;
             var formattedRial = rialNumber.toLocaleString('en-US');
             $('#rial-price').text(formattedRial);
-            $('#dollar-price').text('$86');
+            $('#dollar-price').text('$68');
             $('#discount-code').val('').prop('disabled', false);
             $('.ncp-discount .ncp_btn_normal').prop('disabled', false);
         });
@@ -1083,10 +1084,9 @@ function table_loader(){
             updateDiscountedPrice('$129');
             var rial = $('#price-three').val();
             var rialNumber = Number(rial);
-            rialNumber = rialNumber * 10;
             var formattedRial = rialNumber.toLocaleString('en-US');
             $('#rial-price').text(formattedRial);
-            $('#dollar-price').text('$159');
+            $('#dollar-price').text('$129');
             $('#discount-code').val('').prop('disabled', false);
             $('.ncp-discount .ncp_btn_normal').prop('disabled', false);
 
@@ -1098,10 +1098,9 @@ function table_loader(){
             updateDiscountedPrice('$239');
             var rial = $('#price-fore').val();
             var rialNumber = Number(rial);
-            rialNumber = rialNumber * 10;
             var formattedRial = rialNumber.toLocaleString('en-US');
             $('#rial-price').text(formattedRial);
-            $('#dollar-price').text('$289');
+            $('#dollar-price').text('$239');
             $('#discount-code').val('').prop('disabled', false);
             $('.ncp-discount .ncp_btn_normal').prop('disabled', false);
         });
@@ -1144,5 +1143,4 @@ function table_loader(){
             }
         });
     });
-    
 }
