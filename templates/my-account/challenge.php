@@ -51,7 +51,7 @@ function challenge_page($challenge_prices_response, $nitro_access_token)
                     </div>
                     <div class="small-block">
                     قیمت کل به دلار
-                    <div class="inner-small-block-challenge" id="dollar-price">$59</div>
+                    <div class="inner-small-block-challenge" id="dollar-price">$42</div>
                     </div>
                     <div class="small-block">
                         قیمت کل به ریال

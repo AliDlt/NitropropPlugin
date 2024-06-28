@@ -1,25 +1,15 @@
 jQuery(function ($) {
     let currentStep = 1;
 
+    $(document).ready(function() {
+        $('#btn-price-1').trigger('click');
+    });
+    
     $(document).on('click', '.btn-table', function (e) {
         e.preventDefault();
         $('.btn-table').removeClass('btn-active');
         $(this).addClass('btn-active');
     });
-
-    function addThousandsSeparator(num) {
-        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    // function updatePrice(newPrice, price) {
-    //     var $targetPrice = $('#payment-cell a');
-    //     $targetPrice.text(newPrice);
-    //     if (price) {
-    //         $("#rial-price").text(addThousandsSeparator(price));
-    //         $("#dollar-price").text(newPrice);
-    //         $("#discount-code").val('').prop('disabled', false);
-    //     }
-    // }
 
     function updateDiscountedPrice(newPrice) {
         var $targetPrice = $('#discounted-payment-cell a');
