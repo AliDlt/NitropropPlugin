@@ -5,8 +5,8 @@
             <p>در نیتروپراپ چالش ها محدودیت زمانی ندارند و بدون نگرانی از بابت محدودیت های ۳۰ و ۶۰ روزه برای پاس کردن
                 چالش ها ، می توانید مراحل چالش خود را طی کنید.</p>
             <div class="btn-sec-slider-01">
-                <button onclick="window.location.href='https://nitroprop.live/panel/" class="slider-login-btn">خرید چالش</button>
-                <button class="slider-preview-dashboard-btn">ورود به داشبورد</button>
+                <a href="/panel/?land=challenge"  class="slider-login-btn">خرید چالش</a>
+                <a href="/panel" class="slider-preview-dashboard-btn">ورود به داشبورد</a>
             </div>
         </div>
         <div class="right-slider-01">
@@ -18,8 +18,8 @@
             <h2>تقسیم سود ۵ درصدی از مجموع سود چالش ها</h2>
             <p>با اولین برداشت سود در حساب ریل علاوه بر ریفاند هزینه چالش، ۵ درصد از مجموع سود دو مرحله  چالش نیز برای شما واریز می شود.</p>
             <div class="btn-sec-slider-01">
-            <button onclick="window.location.href='https://nitroprop.live/panel/" class="slider-login-btn">خرید چالش</button>
-            <button class="slider-preview-dashboard-btn">ورود به داشبورد</button>
+                <a href="/panel/?land=challenge"  class="slider-login-btn">خرید چالش</a>
+                <a href="/panel" class="slider-preview-dashboard-btn">ورود به داشبورد</a>
             </div>
         </div>
         <div class="right-slider-01">
@@ -33,8 +33,8 @@
             تمامی حساب ها در سرور اختصاصی نیتروپراپ سواپ فری هستند و می توانید روز ها و هفته ها معاملات خود را باز نگه دارید تا به سود موردنظر خود برسید.
             </p>
             <div class="btn-sec-slider-01">
-            <button onclick="window.location.href='https://nitroprop.live/panel/" class="slider-login-btn">خرید چالش</button>
-            <button class="slider-preview-dashboard-btn">ورود به داشبورد</button>
+                <a href="/panel/?land=challenge"  class="slider-login-btn">خرید چالش</a>
+                <a href="/panel" class="slider-preview-dashboard-btn">ورود به داشبورد</a>
             </div>
         </div>
         <div class="right-slider-01">
@@ -46,8 +46,8 @@
             <h2>بدون قانون ریسک شناور و mdl</h2>
             <p>در نیتروپراپ قوانین محدود کننده ای مثل ریسک شناور و mdl نداریم و با خیال راحت می توانید سبک و استراتژی معاملاتی خود را پیاده سازی کنید و نگرانی از بابت این قوانین نداشته باشید.</p>
             <div class="btn-sec-slider-01">
-            <button onclick="window.location.href='https://nitroprop.live/panel/" class="slider-login-btn">خرید چالش</button>
-            <button class="slider-preview-dashboard-btn">ورود به داشبورد</button>
+            <a href="/panel/?land=challenge"  class="slider-login-btn">خرید چالش</a>
+            <a href="/panel" class="slider-preview-dashboard-btn">ورود به داشبورد</a>
             </div>
         </div>
         <div class="right-slider-01">
