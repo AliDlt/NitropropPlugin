@@ -43,7 +43,7 @@
     color: #2C487F;
     line-height: 70px;
 }
-button.slider-login-btn {
+.slider-login-btn {
     background-image: linear-gradient(90deg, #5386E4, #0FBADF);
     color: #fff;
     border: none;
@@ -53,16 +53,19 @@ button.slider-login-btn {
     font-size: 15px;
     outline: none;
     font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-button.slider-login-btn:focus {
+.slider-login-btn:focus {
     outline: none;
 }
-button.slider-preview-dashboard-btn:focus {
+.slider-preview-dashboard-btn:focus {
     outline: none;
     background: inherit;
     color: #4E89E3;
 }
-button.slider-preview-dashboard-btn {
+.slider-preview-dashboard-btn {
     color: #4E89E3;
     border: 2px solid #4E89E3;
     border-radius: 20px;
@@ -71,13 +74,17 @@ button.slider-preview-dashboard-btn {
     font-size: 15px;
     font-weight: 600;
     outline: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-button.slider-preview-dashboard-btn:hover {
+.slider-preview-dashboard-btn:hover {
     background: #4E89E3;
-    color: #fff;
+    color: #fff !important;
 }
-button.slider-login-btn:hover {
+.slider-login-btn:hover {
     background-image: linear-gradient(90deg, #0FBADF, #5386E4);
+    color: #fff;
 }
 .left-slider-01 {
     width: 55%;
@@ -126,7 +133,10 @@ button.slider-login-btn:hover {
     position: absolute;
     top: 0;
 }
-
+.btn-sec-slider-01{
+    display: flex;
+    gap: 10px;
+}
 /* The dots/bullets/indicators */
 .dot {
     cursor: pointer;
@@ -165,12 +175,12 @@ button.slider-login-btn:hover {
     .left-slider-01 p {
         font-size: 16px;
     }
-    button.slider-login-btn {
+    .slider-login-btn {
         width: 120px;
         height: 38px;
         font-size: 13px;
     }
-    button.slider-preview-dashboard-btn {
+    .slider-preview-dashboard-btn {
         width: 180px;
         height: 38px;
         font-size: 13px;
@@ -256,10 +266,10 @@ button.slider-login-btn:hover {
         flex-wrap: wrap;
         gap: 5px;
     }
-    button.slider-login-btn {
+    .slider-login-btn {
         width: 116px;
     }
-    button.slider-preview-dashboard-btn {
+    .slider-preview-dashboard-btn {
         width: 136px;
     }
 }

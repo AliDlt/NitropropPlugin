@@ -56,7 +56,7 @@ function challenge_page($challenge_prices_response, $nitro_access_token)
                     <div class="small-block">
                         قیمت کل به ریال
                         <div class="inner-small-block-challenge"
-                             id="rial-price"><?php echo number_format($challenge_prices_response['data'][0]['price'].'0') ?></div>
+                             id="rial-price"><?php echo number_format($challenge_prices_response['data'][0]['price']) ?></div>
                     </div>
                 </div>
             </div>

@@ -884,17 +884,17 @@ img.btn-account-bell {
 
 
 
-/*.login_btn_wrapper {*/
-/*    background: #5386e4 !important;*/
-/*    padding: 10px 15px !important;*/
-/*    color: #fff !important;*/
-/*    border-radius: 25px !important;*/
-/*    transition: max-height 0.6s ease-in-out;*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    font-family: 'Kalameh';*/
-/*}*/
+.login_btn_wrapper {
+    background: #5386e4 !important;
+    padding: 10px 15px !important;
+    color: #fff !important;
+    border-radius: 25px !important;
+    transition: max-height 0.6s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Kalameh';
+}
 
 .login_btn_wrapper img {
     width: 20px !important;
@@ -1306,6 +1306,9 @@ img.btn-account-bell {
 }
 
 img.btn-account-person {
+    /*width: 41px;*/
+    /*height: 41px;*/
+    /*margin-right: 6px;*/
     display: none;
 }
 
@@ -2548,7 +2551,9 @@ p.selected-payment {
         width: 30px !important;
         height: 30px !important;
     }
-
+    .login_btn_wrapper {
+        background: inherit !important;
+    }
    
     .tp-rightarrow{
         left: 49% !important;
