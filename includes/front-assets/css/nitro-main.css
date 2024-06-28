@@ -241,7 +241,7 @@ h3.accordion-title {
     margin-bottom: 24px;
 }
 
-@media (min-width: 480px) {
+@media (min-width: 768px) {
 
     .swiper-button-next,
     .swiper-button-prev {
@@ -280,51 +280,7 @@ h3.accordion-title {
         margin-bottom: 13px;
     }
 
-    .swiper-button-next:after,
-    .swiper-button-prev:after {
-        font-size: 10px !important;
-        font-weight: 700 !important;
-    }
 
-    .swiper-button-next {
-        top: 99% !important;
-        left: 34% !important;
-        z-index: 1000 !important;
-        width: 23px !important;
-        height: 23px !important;
-        background: #5386E4;
-        border-radius: 50%;
-        color: #fff !important;
-    }
-
-    .swiper-button-prev {
-        top: 99% !important;
-        right: 34% !important;
-        z-index: 1000 !important;
-        width: 23px !important;
-        height: 23px !important;
-        background: #5386E4;
-        border-radius: 50%;
-        color: #fff !important;
-    }
-
-    .swiper-pagination-bullet {
-        width: 11px !important;
-        height: 11px !important;
-        background: #0059ff !important;
-    }
-
-    .swiper-pagination-bullet-active {
-        width: 17px !important;
-        height: 17px !important;
-        background: #5386E4 !important;
-    }
-
-    .swiper-pagination {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
 }
 
 
@@ -549,11 +505,11 @@ img.btn-account-bell {
     margin-right: 39px;
 }
 
-/*img.btn-account-person {*/
-/*    width: 58px;*/
-/*    height: 58px;*/
-/*    margin-right: 7px;*/
-/*}*/
+img.btn-account-person {
+    width: 58px;
+    height: 58px;
+    margin-right: 7px;
+}
 
 .btn-account-name {
     display: flex;
@@ -896,9 +852,9 @@ img.btn-account-bell {
     font-family: 'Kalameh', serif;
 }
 
-.login_btn_wrapper img {
-    width: 20px !important;
-}
+/*.login_btn_wrapper img {*/
+/*    width: 20px !important;*/
+/*}*/
 
 .login_btn {
     font-size: 15px !important;
@@ -1306,12 +1262,14 @@ img.btn-account-bell {
 }
 
 img.btn-account-person {
-    /*width: 41px;*/
-    /*height: 41px;*/
-    /*margin-right: 6px;*/
+    width: 41px;
+    height: 41px;
+    margin-right: 6px;
+
+}
+.btn-login-person{
     display: none;
 }
-
 .btn-account-name {
     gap: 5px;
     font-size: 16px;
@@ -2546,7 +2504,12 @@ p.selected-payment {
     .login_btn {
         display: none;
     }
-    img.btn-account-person {
+    /*img.btn-account-person {*/
+    /*    display: block;*/
+    /*    width: 30px !important;*/
+    /*    height: 30px !important;*/
+    /*}*/
+    .btn-login-person{
         display: block;
         width: 30px !important;
         height: 30px !important;
@@ -2687,7 +2650,7 @@ p.selected-payment {
         padding: 0 20px;
     }
     .nitro-posts-sec {
-        height: 375px !important;
+        height: 430px !important;
     }
 .transaction-list-account-number,
 .transaction-list-date,
@@ -2695,6 +2658,51 @@ p.selected-payment {
 .transaction-list-time {
     width: 100%;
 }
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        font-size: 10px !important;
+        font-weight: 700 !important;
+    }
+
+    .swiper-button-next {
+        top: 99% !important;
+        left: 34% !important;
+        z-index: 1000 !important;
+        width: 23px !important;
+        height: 23px !important;
+        background: #5386E4;
+        border-radius: 50%;
+        color: #fff !important;
+    }
+
+    .swiper-button-prev {
+        top: 99% !important;
+        right: 34% !important;
+        z-index: 1000 !important;
+        width: 23px !important;
+        height: 23px !important;
+        background: #5386E4;
+        border-radius: 50%;
+        color: #fff !important;
+    }
+
+    .swiper-pagination-bullet {
+        width: 11px !important;
+        height: 11px !important;
+        background: #0059ff !important;
+    }
+
+    .swiper-pagination-bullet-active {
+        width: 17px !important;
+        height: 17px !important;
+        background: #5386E4 !important;
+    }
+
+    .swiper-pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
     .withdrawal-input-sec-inner {
         width: 100%;
     }
@@ -2868,7 +2876,9 @@ p.selected-payment {
     .transaction-list-condition{
         width: 50% !important;
     }
-
+    .nitro-posts-sec {
+        height: 375px !important;
+    }
     .transaction-list-desc{
         display: flex;
         align-items: center;

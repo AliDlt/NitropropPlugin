@@ -71,7 +71,7 @@ jQuery(function ($) {
 
 var swiper = new Swiper(".mySwiper", {
     slidesPerView: 3,
-    spaceBetween: 90,
+    spaceBetween: 220,
     autoHeight: true,
     pagination: {
         el: ".swiper-pagination",
@@ -84,11 +84,12 @@ var swiper = new Swiper(".mySwiper", {
     breakpoints: {
         // اندازه desktop
         1200: {
-            slidesPerView: 4,
+            slidesPerView: 3,
         },
         // اندازه tablet
         768: {
-            slidesPerView: 4,
+            slidesPerView: 3,
+            spaceBetween: 90,
         },
         // اندازه mobile
         480: {
