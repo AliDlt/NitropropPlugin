@@ -766,7 +766,7 @@ function ncp_login_btn()
         ?>
         <div class="login_btn_wrapper">
             <a href="/panel">
-                <img class="btn-account-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg' ?>"
+                <img class="btn-login-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg' ?>"
                      alt="">
             </a>
             <div class="btn-account-name login_btn">
