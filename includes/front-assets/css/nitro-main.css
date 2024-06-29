@@ -908,7 +908,7 @@ a.npc-exit-profile {
 }
 
 .ncp_btn_normal {
-    width: 138px;
+    width: 120px;
     height: 43px;
     background: #5386E4;
     border-radius: 35px;
@@ -932,7 +932,9 @@ a.npc-exit-profile {
     border: none !important;
     margin: 0
 }
-
+.btn-table{
+    width: 120px;
+}
 button.price-btn,
 button.price-btn:focus {
     height: 35px;
@@ -2562,6 +2564,8 @@ p.selected-payment {
     }
     .connection-sec {
         flex-direction: column;
+        border-radius: 30px;
+        margin-bottom: 20px;
     }
     .tp-bullet.selected {
         width: 14px !important;
@@ -2833,11 +2837,10 @@ p.selected-payment {
         align-items: center;
     }
 
-
     .ncp-block {
         margin: 17px;
         border-radius: 15px;
-        /* padding: 10px 16px; */
+        padding: 10px 16px;
     }
 
     .ncp-my-account-header {
