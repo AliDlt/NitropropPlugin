@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="right-slider-01">
-            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/slider-04.png' ?>" alt="">
+            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/slider-05.png' ?>" alt="">
         </div>
     </div>
 </div>
