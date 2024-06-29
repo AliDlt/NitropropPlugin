@@ -908,7 +908,7 @@ a.npc-exit-profile {
 }
 
 .ncp_btn_normal {
-    width: 120px;
+    width: 138px;
     height: 43px;
     background: #5386E4;
     border-radius: 35px;
@@ -933,7 +933,7 @@ a.npc-exit-profile {
     margin: 0
 }
 .btn-table{
-    width: 120px;
+    width: 120px !important;
 }
 button.price-btn,
 button.price-btn:focus {

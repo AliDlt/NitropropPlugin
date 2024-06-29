@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="right-slider-01">
-            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/slider-01.png' ?>" alt="">
+            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/zamani.webp' ?>" alt="">
         </div>
     </div>
     <div class="mySlides fade slider-01" style="display: none">
@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="right-slider-01">
-            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/slider-02.png' ?>" alt="">
+            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/sood.webp' ?>" alt="">
         </div>
     </div>
     <div class="mySlides fade slider-01" style="display: none">
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class="right-slider-01">
-            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/slider-03.png' ?>" alt="">
+            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/swap.webp' ?>" alt="">
         </div>
     </div>
     <div class="mySlides fade slider-01" style="display: none">
@@ -51,7 +51,7 @@
             </div>
         </div>
         <div class="right-slider-01">
-            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/slider-04.png' ?>" alt="">
+            <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/slider/mdl.webp' ?>" alt="">
         </div>
     </div>
 </div>
