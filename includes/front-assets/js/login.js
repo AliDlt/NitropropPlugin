@@ -139,6 +139,19 @@ jQuery(function ($) {
         }
     });
     
+    // Trigger login on Enter key press
+    $(document).on('keypress', function(e) {
+        if (e.which === 13 && $('#ncp-login').is(':visible')) {
+            $('#ncp-login').click();
+        }
+    });
+
+    // Trigger register on Enter key press
+    $(document).on('keypress', function(e) {
+        if (e.which === 13 && $('#ncp-register').is(':visible')) {
+            $('#ncp-register').click();
+        }
+    });
 
     $(document).on('click', '#ncp-login', function () {
         let validation = true;
