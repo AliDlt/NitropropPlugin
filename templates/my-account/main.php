@@ -127,7 +127,7 @@ if ($nitro_access_token && $account_info_response['status']==200) {
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/down.svg' ?>" alt="">
                     <div class="dropdown-menu">
                         <a href="/panel/?land=profile">حساب کاربری</a>
-                        <a href="" id="npc-exit-profile">خروج</a>
+                        <a id="npc-exit-profile">خروج</a>
                     </div>
                 </div>
             </div>
