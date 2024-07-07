@@ -804,7 +804,7 @@ function login_api($email, $password)
     ];
     $curl = curl_init();
     curl_setopt_array($curl, [
-        CURLOPT_URL => 'https://client.nitroprop.com/api/auth/login/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/auth/login/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -869,7 +869,7 @@ function ncp_register()
     $body_json = json_encode($body);
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.com/api/register/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/register/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -923,7 +923,7 @@ function ncp_forget_pass()
     ];
     $body_json = json_encode($body);
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.com/api/users/forget-password/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/users/forget-password/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -948,7 +948,7 @@ function api_account_info($nitro_access_token)
 {
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.com/api/users/list/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/users/list/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -971,7 +971,7 @@ function api_account_file($nitro_access_token)
 {
     $curl = curl_init();
     curl_setopt_array($curl, [
-        CURLOPT_URL => 'https://client.nitroprop.com/api/users/accounts/list/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/users/accounts/list/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -992,7 +992,7 @@ function api_get_challenge_prices($nitro_access_token)
 {
     $curl = curl_init();
     curl_setopt_array($curl, [
-        CURLOPT_URL => 'https://client.nitroprop.com/api/prices/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/prices/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1013,7 +1013,7 @@ function api_account_sync($nitro_access_token,$id)
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.com/api/core/account/'.$id.'/syncAccount/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/core/account/'.$id.'/syncAccount/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1054,7 +1054,7 @@ function api_challenges_buy($nitro_access_token, $platform, $groupID, $discountC
         }
     }
     curl_setopt_array($curl, [
-        CURLOPT_URL => 'https://client.nitroprop.com/api/challenges/buy/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/challenges/buy/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1084,7 +1084,7 @@ function api_discount_checker($nitro_access_token, $code, $groupID)
         'group' => $groupID,
     ];
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.com/api/discount/' . $code . '/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/discount/' . $code . '/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1113,7 +1113,7 @@ function api_withdrawal_request($code, $nitro_access_token, $dataId ,$dataArrayV
         'login'=>$dataArrayVal
     ];
     curl_setopt_array($curl, [
-        CURLOPT_URL => 'https://client.nitroprop.com/api/users/accounts/' . $dataId . '/withdraws/create/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/users/accounts/' . $dataId . '/withdraws/create/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1138,7 +1138,7 @@ function api_withdrawal_history($nitro_access_token, $id)
 {
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.com/api/users/accounts/' . $id . '/withdraws/list/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/users/accounts/' . $id . '/withdraws/list/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1166,7 +1166,7 @@ function api_change_password($nitro_access_token, $oldPass, $newPass)
         'new_password' => $newPass,
     ];
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.com/api/users/password/update/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/users/password/update/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1190,7 +1190,7 @@ function send_login_data_to_api()
 {
     if (isset($_POST['action']) && $_POST['action'] === 'custom_login_action') {
         // API endpoint
-        $url = 'https://client.nitroprop.com/api/auth/login/';
+        $url = 'https://client.nitroprop.net/api/auth/login/';
         // Data to be sent
         $data = array(
             'email' => $_POST['email'],
@@ -1227,7 +1227,7 @@ function api_send_request($request_type, $description, $acc_id, $nitro_access_to
         'description' => $description
     ];
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.com/api/users/accounts/' . $acc_id . '/requests/create/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/users/accounts/' . $acc_id . '/requests/create/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1253,7 +1253,7 @@ function api_list_request($acc_id)
     $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.com/api/users/accounts/' . $acc_id . '/requests/list/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/users/accounts/' . $acc_id . '/requests/list/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
