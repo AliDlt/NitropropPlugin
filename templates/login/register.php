@@ -87,7 +87,7 @@ function register_template()
     </div>
     <div class="rule-container">
         <input id="rule" name="rule" type="checkbox">
-        <label for="rule">تمامی <a class="forgot-text" href="https://nitroprop.live/rules/" target="_blank">قوانین</a>
+        <label for="rule">تمامی <a class="forgot-text" href="https://nitroprop.com/rules/" target="_blank">قوانین</a>
          را خوانده و می‌پذیرم.</label>
         <div class="error-sec rules-error" id="rules-error-sec">
             <p class="input-error" id="rules-error" style="display: none">لطفا با قوانین موافقت کنید!</p>
