@@ -253,7 +253,6 @@ jQuery(function ($) {
             })
         });
         $('#npc-exit-profile').on('click', function () {
-            $('.background-spinner').fadeIn();
             $('#ncp-exit').trigger('click');
         });
         $('#ncp-hamburger').on('click', function () {

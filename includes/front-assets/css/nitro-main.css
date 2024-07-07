@@ -412,7 +412,9 @@ img.menu-pointer {
 select:focus {
     border: 2px solid #5386E4 !important;
 }
-
+#npc-exit-profile {
+    color: #5d5d5d;
+}
 
 
 @keyframes spin {
