@@ -377,7 +377,7 @@ jQuery(function ($) {
                                 if (response.data.message){
                                     showToast(response.data.message, "error");
                                 }else {
-                                    showToast('مشکلی پیش آمده', "error");
+                                    showToast('ایمیل معتبر نیست', "error");
                                 }
                             }
                             $('#spinner-gif').fadeOut();
