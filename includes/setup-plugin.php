@@ -23,3 +23,22 @@ function create_nitro_table()
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
 }
+
+function nitro_register_custom_capabilities() {
+    $capabilities = [
+        'nitro_manage_certificates',
+    ];
+
+    foreach ($capabilities as $capability) {
+        // Ensure capability is registered
+        $roles = wp_roles()->roles;
+        foreach ($roles as $role_name => $role_info) {
+            $role = get_role($role_name);
+            if ($role && !isset($role->capabilities[$capability])) {
+                $role->add_cap($capability, false);
+            }
+        }
+    }
+}
+
+add_action('init', 'nitro_register_custom_capabilities');
