@@ -75,7 +75,6 @@ add_action('wp_enqueue_scripts', function () {
         wp_dequeue_style('elementor-post-22');
         wp_dequeue_style('table');
         wp_dequeue_script('table');
-
     }
 }, 10000);
 //upload file setup

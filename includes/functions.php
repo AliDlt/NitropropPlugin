@@ -204,6 +204,7 @@ function login_template_function()
         <?php
         die();
     } else {
+        setcookie('nitro_access_token', "", time() - 3600, "/");
         include_once NCP_PLUGIN_TEMPLATES . 'login/custom-login.php';
     }
 }
@@ -221,6 +222,7 @@ function ncp_login_loader()
             </script>
             <?php
         } else {
+            setcookie('nitro_access_token', "", time() - 3600, "/");
             wp_send_json(login_template());
         }
     } else {
