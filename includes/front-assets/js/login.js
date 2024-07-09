@@ -430,8 +430,10 @@ jQuery(function ($) {
     }
 
     function showToast(message, type) {
+        const displayMessage = message || "لطفا کمی بعد امتحان کنید";
+        
         Toastify({
-            text: message,
+            text: displayMessage,
             duration: 3000,
             closeButton: false,
             gravity: "top",

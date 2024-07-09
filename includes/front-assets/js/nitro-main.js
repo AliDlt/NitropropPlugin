@@ -978,10 +978,12 @@ function showValidationErrors(errors) {
 }
 
 function showToast(message, type) {
+    const displayMessage = message || "لطفا کمی بعد امتحان کنید";
+
     Toastify({
-        text: message, // Prepend the icon to the message
+        text: displayMessage,
         duration: 3000,
-        closeButton: false, // Disable close button
+        closeButton: false,
         gravity: "top",
         position: "right",
         newWindow: true,
