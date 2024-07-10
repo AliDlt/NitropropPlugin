@@ -128,6 +128,9 @@ function state_svg($state)
 
 function log_out_ncp()
 {
+    setcookie('nitro_access_token', "", time() - 3600, "/");
+    setcookie('ncp_is_page', "", time() - 3600, "/");
+    wp_logout();
     ?>
     <script>
         window.location.href = "<?php echo site_url('/login-register'); ?>";
@@ -205,6 +208,7 @@ function login_template_function()
         die();
     } else {
         setcookie('nitro_access_token', "", time() - 3600, "/");
+        setcookie('ncp_is_page', "", time() - 3600, "/");
         include_once NCP_PLUGIN_TEMPLATES . 'login/custom-login.php';
     }
 }
@@ -223,6 +227,7 @@ function ncp_login_loader()
             <?php
         } else {
             setcookie('nitro_access_token', "", time() - 3600, "/");
+            setcookie('ncp_is_page', "", time() - 3600, "/");
             wp_send_json(login_template());
         }
     } else {
@@ -353,9 +358,10 @@ function ncp_login()
 
         $response = login_api($email, $password);
         if (!$response['status']) {
+            $one_week = 7 * 24 * 60 * 60; // تعداد ثانیه‌های یک هفته
             $nitro_access_token = $response['access'];
-            $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false;
-            setcookie("nitro_access_token", $nitro_access_token, 0, '/', $domain);
+
+            setcookie("nitro_access_token", $nitro_access_token, time() + $one_week, '/');
 
             $user = get_user_by('email', $email);
             if ($user) {
@@ -415,14 +421,20 @@ function ncp_login()
 //panel ajax and page loader
 function my_account_template_function()
 {
-    $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-    $account_info_response = api_account_info($nitro_access_token);
-    if ($nitro_access_token && $account_info_response['status'] == 200) {
-        include_once NCP_PLUGIN_TEMPLATES . 'my-account/main.php';
-    } else {
+    $nitro_access_token = $_COOKIE['nitro_access_token'];
+    if ($nitro_access_token){
+        $account_info_response = api_account_info($nitro_access_token);
+        if ($account_info_response['status'] == 200){
+            include_once NCP_PLUGIN_TEMPLATES . 'my-account/main.php';
+        }else{
+            log_out_ncp();
+            die();
+        }
+    }else{
         log_out_ncp();
         die();
     }
+
 }
 
 function ncp_withdrawal_loader()
@@ -693,11 +705,11 @@ function ncp_support_loader()
 function ncp_exit()
 {
     check_ajax_referer('my_ajax_nonce', 'nonce');
-    $domain = $_SERVER['HTTP_HOST'];
-    if ($domain == 'localhost' || $domain == '127.0.0.1' || preg_match('/^192\.168\.\d+\.\d+$/', $domain)) {
-        $domain = false;
-    }
-    setcookie('nitro_access_token', '', time() - 3600, '/', $domain);
+//    $domain = $_SERVER['HTTP_HOST'];
+//    if ($domain == 'localhost' || $domain == '127.0.0.1' || preg_match('/^192\.168\.\d+\.\d+$/', $domain)) {
+//        $domain = false;
+//    }
+    setcookie('nitro_access_token', "", time() - 3600, "/");
     wp_logout();
     wp_send_json('done');
 }
