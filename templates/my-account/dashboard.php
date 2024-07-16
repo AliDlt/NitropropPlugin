@@ -38,7 +38,7 @@ function dashboard_template($account_info_response, $data)
                             </div>
                         </div>
                         <div class="inner-acc-info">
-                            <span>Inverstor Password :</span>
+                            <span>Investor Password :</span>
                             <div class="right-info"><?php echo $data ? $data['invest_password'] : '-' ?></div>
                         </div>
                         <div class="inner-acc-info">
