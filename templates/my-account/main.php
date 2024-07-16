@@ -12,6 +12,7 @@ if ($nitro_access_token && $account_info_response['status']==200) {
     $account_file_response = api_account_file($nitro_access_token);
     $datas = $account_file_response['data'];
 } else {
+
     log_out_ncp();
     die();
 }
