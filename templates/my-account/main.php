@@ -8,11 +8,26 @@ $cookie_name = "ncp_is_page";
 $cookie_value = "dashboard";
 $cookie_expiry = time() + 3600;
 setcookie($cookie_name, $cookie_value, $cookie_expiry, "/");
-if ($nitro_access_token && $account_info_response['status']==200) {
-    $account_file_response = api_account_file($nitro_access_token);
-    $datas = $account_file_response['data'];
+//if ($nitro_access_token && $account_info_response['status']==200) {
+//    $account_file_response = api_account_file($nitro_access_token);
+//    $datas = $account_file_response['data'];
+//} else {
+//
+//    log_out_ncp();
+//    die();
+//}
+$disconnected = false;
+if ($nitro_access_token) {
+    if ($account_info_response['status'] == 200) {
+        $account_file_response = api_account_file($nitro_access_token);
+        $datas = $account_file_response['data'];
+    } elseif ($account_info_response['status'] == 403 || $account_info_response['status'] == 401) {
+        log_out_ncp();
+        die();
+    } else {
+        $disconnected =true;
+    }
 } else {
-
     log_out_ncp();
     die();
 }
@@ -25,77 +40,87 @@ if ($nitro_access_token && $account_info_response['status']==200) {
         <div class="ncp-main-menu">
             <a id="ncp-dashboard">
                 <div class="ncp-menu-content">
-                    <img class="menu-pointer" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
+                    <img class="menu-pointer"
+                         src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/Union.svg' ?>" alt="">
                     داشبورد
                 </div>
             </a>
             <a id="ncp-challenge">
                 <div class="ncp-menu-content">
-                    <img class="menu-pointer" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
+                    <img class="menu-pointer"
+                         src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/06.svg' ?>" alt="">
                     خرید چالش
                 </div>
             </a>
             <a id="ncp-request">
                 <div class="ncp-menu-content">
-                    <img class="menu-pointer" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
+                    <img class="menu-pointer"
+                         src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/04.svg' ?>" alt="">
                     ثبت درخواست
                 </div>
             </a>
             <a id="ncp-withdrawal">
                 <div class="ncp-menu-content">
-                    <img class="menu-pointer" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
+                    <img class="menu-pointer"
+                         src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/05.svg' ?>" alt="">
                     برداشت سود
                 </div>
             </a>
             <a id="ncp-authentication">
                 <div class="ncp-menu-content">
-                    <img class="menu-pointer" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
+                    <img class="menu-pointer"
+                         src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/03.svg' ?>" alt="">
                     احراز هویت
                 </div>
             </a>
             <a id="ncp-profile">
                 <div class="ncp-menu-content">
-                    <img class="menu-pointer" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
+                    <img class="menu-pointer"
+                         src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/07.svg' ?>" alt="">
                     حساب کاربری
                 </div>
             </a>
             <a id="ncp-support">
                 <div class="ncp-menu-content">
-                    <img class="menu-pointer" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
+                    <img class="menu-pointer"
+                         src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/08.svg' ?>" alt="">
                     پشتیبانی
                 </div>
             </a>
             <a id="ncp-exit">
                 <div class="ncp-menu-content">
-                    <img class="menu-pointer" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
+                    <img class="menu-pointer"
+                         src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/menu-pointer.svg' ?>" alt="">
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/09.svg' ?>" alt="">
                     خروج
                 </div>
             </a>
         </div>
     </div>
+
     <div class="ncp-my-account-container">
+        <?php echo $disconnected ? '<p class="server-error">عدم ارتباط با سرور</p>':null?>
         <div class="ncp-my-account-header">
             <div class="ncp-right-header">
                 <div class="ncp-hamburger" id="ncp-hamburger">
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/hamburger.svg' ?>" alt="">
                 </div>
                 <div class="select-option-sec">
-                    <?php if ($datas){
+                    <?php if ($datas) {
                         ?>
                         <select class="btn-account-code appearance-none" name="status_id " id="status_id">
                             <?php
                             $first_array = 0;
                             foreach ($datas as $data) {
                                 ?>
-                               <option value="<?php echo $data['login'] ?>"
+                                <option value="<?php echo $data['login'] ?>"
                                         data-array-id="<?php echo $first_array ?>"
                                         data-id="<?php echo $data['id'] ?>"
                                 ><?php echo $data['login'] ?>
@@ -105,26 +130,27 @@ if ($nitro_access_token && $account_info_response['status']==200) {
                             }
                             ?>
                         </select>
-<!--                        <img src="--><?php //echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/down.svg' ?><!--" alt="">-->
+                        <!--                        <img src="--><?php //echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/down.svg' ?><!--" alt="">-->
                         <?php
-                    }else{
+                    } else {
                         ?>
-                            <div class="btn-account-code appearance-none">-</div>
+                        <div class="btn-account-code appearance-none">-</div>
                         <?php
                     } ?>
                 </div>
                 <div class="account-condition" id="account-condition">
                     <?php
                     $state = $datas[0]["state"];
-                    echo state_svg($state)?:'';
+                    echo state_svg($state) ?: '';
                     ?>
                 </div>
             </div>
             <div class="ncp-left-header">
                 <!-- <img class="btn-account-bell" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/bell.svg' ?>" alt=""> -->
-                <img class="btn-account-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/account.svg' ?>" alt="">
-                <div class="btn-account-name" data-name="<?php echo $account_info_response['data']['fullname']?>">
-                    <?php echo $account_info_response['data']['first_name_en']?>
+                <img class="btn-account-person"
+                     src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/account.svg' ?>" alt="">
+                <div class="btn-account-name" data-name="<?php echo $account_info_response['data']['fullname'] ?>">
+                    <?php echo $account_info_response['data']['first_name_en'] ?>
                     <img src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/down.svg' ?>" alt="">
                     <div class="dropdown-menu">
                         <a href="/panel/?land=profile">حساب کاربری</a>
@@ -147,7 +173,4 @@ if ($nitro_access_token && $account_info_response['status']==200) {
         </div>
     </div>
 </div>
-
-
-
-
+<?php wp_footer(); ?>

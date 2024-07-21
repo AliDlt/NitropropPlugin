@@ -243,7 +243,15 @@
     justify-content: center;
     align-items: center;
 }
-
+p.server-error {
+    background: red;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding: 10px 0;
+    margin: 0;
+    color: #fff;
+}
 .primary-btn {
     outline: none;
     border: none;

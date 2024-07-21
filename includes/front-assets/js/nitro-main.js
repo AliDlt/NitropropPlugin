@@ -99,8 +99,6 @@ jQuery(function ($) {
             dataId = selectedOption.data('id');
             dashboardAjaxLoader(dataArrayId, dataId, 1);
         });
-        
-        
         $('#ncp-request').on('click', function () {
             $('.background-spinner').fadeIn();
             var selectedOption = $('#status_id ').find('option:selected');

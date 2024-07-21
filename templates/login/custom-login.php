@@ -1,3 +1,4 @@
+<?php wp_head(); ?>
 <div class="login-body">
     <div class="login-container">
         <div class="content-section " >
@@ -51,3 +52,4 @@
         </div>
     </div>
 </div>
+<?php wp_footer(); ?>

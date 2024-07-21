@@ -133,7 +133,30 @@ function log_out_ncp()
     wp_logout();
     ?>
     <script>
+        const displayMessage = message || "شما دسترسی به پنل را ندارید";
+
+        Toastify({
+            text: displayMessage,
+            duration: 3000,
+            closeButton: false,
+            gravity: "top",
+            position: "right",
+            newWindow: true,
+            stopOnFocus: true,
+            style: {
+                background: type === 'success' ? "green" : "red",
+                direction: "rtl",
+                color: type === 'success' ? "white" : "#fff",
+                borderRadius: "14px",
+                minWidth: "150px",
+                boxShadow: "0 3px 6px rgba(0,0,0,0.1)",
+                fontFamily: "kalameh, sans-serif",
+                fontSize: "16px",
+                textAlign: "center",
+            }
+        }).showToast();
         window.location.href = "<?php echo site_url('/login-register'); ?>";
+
     </script>
     <?php
 
@@ -193,23 +216,33 @@ function ncp_pass_changer()
 }
 
 
-//login ajax and page loader
+
 function login_template_function()
 {
-
     $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-    $account_info_response = api_account_info($nitro_access_token);
-    if ($nitro_access_token && $account_info_response['status'] == 200) {
-        ?>
-        <script>
-            window.location.href = "<?php echo site_url('/panel'); ?>";
-        </script>
-        <?php
-        die();
-    } else {
-        setcookie('nitro_access_token', "", time() - 3600, "/");
-        setcookie('ncp_is_page', "", time() - 3600, "/");
+    if ($nitro_access_token){
+        $account_info_response = api_account_info($nitro_access_token);
+        if ($account_info_response['status'] == 403 ||$account_info_response['status'] == 401) {
+            setcookie('nitro_access_token', "", time() - 3600, "/");
+            setcookie('ncp_is_page', "", time() - 3600, "/");
+            ?><p class="server-error">شما دسترسی به پنل را ندارید</p><?php
+            include_once NCP_PLUGIN_TEMPLATES . 'login/custom-login.php';
+        } elseif($account_info_response['status'] == 200){
+            ?>
+            <script>
+                window.location.href = "<?php echo site_url('/panel'); ?>";
+            </script>
+            <?php
+            die();
+        }else{
+            ?><p class="server-error">مشکل ارتباط با سرور</p><?php
+//            include_once NCP_PLUGIN_TEMPLATES . 'login/custom-login.php';
+            include_once NCP_PLUGIN_TEMPLATES . 'my-account/main.php';
+
+        }
+    }else{
         include_once NCP_PLUGIN_TEMPLATES . 'login/custom-login.php';
+        die();
     }
 }
 
@@ -228,13 +261,13 @@ function ncp_login_loader()
         } else {
             setcookie('nitro_access_token', "", time() - 3600, "/");
             setcookie('ncp_is_page', "", time() - 3600, "/");
-            wp_send_json(login_template());
+            include_once NCP_PLUGIN_TEMPLATES . 'login/custom-login.php';
+//            wp_send_json(login_template());
         }
     } else {
-        wp_send_json(login_template());
+        include_once NCP_PLUGIN_TEMPLATES . 'login/custom-login.php';
+//        wp_send_json(login_template());
     }
-
-
 }
 
 function ncp_register_loader()
@@ -421,16 +454,18 @@ function ncp_login()
 //panel ajax and page loader
 function my_account_template_function()
 {
+
     $nitro_access_token = $_COOKIE['nitro_access_token'];
-    if ($nitro_access_token){
+    if ($nitro_access_token) {
         $account_info_response = api_account_info($nitro_access_token);
-        if ($account_info_response['status'] == 200){
-            include_once NCP_PLUGIN_TEMPLATES . 'my-account/main.php';
-        }else{
+        if ($account_info_response['status'] == 403 || $account_info_response['status'] == 401) {
             log_out_ncp();
             die();
         }
-    }else{
+        else {
+            include_once NCP_PLUGIN_TEMPLATES . 'my-account/main.php';
+        }
+    } else {
         log_out_ncp();
         die();
     }
@@ -447,7 +482,7 @@ function ncp_withdrawal_loader()
     if ($dataId !== null) {
         if ($nitro_access_token && $account_file_response['status'] == 200) {
 
-            wp_send_json(withdrawal_loader($dataId,$account_file_response, $nitro_access_token));
+            wp_send_json(withdrawal_loader($dataId, $account_file_response, $nitro_access_token));
         } else {
             log_out_ncp();
             die();
@@ -489,29 +524,29 @@ function ncp_dashboard_loader()
     $dataId = isset($_POST['dataId']) ? sanitize_text_field($_POST['dataId']) : '';
     $refresh_dashboard = isset($_POST['refresh_dashboard']) ? sanitize_text_field($_POST['refresh_dashboard']) : '';
     $statusLoader = isset($_POST['$statusLoader']) ? sanitize_text_field($_POST['$statusLoader']) : '';
-    if ($dataId !== null) {
-        $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
-        if ($refresh_dashboard){
-            api_account_sync($nitro_access_token,$dataId);
+    $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
+    if ($nitro_access_token){
+        if ($refresh_dashboard) {
+            api_account_sync($nitro_access_token, $dataId);
         }
         $account_info_response = api_account_info($nitro_access_token);
-        $account_file_response = api_account_file($nitro_access_token);
-//        $data = $account_file_response['data'][$dataArrayId];
-        $data = [];
-        foreach ($account_file_response['data'] as $item) {
-            if ($item['id'] == $dataId) {
-                $data = $item;
-                break;
+        if ($account_info_response['status'] == 200) {
+            $account_file_response = api_account_file($nitro_access_token);
+            $data = [];
+            foreach ($account_file_response['data'] as $item) {
+                if ($item['id'] == $dataId) {
+                    $data = $item;
+                    break;
+                }
             }
-        }
-        $state = $data["state"];
-        $stateHTML = state_svg($state);
-        $cookie_name = "ncp_is_page";
-        $cookie_value = "dashboard";
-        $cookie_expiry = time() + 3600;
-        setcookie($cookie_name, $cookie_value, $cookie_expiry, "/");
-        if ($state == 'trading') {
-            $stateHTML = '<svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            $state = $data["state"];
+            $stateHTML = state_svg($state);
+            $cookie_name = "ncp_is_page";
+            $cookie_value = "dashboard";
+            $cookie_expiry = time() + 3600;
+            setcookie($cookie_name, $cookie_value, $cookie_expiry, "/");
+            if ($state == 'trading') {
+                $stateHTML = '<svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <filter x="-50%" y="-50%" width="50%" height="50%">
                         <feGaussianBlur in="SourceAlpha" stdDeviation="5"></feGaussianBlur>
@@ -533,8 +568,8 @@ function ncp_dashboard_loader()
                     <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite" />
                 </circle>
             </svg>';
-        } elseif ($state == 'rejected') {
-            $stateHTML = '<svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            } elseif ($state == 'rejected') {
+                $stateHTML = '<svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <filter x="-50%" y="-50%" width="50%" height="50%">
                         <feGaussianBlur in="SourceAlpha" stdDeviation="5"></feGaussianBlur>
@@ -556,8 +591,8 @@ function ncp_dashboard_loader()
                     <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"></animate>
                 </circle>
             </svg>';
-        } elseif ($state == 'completed') {
-            $stateHTML = '<svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            } elseif ($state == 'completed') {
+                $stateHTML = '<svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                     <filter x="-50%" y="-50%" width="50%" height="50%">
                         <feGaussianBlur in="SourceAlpha" stdDeviation="5"></feGaussianBlur>
@@ -579,37 +614,43 @@ function ncp_dashboard_loader()
                     <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite" />
                 </circle>
             </svg>';
-        }
-        $selectHTML = '';
-
-        if ($account_file_response['data']){
-            $selectHTML .= '<select class="btn-account-code appearance-none" name="status_id " id="status_id">';
-            $first_array = 0;
-            foreach ($account_file_response['data'] as $dataSellect) {
-                $selectHTML .= '<option value="' . $dataSellect['login'] . '"';
-                $selectHTML .= $data['login'] == $dataSellect['login'] ? 'selected="selected "':'';
-                $selectHTML .= 'data-array-id="'. $first_array.'"data-id="'. $dataSellect['id'].'">';
-                $selectHTML .= $dataSellect['login'];
-                $selectHTML .= '</option>';
-                $first_array++;
             }
-            $selectHTML .= '</select>';
-        }else{
-            $selectHTML .= '<div class="btn-account-code appearance-none">-</div>';
-        }
-        if ($nitro_access_token && $account_info_response['status'] == 200) {
+            $selectHTML = '';
+
+            if ($account_file_response['data']) {
+                $selectHTML .= '<select class="btn-account-code appearance-none" name="status_id " id="status_id">';
+                $first_array = 0;
+                foreach ($account_file_response['data'] as $dataSellect) {
+                    $selectHTML .= '<option value="' . $dataSellect['login'] . '"';
+                    $selectHTML .= $data['login'] == $dataSellect['login'] ? 'selected="selected "' : '';
+                    $selectHTML .= 'data-array-id="' . $first_array . '"data-id="' . $dataSellect['id'] . '">';
+                    $selectHTML .= $dataSellect['login'];
+                    $selectHTML .= '</option>';
+                    $first_array++;
+                }
+                $selectHTML .= '</select>';
+            } else {
+                $selectHTML .= '<div class="btn-account-code appearance-none">-</div>';
+            }
             wp_send_json([
                 "template" => dashboard_template($account_info_response, $data),
                 "step" => $stateHTML,
                 "select" => $selectHTML,
             ]);
-        } else {
-            log_out_ncp();
-            die();
         }
-    } else {
-        wp_send_json_error('access denied');
+//        elseif ($account_info_response['status'] == 403 || $account_info_response['status'] == 401) {
+//            log_out_ncp();
+//            die();
+//        }
+        else {
+            wp_send_json_error(['statusText' => 'عدم ارتباط با سرور']);
+        }
+    }else{
+        log_out_ncp();
+        die();
     }
+
+
 }
 
 
@@ -657,6 +698,7 @@ function ncp_requests_loader()
         die();
     }
 }
+
 //function ncp_requests_loader()
 //{
 //    check_ajax_referer('my_ajax_nonce', 'nonce');
@@ -780,7 +822,8 @@ function ncp_login_btn()
         ?>
         <div class="login_btn_wrapper">
             <a href="/panel">
-                <img class="btn-login-person" src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg'?>"
+                <img class="btn-login-person"
+                     src="<?php echo NCP_PLUGIN_INCLUDES_URL . 'front-assets/img/profilelogin.svg' ?>"
                      alt="iconProfile">
             </a>
             <div class="btn-account-name login_btn">
@@ -1022,12 +1065,12 @@ function api_get_challenge_prices($nitro_access_token)
     return $decoded_response;
 }
 
-function api_account_sync($nitro_access_token,$id)
+function api_account_sync($nitro_access_token, $id)
 {
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL => 'https://client.nitroprop.net/api/core/account/'.$id.'/syncAccount/',
+        CURLOPT_URL => 'https://client.nitroprop.net/api/core/account/' . $id . '/syncAccount/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
         CURLOPT_MAXREDIRS => 10,
@@ -1036,7 +1079,7 @@ function api_account_sync($nitro_access_token,$id)
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
-            'Authorization: Bearer '.$nitro_access_token,
+            'Authorization: Bearer ' . $nitro_access_token,
         ),
     ));
 
@@ -1044,6 +1087,7 @@ function api_account_sync($nitro_access_token,$id)
 
     curl_close($curl);
 }
+
 function api_challenges_buy($nitro_access_token, $platform, $groupID, $discountCode)
 {
 
@@ -1119,12 +1163,12 @@ function api_discount_checker($nitro_access_token, $code, $groupID)
 
 }
 
-function api_withdrawal_request($code, $nitro_access_token, $dataId ,$dataArrayVal)
+function api_withdrawal_request($code, $nitro_access_token, $dataId, $dataArrayVal)
 {
     $curl = curl_init();
     $body = [
         'address' => $code,
-        'login'=>$dataArrayVal
+        'login' => $dataArrayVal
     ];
     curl_setopt_array($curl, [
         CURLOPT_URL => 'https://client.nitroprop.net/api/users/accounts/' . $dataId . '/withdraws/create/',
@@ -1349,10 +1393,10 @@ function ncp_withdrawal_request()
 //        $current_balance = $dataArray ? $dataArray['current_balance'] : 0;
 //        $percentage_value = $current_balance * 0.8;
 //        $rounded_value = round($percentage_value);
-        $response = api_withdrawal_request($code, $nitro_access_token, $dataId,$dataArrayVal);
-        if ($response){
+        $response = api_withdrawal_request($code, $nitro_access_token, $dataId, $dataArrayVal);
+        if ($response) {
             wp_send_json($response);
-        }else{
+        } else {
             wp_send_json_error();
         }
     }
@@ -1516,7 +1560,8 @@ function delete_nitro_row_callback()
     wp_die();
 }
 
-function table_section_shortcode() {
+function table_section_shortcode()
+{
     $nitro_access_token = $_COOKIE['nitro_access_token'] ?? '';
 //    $response = api_get_challenge_prices($nitro_access_token);
 
@@ -1528,20 +1573,24 @@ function table_section_shortcode() {
             <!-- btns -->
             <div class="btn-price">
                 <button class="ncp_btn_normal btn-table btn-active" id="btn-price-0" data-id="1"
-                   data-price="$5000"
-                   name="one">5000 $</button>
+                        data-price="$5000"
+                        name="one">5000 $
+                </button>
             </div>
             <div class="btn-price">
                 <button class="ncp_btn_normal btn-table" id="btn-price-1" data-id="2" data-price="$10000"
-                   name="two">10000 $</button>
+                        name="two">10000 $
+                </button>
             </div>
             <div class="btn-price">
                 <button class="ncp_btn_normal btn-table" id="btn-price-2" data-id="3" data-price="$25000"
-                   name="three">25000 $</button>
+                        name="three">25000 $
+                </button>
             </div>
             <div class="btn-price">
                 <button class="ncp_btn_normal btn-table" id="btn-price-3" data-id="4" data-price="$50000"
-                   name="four">50000 $</button>
+                        name="four">50000 $
+                </button>
             </div>
         </div>
         <div class="ncp-table w-100 d-flex center">
@@ -1660,8 +1709,6 @@ function table_section_shortcode() {
     <?php
     return ob_get_clean();
 }
-
-
 
 
 function nitro_slider()
